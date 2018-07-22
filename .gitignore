@@ -3,4 +3,6 @@ file
 *.o
 a.out
 mbappe.cor
+mbappe.s
+zork.cor
 zork.s
