@@ -3,28 +3,50 @@
 void	get_name(char *line, int fd2)
 {
 	int			i;
+	long		magic;
 	char		*name;
-	char		*temp;
 	char		**arr;
 	static int	flag;
 
-	i = 0;
-	if (flag == 0 && ft_strstr(line, ".name"))
+	if (flag == 0 && ft_strstr(line, NAME_CMD_STRING))
 	{
-		arr = ft_strsplit(line, ' ');
-		i = 1;
-		while (arr[1] && arr[1][i] != '"')
-			i++;
-		long magic = 0xEA83F3;
-		write(fd2, &magic, 4);
-		name = ft_strnew(132);
-		ft_bzero(name, ft_strlen(name));
-		temp = ft_strsub(arr[1], 1, i-1);
-		ft_strcpy(name, temp);
-		write(fd2, name, 132);
-		flag = 1;
+		i = 0;		
+		arr = ft_strsplit(line, '"');
+		if (ft_strequ(ft_strtrim(arr[0]), NAME_CMD_STRING))
+		{
+			magic = COREWAR_EXEC_MAGIC;
+			write(fd2, &magic, 4);
+			name = ft_strnew(PROG_NAME_LENGTH);
+			ft_bzero(name, PROG_NAME_LENGTH);
+			ft_strcpy(name, arr[1]);
+			write(fd2, name, PROG_NAME_LENGTH);
+			flag = 1;
+		}
 	}
 }
+
+void	get_comment(char *line, int fd2)
+{
+	int			i;
+	char		*comment;
+	char		**arr;
+	static int	flag;
+
+	if (flag == 0 && ft_strstr(line, COMMENT_CMD_STRING))
+	{
+		i = 0;		
+		arr = ft_strsplit(line, '"');
+		if (ft_strequ(ft_strtrim(arr[0]), COMMENT_CMD_STRING))
+		{
+			comment = ft_strnew(COMMENT_LENGTH);
+			ft_bzero(comment, COMMENT_LENGTH);
+			ft_strcpy(comment, arr[1]);
+			write(fd2, comment, COMMENT_LENGTH);
+			flag = 1;
+		}
+	}
+}
+
 
 int main(int ac, char **av)
 {
@@ -44,6 +66,7 @@ int main(int ac, char **av)
 	while (get_next_line(fd, &line))
 	{
 		get_name(line, fd2);
+		get_comment(line, fd2);
 		free(line);
 	}
 }
