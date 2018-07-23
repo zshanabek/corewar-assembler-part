@@ -45,6 +45,14 @@ void	get_instr(char *line)
 	ft_printf("%s\n", label);
 }
 
+void 	parse(char *line, int fd)
+{
+	while (get_next_line(fd, &line))
+	{
+		get_instr(line);
+		ft_printf("%s\n", line);
+	}
+}
 int main(int ac, char **av)
 {
 	int		fd;
@@ -64,10 +72,9 @@ int main(int ac, char **av)
 	h = malloc(sizeof(header_t));
 	ft_read_header(h, fd);
 	get_next_line(fd, &line);
-	get_next_line(fd, &line);
 	fd2 = open("mbappe.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);		
 	write_magic(fd2);
 	write(fd2, h->prog_name, PROG_NAME_LENGTH);
 	write(fd2, h->comment, COMMENT_LENGTH);
-	get_instr(line);
+	parse(line, fd);
 }
