@@ -35,8 +35,6 @@ int main(int ac, char **av)
 	int		fd;
 	int		fd2;
 	char	*line;
-	//char 	*name;
-	//char 	*comment;	
 	header_t	*h;
 
 	line = NULL;
