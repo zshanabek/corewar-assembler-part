@@ -65,27 +65,6 @@ void	ft_read_header(header_t *h, int fd)
 		exit(ft_printf("ERROR3\n"));
 }
 
-// void	ft_read_header(header_t *h, int fd)
-// {
-// 	char	**arr;
-// 	char	*str;
-
-// 	h->magic = COREWAR_EXEC_MAGIC;
-	
-// 	// get_next_line(fd, &str);
-// 	// arr = ft_strsplit(str, '"');
-// 	// if (arr[2] != NULL)
-// 	// 	exit(ft_printf("ERROR4\n"));
-// 	// if (ft_strequ(ft_strtrim(arr[0]), NAME_CMD_STRING))
-// 	// 	ft_strcpy(h->prog_name, arr[1]);
-// 	// get_next_line(fd, &str);
-// 	// arr = ft_strsplit(str, '"');
-// 	// if (ft_strequ(ft_strtrim(arr[0]), COMMENT_CMD_STRING))
-// 	// 	ft_strcpy(h->comment, arr[1]);
-// 	// else
-// 	// 	exit(ft_printf("ERROR3\n"));
-// }
-
 int main(int ac, char **av)
 {
 	int		fd;
