@@ -30,6 +30,21 @@ void	ft_read_header(header_t *h, int fd)
 		exit(ft_printf("ERROR3\n"));
 }
 
+void	get_instr(char *line)
+{
+	int i;
+	char *label;
+
+	label = NULL;
+	i = 0;
+	while (line[i] && line[i] != LABEL_CHAR)
+		i++;
+	if (line[i] != LABEL_CHAR)
+		exit(1);
+	label = ft_strsub(line, 0, i);
+	ft_printf("%s\n", label);
+}
+
 int main(int ac, char **av)
 {
 	int		fd;
@@ -54,4 +69,5 @@ int main(int ac, char **av)
 	write_magic(fd2);
 	write(fd2, h->prog_name, PROG_NAME_LENGTH);
 	write(fd2, h->comment, COMMENT_LENGTH);
+	get_instr(line);
 }
