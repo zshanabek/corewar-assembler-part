@@ -23,7 +23,6 @@ void	ft_fill_info(char *answer, int fd, char *str, int max)
 	s = ft_strdup(str + 1);
 	while (s[i] && s[i++] != '\"')
 	{
-		//i++;
 		len++;
 		if (s[i] == '\0' || s[i] == '\"')
 		{
@@ -65,6 +64,53 @@ void	ft_read_header(header_t *h, int fd)
 		exit(ft_printf("ERROR3\n"));
 }
 
+int is_label_char(char c)
+{
+	int i;
+
+	i = 0;
+	while (LABEL_CHARS[i])
+	{
+		if (LABEL_CHARS[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	analyze_opcode(t_label **head, char *line)
+{
+	int		i;
+	int		h;	
+	t_label	*label;
+
+	i = 0;
+	while (line[i] && ft_isws(line[i]))
+		i++;
+	h = i;
+	while (is_label_char(line[i]) && line[i] != LABEL_CHAR)
+		i++;
+	if (line[i] == LABEL_CHAR)
+	{
+		label = create_label();
+		label->name = ft_strsub(line, h, i-h);
+		ft_lstaddendlabel(head, label);
+	}	
+}
+
+void	read_instr(int fd, char *line)
+{
+	t_label	*head;
+
+	head = NULL;
+	while (get_next_line(fd, &line))
+	{
+		analyze_opcode(&head, line);
+		// ft_printf("%s\n", line);
+		free(line);
+	}
+}
+
 int main(int ac, char **av)
 {
 	int		fd;
@@ -83,11 +129,9 @@ int main(int ac, char **av)
 		exit(1);
 	h = malloc(sizeof(header_t));
 	ft_read_header(h, fd);
-	get_next_line(fd, &line);
 	fd2 = open("mbappe.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);		
 	write_magic(fd2);
 	write(fd2, h->prog_name, PROG_NAME_LENGTH);
 	write(fd2, h->comment, COMMENT_LENGTH);
-
-	//get_instr(line);
+	read_instr(fd, line);
 }
