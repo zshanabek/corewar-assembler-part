@@ -6,7 +6,7 @@
 /*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/07/24 16:26:19 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/07/24 16:46:43 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,16 @@ typedef struct	s_ins
 {
 	char			*name;		// имя инструкции
 	t_param			*param;		//данные аргументов инструкции
-	int				codage;
+	//int				codage;
+	t_op			op;
+	//int				param[3];	//какие параметры:T_REG = 1; T_DIR = 2; T_IND = 3;  если нет аргумента = 0
 	unsigned int	size;		//длинна всей инструкции
 	t_ins			*next;
 }				t_ins;
 
 typedef struct	s_label
 {
-	t_ins			*instr;	//сама инструкция
+	t_ins			*instr;		//сама инструкция
 	char			*name;		//имя лейбла
 	unsigned int	size;		//длинна всего лейбла
 	t_label			*next;			
