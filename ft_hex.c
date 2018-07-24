@@ -37,9 +37,11 @@ void	ft_hex(t_label *label)
 	int		i;
 
 	l = label;
-	while (l)
+	while (l) // дописываем каждую инструкцию, считаем длинну инструкции и лейбла
 	{
+		len = 0;
 		in = l->instr;
+		in->pos = 1;
 		while (in)
 		{
 			i = 0;
@@ -47,26 +49,35 @@ void	ft_hex(t_label *label)
 			{
 				if (ft_strequ(in->name, op_tab[i].name))
 				{
-					in->op = op_tab[i];
+					in->hexa = op_tab[i].opcode;
 					break ;
 				}
 				i++;
 			}
 			in->size = 1; // opcode name
-			if (in->op.coding_byte == 1)
+			if (in->codage == 1)
 				in->size++;
-			i = 0;
-			while (i < 3)
+			//i = 0;
+			p = in->param;
+			while (p)
 			{
-				if (in->op.param[i] == 0)
+				if (p->type == 0)
 					break;
-				else if (in->op.param[i] == 1)
+				else if (p->type == 1)
 					in->size++;
-				else if	(in->op.param[i] == 2 && in->op.coding_byte == 4)
+				else if	(p->type == 2 && in->codage == 4)
 					in->size += 4;
 				else //if (in->op.param[i] == 3 ||)
 					in->size += 2;
+				p = p->next;
 			}
+			len += in->size;
+			in = in->next;
 		}
+		l->size = len;
+		if (l->next)
+			l->next->pos = l->pos + len;
+		l = l->next;
 	}
+	l = label;
 }
