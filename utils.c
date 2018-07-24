@@ -6,6 +6,7 @@ t_opcode	*create_opcode(void)
 
 	item = malloc(sizeof(t_opcode));
 	item->next = NULL;
+	item->param = NULL;
 	return (item);
 }
 
@@ -48,9 +49,9 @@ void		ft_lstaddendlabel(t_label **head, t_label *item)
 	current->next = item;
 }
 
-void	ft_lstaddendarg(t_arg **head, t_arg *item)
+void	ft_lstaddendarg(t_param **head, t_param *item)
 {
-	t_arg	*current;
+	t_param	*current;
 
 	if (*head == NULL)
 	{

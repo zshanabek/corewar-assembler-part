@@ -78,11 +78,13 @@ int is_label_char(char c)
 	return (0);
 }
 
-void	analyze_opcode(t_label **head, char *line)
+void	analyze_opcode(t_label **lhead, t_opcode **ohead, char *line)
 {
-	int		i;
-	int		h;	
-	t_label	*label;
+	int			i;
+	int			h;	
+	t_label		*label;
+	t_opcode	*opcode;
+	
 
 	i = 0;
 	while (line[i] && ft_isws(line[i]))
@@ -94,18 +96,27 @@ void	analyze_opcode(t_label **head, char *line)
 	{
 		label = create_label();
 		label->name = ft_strsub(line, h, i-h);
-		ft_lstaddendlabel(head, label);
-	}	
+		ft_lstaddendlabel(lhead, label);
+	}
+	else
+	{
+		opcode = create_opcode();
+		opcode->name = ft_strsub(line, h, i-h);
+		ft_lstaddendopcode(ohead, opcode);
+		ft_printf("%s\n", opcode->name);
+	}
 }
 
 void	read_instr(int fd, char *line)
 {
-	t_label	*head;
+	t_label		*lhead;
+	t_opcode	*ohead;	
 
-	head = NULL;
+	lhead = NULL;
+	ohead = NULL;	
 	while (get_next_line(fd, &line))
 	{
-		analyze_opcode(&head, line);
+		analyze_opcode(&lhead, &ohead, line);
 		// ft_printf("%s\n", line);
 		free(line);
 	}
