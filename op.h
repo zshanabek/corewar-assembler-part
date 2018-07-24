@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/07/22 11:36:44 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/24 16:26:19 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,40 @@ typedef struct		header_s
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
 
+typedef	struct	s_op
+{
+	char			*name;		// имя инструкции
+	int				nb_param;	// сколько параментров
+	int				param[3];	// какие параметры:T_REG = 1; T_DIR = 2; T_IND = 3;  если нет аргумента = 0
+	char			opcode;		// номер инструкции
+	int				cycle;		// сколько циклов работает
+	char			*full_name;	// типа описание инструкции
+	int				coding_byte;// codage octal: true false
+	int				two_bytes;	// вот это я не понял
+}				t_op;
+
+typedef	struct	s_param
+{
+	unsigned int	value;		//значения аргумента
+	char			*label;		//значение
+	int				type;		//тип аргумента:T_REG = 1; T_DIR = 2; T_IND = 3;
+	t_param			*next;		//ссылка на след аргумент
+}				t_param;
+
+typedef struct	s_ins
+{
+	char			*name;		// имя инструкции
+	t_param			*param;		//данные аргументов инструкции
+	int				codage;
+	unsigned int	size;		//длинна всей инструкции
+	t_ins			*next;
+}				t_ins;
+
+typedef struct	s_label
+{
+	t_ins			*instr;	//сама инструкция
+	char			*name;		//имя лейбла
+	unsigned int	size;		//длинна всего лейбла
+	t_label			*next;			
+}				t_label;
 #endif
