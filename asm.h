@@ -5,28 +5,26 @@
 
 typedef struct			s_param
 {
-	int					type_arg;
+	int					type;
 	char				*val;
 	int					value;
-	size_t				arg_size;
+	size_t				size;
 	struct s_param		*next;
 }						t_param;
 
-typedef struct	s_label
+typedef struct			s_label
 {
-	char			*name;		//имя лейбла
-	unsigned int	size;		//длинна всего лейбла
-	struct s_label	*next;	
-	unsigned int	pos;		
-}					t_label;
+	char				*name;
+	struct s_label		*next;	
+}						t_label;
 
 typedef struct			s_opcode
 {
-	char				*name;		// имя инструкции
+	char				*name;		
 	int					codage;
 	char				*opcode;
-	unsigned int		size;		//длинна всей инструкции	
-	t_param				*param;		//данные аргументов инструкции	
+	unsigned int		size;
+	t_param				*param;
 	t_label				*label;
 	struct s_opcode		*next;
 }						t_opcode;
@@ -38,5 +36,6 @@ void		ft_lstaddendopcode(t_opcode **head, t_opcode *item);
 void		iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem));
 void		print_opcode(t_opcode *opcode);
 void		read_instr(int fd, char *line);
+void		ft_lstaddendpar(t_param **head, t_param *item);
 
 #endif

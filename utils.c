@@ -22,6 +22,15 @@ t_label		*create_label(void)
 	return (item);
 }
 
+t_param		*create_param(void)
+{
+	t_param *item;
+
+	item = malloc(sizeof(t_param));
+	item->next = NULL;
+	return (item);
+}
+
 void	ft_lstaddendopcode(t_opcode **head, t_opcode *item)
 {
 	t_opcode	*current;
@@ -52,7 +61,7 @@ void		ft_lstaddendlabel(t_label **head, t_label *item)
 	current->next = item;
 }
 
-void	ft_lstaddendarg(t_param **head, t_param *item)
+void	ft_lstaddendpar(t_param **head, t_param *item)
 {
 	t_param	*current;
 

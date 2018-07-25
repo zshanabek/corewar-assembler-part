@@ -14,16 +14,27 @@ int is_label_char(char c)
 	return (0);
 }
 
-void	get_params(char *line, int i)
+void 	get_params(t_opcode *opcode, int i, char *line)
 {
-	char *par;
+	char *params;
+	char **arr;
+	int k;
 
-	ft_printf("%c\n", line[i]);
+	params = ft_strsub(line, i, ft_strlen(line) - i);
+	arr = ft_strsplit(params, ',');
+	k = 0;
+	while (arr[k])
+	{
+		arr[k] = ft_strtrim(arr[k]);
+		k++;
+	}
+	ft_print2darr(arr);
 }
 
-void	get_opcode(t_opcode **head, t_opcode *opcode, int h, int i, char *line)
+void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 {
 	opcode->name = ft_strsub(line, h, i - h);
+	get_params(opcode, i, line);
 }
 
 t_label	*parse_instr(t_opcode **ohead, char *line)
@@ -34,6 +45,7 @@ t_label	*parse_instr(t_opcode **ohead, char *line)
 	t_opcode	*opcode;
 
 	opcode = create_opcode();
+	ft_lstaddendopcode(ohead, opcode);
 	i = 0;
 	while (line[i] && ft_isws(line[i]))
 		i++;
@@ -51,10 +63,10 @@ t_label	*parse_instr(t_opcode **ohead, char *line)
 		h = i;
 		while (line[i] && is_label_char(line[i]))
 			i++;
-		get_opcode(ohead, opcode, h, i, line);
+		get_opcode(opcode, h, i, line);
 	}
 	else
-		get_opcode(ohead, opcode, h, i, line);
+		get_opcode(opcode, h, i, line);
 	return (label);
 }
 
