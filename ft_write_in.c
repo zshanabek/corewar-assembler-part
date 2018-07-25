@@ -21,38 +21,90 @@ char	*ft_bin_to_hex(char *bin)
 	return (str);
 }
 
-char	*ft_param(t_param *param, t_label *l, t_label *label_all)
+char	*ft_count_len(long long int value, t_param *param)// перевести параметр в хекс, подогнать под размер и вернуть
 {
+	char				*s;
+	char				*ret;
+	int					i;
+	char				*ret2;
+
+	if (value < 0)
+	{
+		value = -value;
+		ret = ft_itoa_base(value, 2);
+		i = ft_strlen(ret) - 1;
+		while (i > -1)
+		{
+			if (ret[i] == '0')
+				ret[i] = '1';
+			else
+				ret[i] = '0';
+			i--;
+		}
+		i = ft_strlen(ret) - 1;
+		while (i > -1)
+		{
+			if (ret[i] == '0')
+			{
+				ret[i] = '1';
+				break ;
+			}
+			if (i == 0)
+			{
+				ret = ft_arrg_join("1", ret); // LEAK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				break ;
+			}
+			i--;
+		}
+		s = ft_bin_to_hex(ret);
+		ft_strdel(ret);
+	}
+	else
+		s = ft_itoa_base(value, 16);
+	while(ft_strlen(s) != (param->size * 2))
+	{
+		ft_strdel(ret);
+		ret = ft_arrg_join("0", s);
+	}
+	ft_strdel(s);
+	return (ret);
+}
+
+char	*ft_param(t_ins *in, t_ins *instruct)
+{
+	t_ins	*i;
+	t_label	*l;
 	t_param	*p;
-	t_label	*l_all;
 	char	*s;
 
-	p = param;
+	p = in->param;
 	while (p)
 	{
 		if (p->label != NULL)
 		{
-			l_all = label_all;
-			while (l_all)
+			i = instruct;
+			while (i)
 			{
-				if (ft_strequ(l_all->name, p->label))
+				l = i->label;
+				while (l)
 				{
-					s = ft_arrg_join(s, ft_itoa_base(l_all->pos - l->pos, 16));
-					break ;
+					if (ft_strequ(l->name, p->label))
+					{
+						s = ft_arrg_join(s, ft_count_len(i->pos - in->pos, p));//ft_itoa_base(i->pos - in->pos, 16));
+						break ;
+					}
+					l = l->next;
 				}
-				l_all = l_all->next;
 			}
 		}
 		else
-		{
-			s = ft_arrg_join(s, ft_itoa_base(p->value , 16));
-		}
+			s = ft_arrg_join(s, ft_count_len(p->value, p));
 		p = p->next;
 	}
 }
 
 
-void	ft_write_in(t_label *label)
+void	ft_write_in(t_ins *instruct)
 {
 	char	*str;
 	t_label	*l;
@@ -61,35 +113,29 @@ void	ft_write_in(t_label *label)
 	char	*cod;
 
 	str = NULL;
-	l = label;
-	while (l)
+	while (in)
 	{
-		in = l->instr;
-		while (in)
+		str = ft_arrg_join(str, in->opcode);
+		if (in->codage == 1)
 		{
-			str = ft_arrg_join(str, in->opcode);
-			if (in->codage == 1)
+			p = in->param;
+			while (p)
 			{
-				p = in->param;
-				while (p)
-				{
-					if (p->type == 0)
-						break ;
-					else if (p->type == 1)
-						cod = ft_arrg_join(cod, "01");
-					else if (p->type == 2)
-						cod = ft_arrg_join(cod, "10");
-					else if (p->type == 3)
-						cod = ft_arrg_join(cod, "11");
-					p =p->next;
-				}
-				while (ft_strlen(cod) < 8)
-					cod = ft_arrg_join(cod, "00");
-				str = ft_arrg_join(str, ft_bin_to_hex(cod));
+				if (p->type == 0)
+					break ;
+				else if (p->type == 1)
+					cod = ft_arrg_join(cod, "01");
+				else if (p->type == 2)
+					cod = ft_arrg_join(cod, "10");
+				else if (p->type == 3)
+					cod = ft_arrg_join(cod, "11");
+				p =p->next;
 			}
-			str = ft_arrg_join(str, ft_param(in->param, l, label));
-			in = in->next;
+			while (ft_strlen(cod) < 8)
+				cod = ft_arrg_join(cod, "00");
+			str = ft_arrg_join(str, ft_bin_to_hex(cod));
 		}
-		l = l->next;
+		str = ft_arrg_join(str, ft_param(in, instruct));
+		in = in->next;
 	}
 }

@@ -28,56 +28,58 @@ t_op    op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-void	ft_hex(t_label *label)
+int ft_param_len(t_ins *in, t_param *p)
+{
+	if (p->type == 0)
+		return (0);
+	else if (p->type == 1)
+		return (1);
+	else if	(p->type == 2 && in->codage == 4)
+		return (4);
+	else //if (in->op.param[i] == 3 ||)
+		return (2);
+}
+
+void	ft_hex(t_ins *instr)
 {
 	int		len;
-	t_label	*l;
 	t_ins	*in;
 	t_param	*p;
 	int		i;
 
-	l = label;
-	while (l) // дописываем каждую инструкцию, считаем длинну инструкции и лейбла
+	len = 1;
+	while (in)
 	{
-		len = 0;
-		in = l->instr;
-		l->pos = 1;
-		while (in)
+		in->pos = len;
+		i = 0;
+		while (i < 17)
 		{
-			i = 0;
-			while (i < 17)
+			if (ft_strequ(in->name, op_tab[i].name))
 			{
-				if (ft_strequ(in->name, op_tab[i].name))
-				{
-					in->opcode = ft_itoa_base(op_tab[i].opcode, 16);
-					break ;
-				}
-				i++;
+				in->opcode = ft_itoa_base(op_tab[i].opcode, 16);
+				break ;
 			}
-			in->size = 1; // opcode name
-			if (in->codage == 1)
-				in->size++;
-			//i = 0;
-			p = in->param;
-			while (p)
-			{
-				if (p->type == 0)
-					break;
-				else if (p->type == 1)
-					in->size++;
-				else if	(p->type == 2 && in->codage == 4)
-					in->size += 4;
-				else //if (in->op.param[i] == 3 ||)
-					in->size += 2;
-				p = p->next;
-			}
-			len += in->size;
-			in = in->next;
+			i++;
 		}
-		l->size = len;
-		if (l->next)
-			l->next->pos = l->pos + len;
-		l = l->next;
+		in->size = 1; // opcode name
+		if (in->codage == 1)
+			in->size++;
+		p = in->param;
+		while (p)
+		{
+			p->size = ft_param_len(in, p);
+			// if (p->type == 0)
+			// 	break;
+			// else if (p->type == 1)
+			// 	in->size++;
+			// else if	(p->type == 2 && in->codage == 4)
+			// 	in->size += 4;
+			// else //if (in->op.param[i] == 3 ||)
+			// 	in->size += 2;
+			in->size += p->size;
+			p = p->next;
+		}
+		len += in->size;
+		in = in->next;
 	}
-	l = label;
 }
