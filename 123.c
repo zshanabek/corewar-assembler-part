@@ -23,6 +23,6 @@ char	*ft_bin_to_hex(char *bin)
 
 int main()
 {
-	char *s = "10111001";
+	char *s = "01101000";
 	ft_printf("s %s\n", ft_bin_to_hex(s));
 }
