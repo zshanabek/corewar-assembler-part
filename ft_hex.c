@@ -47,7 +47,7 @@ void	ft_hex(t_ins *instr)
 	t_param	*p;
 	int		i;
 
-	len = 1;
+	len = 0;
 	while (in)
 	{
 		in->pos = len;

@@ -6,7 +6,7 @@
 /*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/07/25 18:44:17 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/07/25 20:02:21 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 */
 #ifndef OP_H
 #define OP_H
+
+#include "asm.h"
 
 #define IND_SIZE				2
 #define REG_SIZE				4
@@ -69,6 +71,8 @@ typedef char	t_arg_type;
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
+
+
 typedef struct		header_s
 {
   unsigned int		magic;
@@ -98,6 +102,12 @@ typedef	struct	s_param
 	struct s_param	*next;		
 }				t_param;
 
+typedef struct	s_label
+{
+	char			*name;		//заполняй;имя лейбла
+	struct s_label	*next;
+}				t_label;
+
 typedef struct	s_ins
 {
 	char			*name;		// заполняй;имя инструкции
@@ -111,10 +121,7 @@ typedef struct	s_ins
 	struct s_ins	*next;
 }				t_ins;
 
-typedef struct	s_label
-{
-	char			*name;		//заполняй;имя лейбла
-	struct s_label	*next;
-}				t_label;
+void			ft_hex(t_ins *instr);
+char 			*ft_arrg_join(char *s1, char *s2);
 
 #endif

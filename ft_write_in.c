@@ -57,13 +57,13 @@ char	*ft_count_len(long long int value, t_param *param)// перевести п�
 			i--;
 		}
 		s = ft_bin_to_hex(ret);
-		ft_strdel(ret);
+		ft_strdel(&ret);
 	}
 	else
 		s = ft_itoa_base(value, 16);
 	while(ft_strlen(s) != (param->size * 2))
 	{
-		ft_strdel(ret);
+		ft_strdel(&ret);
 		ret = ft_arrg_join("0", s);
 	}
 	ft_strdel(s);
@@ -91,6 +91,7 @@ char	*ft_print_label(t_ins *instruct, t_ins *in, t_param *p)
 			l = l->next;
 		}
 	}
+	return (0);
 }
 
 char	*ft_param(t_ins *in, t_ins *instruct)
@@ -125,6 +126,7 @@ char	*ft_param(t_ins *in, t_ins *instruct)
 			s = ft_arrg_join(s, ft_count_len(p->value, p));
 		p = p->next;
 	}
+	return (s);
 }
 
 
@@ -160,6 +162,7 @@ void	ft_write_in(t_ins *instruct)
 			str = ft_arrg_join(str, ft_bin_to_hex(cod));
 		}
 		str = ft_arrg_join(str, ft_param(in, instruct)); //вот вызов
+		//ft_to_file();// в str записана вся инструкция, можно записывать в файл
 		in = in->next;
 	}
 }
