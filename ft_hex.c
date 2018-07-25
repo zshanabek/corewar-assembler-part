@@ -57,29 +57,27 @@ void	ft_hex(t_ins *instr)
 			if (ft_strequ(in->name, op_tab[i].name))
 			{
 				in->opcode = ft_itoa_base(op_tab[i].opcode, 16);
+				in->cod_oct = op_tab[i].coding_byte;
+				if (op_tab[i].two_bytes == 1)
+					in->lab_size = 4;
+				else
+					in->lab_size = 2;
 				break ;
 			}
 			i++;
 		}
 		in->size = 1; // opcode name
-		if (in->codage == 1)
+		if (in->cod_oct != 0)
 			in->size++;
 		p = in->param;
 		while (p)
 		{
 			p->size = ft_param_len(in, p);
-			// if (p->type == 0)
-			// 	break;
-			// else if (p->type == 1)
-			// 	in->size++;
-			// else if	(p->type == 2 && in->codage == 4)
-			// 	in->size += 4;
-			// else //if (in->op.param[i] == 3 ||)
-			// 	in->size += 2;
 			in->size += p->size;
 			p = p->next;
 		}
 		len += in->size;
 		in = in->next;
 	}
+	ft_write_in(in);
 }

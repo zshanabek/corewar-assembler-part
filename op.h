@@ -6,7 +6,7 @@
 /*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/07/25 17:06:56 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/07/25 18:44:17 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,35 +84,36 @@ typedef	struct	s_op
 	int				param[3];	// какие параметры:T_REG = 1; T_DIR = 2; T_IND = 3;  если нет аргумента = 0
 	int				opcode;		// номер инструкции
 	int				cycle;		// сколько циклов работает
-	char			*full_name;	// типа описание инструкции
+	char			*full_name;	// описание инструкции
 	int				coding_byte;// codage octal: true false
-	int				two_bytes;	// вот это я не понял
+	int				two_bytes;	// label size: 0 eto 2, 1 eto 4
 }				t_op;
 
 typedef	struct	s_param
 {
-	unsigned int	value;		//значения аргумента
-	char			*label;		//значение
-	int				type;		//тип аргумента:T_REG = 1; T_DIR = 2; T_IND = 3;
-	int				size;
-	struct s_param	*next;		//ссылка на след аргумент
+	unsigned int	value;		//заполняй;значения аргумента
+	char			*label;		//заполняй;значение
+	int				type;		//заполняй;тип аргумента:T_REG = 1; T_DIR = 2; T_IND = 3;
+	int				size;		//длинна параметра
+	struct s_param	*next;		
 }				t_param;
 
 typedef struct	s_ins
 {
-	char			*name;		// имя инструкции
-	t_param			*param;		// данные аргументов инструкции
-	int				codage;		// 2 or 4
-	char			*opcode;	// имя инструкц в хексе, мб это не надо?
-	t_label			*label;		//имя лэйбла
-	unsigned int	size;		//длинна всей инструкции, по дефолту = 0
-	unsigned int	pos;		//позиция инструкц, по дефолту = 0
-	struct s_ins			*next;
+	char			*name;		// заполняй;имя инструкции
+	t_param			*param;		// заполняй;данные аргументов инструкции
+	int				cod_oct;	// codage octal: 0 or 1
+	int				lab_size;	// label size: 2 or 4
+	char			*opcode;	// имя инструкц в хексе
+	t_label			*label;		// заполняй;имя лэйбла
+	unsigned int	size;		// длинна всей инструкции, по дефолту = 0
+	unsigned int	pos;		// позиция инструкц, по дефолту = 0
+	struct s_ins	*next;
 }				t_ins;
 
 typedef struct	s_label
 {
-	char			*name;
+	char			*name;		//заполняй;имя лейбла
 	struct s_label	*next;
 }				t_label;
 
