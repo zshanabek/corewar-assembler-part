@@ -5,8 +5,10 @@ t_opcode	*create_opcode(void)
 	t_opcode *item;
 
 	item = malloc(sizeof(t_opcode));
-	item->next = NULL;
+	item->name = NULL;
 	item->param = NULL;
+	item->label = NULL;	
+	item->next = NULL;
 	return (item);
 }
 
@@ -15,6 +17,7 @@ t_label		*create_label(void)
 	t_label *item;
 
 	item = malloc(sizeof(t_label));
+	item->name = NULL;
 	item->next = NULL;
 	return (item);
 }

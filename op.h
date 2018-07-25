@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/07/22 11:36:44 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/25 17:01:22 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,18 @@ typedef struct		header_s
   unsigned int		prog_size;
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
+
+
+typedef	struct	s_op
+{
+	char			*name;		// имя инструкции
+	int				nb_param;	// сколько параментров
+	int				param[3];	// какие параметры:T_REG = 1; T_DIR = 2; T_IND = 3;  если нет аргумента = 0
+	char			opcode;		// номер инструкции
+	int				cycle;		// сколько циклов работает
+	char			*full_name;	// типа описание инструкции
+	int				coding_byte;// codage octal: true false
+	int				two_bytes;	// вот это я не понял
+}				t_op;
 
 #endif
