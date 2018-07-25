@@ -70,6 +70,29 @@ char	*ft_count_len(long long int value, t_param *param)// перевести п�
 	return (ret);
 }
 
+char	*ft_print_label(t_ins *instruct, t_ins *in, t_param *p)
+{
+	t_ins *i;
+	t_label	*l;
+	char *s;
+
+	i = instruct;
+	while (i)
+	{
+		l = i->label;
+		while (l)
+		{
+			if (ft_strequ(l->name, p->label))
+			{
+				//s = ft_arrg_join(s, ft_count_len(i->pos - in->pos, p));//ft_itoa_base(i->pos - in->pos, 16));
+				return (ft_count_len(i->pos - in->pos, p));
+				//break ;
+			}
+			l = l->next;
+		}
+	}
+}
+
 char	*ft_param(t_ins *in, t_ins *instruct)
 {
 	t_ins	*i;
@@ -82,20 +105,21 @@ char	*ft_param(t_ins *in, t_ins *instruct)
 	{
 		if (p->label != NULL)
 		{
-			i = instruct;
-			while (i)
-			{
-				l = i->label;
-				while (l)
-				{
-					if (ft_strequ(l->name, p->label))
-					{
-						s = ft_arrg_join(s, ft_count_len(i->pos - in->pos, p));//ft_itoa_base(i->pos - in->pos, 16));
-						break ;
-					}
-					l = l->next;
-				}
-			}
+			s = ft_arrg_join(s, ft_print_label(instruct, in, p));
+			// i = instruct;
+			// while (i)
+			// {
+			// 	l = i->label;
+			// 	while (l)
+			// 	{
+			// 		if (ft_strequ(l->name, p->label))
+			// 		{
+			// 			s = ft_arrg_join(s, ft_count_len(i->pos - in->pos, p));//ft_itoa_base(i->pos - in->pos, 16));
+			// 			break ;
+			// 		}
+			// 		l = l->next;
+			// 	}
+			// }
 		}
 		else
 			s = ft_arrg_join(s, ft_count_len(p->value, p));
@@ -116,7 +140,7 @@ void	ft_write_in(t_ins *instruct)
 	while (in)
 	{
 		str = ft_arrg_join(str, in->opcode);
-		if (in->codage == 1)
+		if (in->cod_oct == 1)
 		{
 			p = in->param;
 			while (p)
@@ -135,7 +159,7 @@ void	ft_write_in(t_ins *instruct)
 				cod = ft_arrg_join(cod, "00");
 			str = ft_arrg_join(str, ft_bin_to_hex(cod));
 		}
-		str = ft_arrg_join(str, ft_param(in, instruct));
+		str = ft_arrg_join(str, ft_param(in, instruct)); //вот вызов
 		in = in->next;
 	}
 }

@@ -3,7 +3,7 @@
 # include "libft/libft.h"
 # include "op.h"
 
-void			ft_hex(t_label *label);
+void			ft_hex(t_ins *instr);
 //char			*ft_itoa_base(long long n, int b);
 
 #endif

@@ -34,7 +34,7 @@ int ft_param_len(t_ins *in, t_param *p)
 		return (0);
 	else if (p->type == 1)
 		return (1);
-	else if	(p->type == 2 && in->codage == 4)
+	else if	(p->type == 2 && in->lab_size == 4)
 		return (4);
 	else //if (in->op.param[i] == 3 ||)
 		return (2);
