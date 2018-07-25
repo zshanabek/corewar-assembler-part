@@ -6,7 +6,7 @@
 /*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/07/24 18:07:55 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/07/25 12:59:01 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef	struct	s_op
 	char			*name;		// имя инструкции
 	int				nb_param;	// сколько параментров
 	int				param[3];	// какие параметры:T_REG = 1; T_DIR = 2; T_IND = 3;  если нет аргумента = 0
-	char			opcode;		// номер инструкции
+	int				opcode;		// номер инструкции
 	int				cycle;		// сколько циклов работает
 	char			*full_name;	// типа описание инструкции
 	int				coding_byte;// codage octal: true false

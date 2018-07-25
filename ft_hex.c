@@ -41,7 +41,7 @@ void	ft_hex(t_label *label)
 	{
 		len = 0;
 		in = l->instr;
-		in->pos = 1;
+		l->pos = 1;
 		while (in)
 		{
 			i = 0;
@@ -49,7 +49,7 @@ void	ft_hex(t_label *label)
 			{
 				if (ft_strequ(in->name, op_tab[i].name))
 				{
-					in->hexa = op_tab[i].opcode;
+					in->opcode = ft_itoa_base(op_tab[i].opcode, 16);
 					break ;
 				}
 				i++;
