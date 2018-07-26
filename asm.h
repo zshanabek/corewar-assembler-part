@@ -6,8 +6,8 @@
 typedef struct			s_param
 {
 	int					type;
-	char				*val;
-	int					value;
+	char				*sval;
+	int					ival;
 	size_t				size;
 	struct s_param		*next;
 }						t_param;
@@ -36,6 +36,7 @@ void		ft_lstaddendopcode(t_opcode **head, t_opcode *item);
 void		iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem));
 void		print_opcode(t_opcode *opcode);
 void		read_instr(int fd, char *line);
+t_param		*create_param(void);
 void		ft_lstaddendpar(t_param **head, t_param *item);
-
+void		show_error();
 #endif

@@ -14,21 +14,75 @@ int is_label_char(char c)
 	return (0);
 }
 
+int		is_digital(char *line)
+{
+	int i;
+
+	i = 0;
+	if (line == NULL)
+		return (0);
+	while (line[i])
+	{
+		if (!ft_isdigit(line[i]) && line[i] != '-')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void 	get_params(t_opcode *opcode, int i, char *line)
 {
-	char *params;
+	char *str;
 	char **arr;
 	int k;
+	t_param *item;
+	char *temp;
 
-	params = ft_strsub(line, i, ft_strlen(line) - i);
-	arr = ft_strsplit(params, ',');
+	str = ft_strsub(line, i, ft_strlen(line) - i);
+	arr = ft_strsplit(str, ',');
 	k = 0;
 	while (arr[k])
 	{
 		arr[k] = ft_strtrim(arr[k]);
+		item = create_param();
+		if (arr[k][0] == 'r')
+		{
+			temp = ft_strsub(arr[k], 1, ft_strlen(arr[k]) - 1);
+			if (is_digital(temp))
+			{
+				item->ival = ft_atoi(temp);
+				item->type = REG_CODE;				
+			}
+		}
+		else if (arr[k][0] == '%')
+		{
+			item->type = DIR_CODE;
+			if (arr[k][1] == ':')
+			{
+				temp = ft_strsub(arr[k], 2, ft_strlen(arr[k]) - 2);
+				item->sval = temp;			
+			}
+			else
+			{
+				temp = ft_strsub(arr[k], 1, ft_strlen(arr[k]) - 1);				
+				if (is_digital(temp))
+					item->ival = ft_atoi(temp);					
+			}
+		}
+		else if (ft_isdigit(arr[k][0]) || arr[k][0] == ':')
+		{
+			if (arr[k][0] == ':')
+				temp = ft_strsub(arr[k], 1, ft_strlen(arr[k]) - 1);				
+			else
+				temp = arr[k];			
+			if (is_digital(temp))
+				item->ival = ft_atoi(temp);
+		}
+		else
+			show_error();
+		ft_lstaddendpar(&opcode->param, item);
 		k++;
 	}
-	ft_print2darr(arr);
 }
 
 void	get_opcode(t_opcode *opcode, int h, int i, char *line)
