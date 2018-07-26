@@ -44,7 +44,7 @@ void get_param(t_param *item, char *str, int code)
 {
 	char *temp;
 
-	if (str[0] == LABEL_CHAR)
+	if (str[0] == LABEL_CHAR || code == REG_CODE)
 		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
 	else
 		temp = str;
@@ -57,11 +57,11 @@ void get_param(t_param *item, char *str, int code)
 
 void 	get_params(t_opcode *opcode, int i, char *line)
 {
-	char *str;
-	char **arr;
-	int k;
-	t_param *item;
-	char *temp;
+	int			k;
+	char		*str;
+	char		*temp;
+	char		**arr;
+	t_param		*item;
 
 	k = 0;
 	str = ft_strsub(line, i, ft_strlen(line) - i);
@@ -71,14 +71,14 @@ void 	get_params(t_opcode *opcode, int i, char *line)
 		arr[k] = ft_strtrim(arr[k]);
 		item = create_param();
 		if (arr[k][0] == 'r')
-			get_treg(item, arr[k]);
+			get_param(item, arr[k], REG_CODE);
 		else if (arr[k][0] == '%')
 		{
 			temp = ft_strsub(arr[k], 1, ft_strlen(arr[k]) - 1);
 			get_param(item, temp, DIR_CODE);
 		}
 		else if (ft_isdigit(arr[k][0]) || arr[k][0] == LABEL_CHAR)
-			get_param(item, arr[k], IND_CODE);				
+			get_param(item, arr[k], IND_CODE);
 		else
 			show_error();
 		ft_lstaddendpar(&opcode->param, item);
@@ -131,8 +131,9 @@ void	read_instr(int fd, char *line)
 	t_opcode	*ohead;
 
 	ohead = NULL;
-	if (get_next_line(fd, &line))
-		parse_instr(&ohead, line);
+	while (get_next_line(fd, &line))
+		if (line[0] != '\0')
+			parse_instr(&ohead, line);
 	iter_opcode(ohead, print_opcode);
 }
 
