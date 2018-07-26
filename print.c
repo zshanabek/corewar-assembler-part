@@ -8,9 +8,9 @@ void	print_label(t_label *label)
 void	print_param(t_param *param)
 {
 	if (param->sval != NULL)
-		ft_printf("   value: %s\n", param->sval);
+		ft_printf("   sval: %s\n", param->sval);
 	if (param->ival != -1)
-		ft_printf("   value: %d\n", param->ival);
+		ft_printf("   ival: %d\n", param->ival);
 	ft_printf("   type: %d\n", param->type);
 	if (param->next != NULL)
 		ft_printf("----------------\n");

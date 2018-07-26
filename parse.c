@@ -48,10 +48,10 @@ void get_param(t_param *item, char *str, int code)
 		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
 	else
 		temp = str;
-	if (is_digital(temp))
-		item->ival = ft_atoi(temp);
-	else
+	if (!is_digital(temp) || (LABEL_CHAR == str[0] && code == IND_CODE))
 		item->sval = temp;
+	else
+		item->ival = ft_atoi(temp);
 	item->type = code;	
 }
 
@@ -65,14 +65,14 @@ void 	get_params(t_opcode *opcode, int i, char *line)
 
 	k = 0;
 	str = ft_strsub(line, i, ft_strlen(line) - i);
-	arr = ft_strsplit(str, ',');
+	arr = ft_strsplit(str, SEPARATOR_CHAR);
 	while (arr[k])
 	{
 		arr[k] = ft_strtrim(arr[k]);
 		item = create_param();
 		if (arr[k][0] == 'r')
 			get_param(item, arr[k], REG_CODE);
-		else if (arr[k][0] == '%')
+		else if (arr[k][0] == DIRECT_CHAR)
 		{
 			temp = ft_strsub(arr[k], 1, ft_strlen(arr[k]) - 1);
 			get_param(item, temp, DIR_CODE);
@@ -99,10 +99,10 @@ t_label	*parse_instr(t_opcode **ohead, char *line)
 	t_label		*label;
 	t_opcode	*opcode;
 
+	i = 0;
 	label = NULL;
 	opcode = create_opcode();
 	ft_lstaddendopcode(ohead, opcode);
-	i = 0;
 	while (line[i] && ft_isws(line[i]))
 		i++;
 	h = i;
@@ -132,7 +132,7 @@ void	read_instr(int fd, char *line)
 
 	ohead = NULL;
 	while (get_next_line(fd, &line))
-		if (line[0] != '\0')
+		if (line[0] != '\0' && line[0] != COMMENT_CHAR)
 			parse_instr(&ohead, line);
 	iter_opcode(ohead, print_opcode);
 }
