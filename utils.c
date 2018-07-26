@@ -28,7 +28,7 @@ t_param		*create_param(void)
 
 	item = malloc(sizeof(t_param));
 	item->ival = -1;
-	item->type = -1;	
+	item->type = 0;	
 	item->sval = NULL;	
 	item->next = NULL;
 	return (item);

@@ -2,7 +2,7 @@
 
 void	print_label(t_label *label)
 {
-	ft_printf("%s\n", label->name);
+	ft_printf("   %s\n", label->name);
 }
 
 void	print_param(t_param *param)

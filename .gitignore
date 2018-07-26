@@ -5,6 +5,7 @@ a.out
 tempCodeRunnerFile.c
 *.dSYM/
 *.h.gch
+.DS_Store
 asm
 file
 mbappe.cor

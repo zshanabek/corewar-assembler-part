@@ -30,6 +30,31 @@ int		is_digital(char *line)
 	return (1);
 }
 
+void get_treg(t_param *item, char *str)
+{
+	char *temp;
+
+	item->type = REG_CODE;
+	temp = ft_strsub(str, 1, ft_strlen(str) - 1);
+	if (is_digital(temp))
+		item->ival = ft_atoi(temp);
+}
+
+void get_param(t_param *item, char *str, int code)
+{
+	char *temp;
+
+	if (str[0] == LABEL_CHAR)
+		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
+	else
+		temp = str;
+	if (is_digital(temp))
+		item->ival = ft_atoi(temp);
+	else
+		item->sval = temp;
+	item->type = code;	
+}
+
 void 	get_params(t_opcode *opcode, int i, char *line)
 {
 	char *str;
@@ -38,46 +63,22 @@ void 	get_params(t_opcode *opcode, int i, char *line)
 	t_param *item;
 	char *temp;
 
+	k = 0;
 	str = ft_strsub(line, i, ft_strlen(line) - i);
 	arr = ft_strsplit(str, ',');
-	k = 0;
 	while (arr[k])
 	{
 		arr[k] = ft_strtrim(arr[k]);
 		item = create_param();
 		if (arr[k][0] == 'r')
-		{
-			temp = ft_strsub(arr[k], 1, ft_strlen(arr[k]) - 1);
-			if (is_digital(temp))
-			{
-				item->ival = ft_atoi(temp);
-				item->type = REG_CODE;				
-			}
-		}
+			get_treg(item, arr[k]);
 		else if (arr[k][0] == '%')
 		{
-			item->type = DIR_CODE;
-			if (arr[k][1] == ':')
-			{
-				temp = ft_strsub(arr[k], 2, ft_strlen(arr[k]) - 2);
-				item->sval = temp;			
-			}
-			else
-			{
-				temp = ft_strsub(arr[k], 1, ft_strlen(arr[k]) - 1);				
-				if (is_digital(temp))
-					item->ival = ft_atoi(temp);					
-			}
+			temp = ft_strsub(arr[k], 1, ft_strlen(arr[k]) - 1);
+			get_param(item, temp, DIR_CODE);
 		}
-		else if (ft_isdigit(arr[k][0]) || arr[k][0] == ':')
-		{
-			if (arr[k][0] == ':')
-				temp = ft_strsub(arr[k], 1, ft_strlen(arr[k]) - 1);				
-			else
-				temp = arr[k];			
-			if (is_digital(temp))
-				item->ival = ft_atoi(temp);
-		}
+		else if (ft_isdigit(arr[k][0]) || arr[k][0] == LABEL_CHAR)
+			get_param(item, arr[k], IND_CODE);				
 		else
 			show_error();
 		ft_lstaddendpar(&opcode->param, item);
@@ -98,6 +99,7 @@ t_label	*parse_instr(t_opcode **ohead, char *line)
 	t_label		*label;
 	t_opcode	*opcode;
 
+	label = NULL;
 	opcode = create_opcode();
 	ft_lstaddendopcode(ohead, opcode);
 	i = 0;
