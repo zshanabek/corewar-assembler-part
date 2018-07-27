@@ -77,7 +77,8 @@ void	ft_hex(t_ins *instr)
 			p = p->next;
 		}
 		len += in->size;
+		//if (len > )// тут нужна проверка что размер инструкций не вышел за макс
 		in = in->next;
 	}
-	ft_write_in(in);
+	//ft_write_in(in);
 }

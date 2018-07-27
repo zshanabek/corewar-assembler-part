@@ -1,7 +1,7 @@
 #include "asm.h"
 #include "op.h"
 
-char	*ft_bin_to_hex(char *bin)
+int	*ft_bin_to(char *bin)
 {
 	int		i;
 	int		x;
@@ -17,18 +17,20 @@ char	*ft_bin_to_hex(char *bin)
 		i--;
 		power *= 2;
 	}
-	str = ft_itoa_base(x, 16);
-	return (str);
+	//str = ft_itoa_base(x, 16);
+	//return (str);
+	return (x);
 }
 
-char	*ft_count_len(long long int value, t_param *param)// перевести параметр в хекс, подогнать под размер и вернуть
+void		ft_count_len(long long int value, t_param *param)// свапаем бит и печатаем
 {
 	char				*s;
 	char				*ret;
 	int					i;
 	char				*ret2;
+	unsigned int		x;
 
-	if (value < 0)
+	if (value < 0)//если число отриц то всё плохо
 	{
 		value = -value;
 		ret = ft_itoa_base(value, 2);
@@ -56,17 +58,15 @@ char	*ft_count_len(long long int value, t_param *param)// перевести п�
 			}
 			i--;
 		}
-		s = ft_bin_to_hex(ret);
+		//s = ft_bin_to(ret);
+		x = ft_bin_to(ret);
 		ft_strdel(&ret);
 	}
-	else
-		s = ft_itoa_base(value, 16);
-	while(ft_strlen(s) != (param->size * 2))
-	{
-		ft_strdel(&ret);
-		ret = ft_arrg_join("0", s);
-	}
-	ft_strdel(s);
+	//else
+	//	s = ft_itoa_base(value, 16);
+	x = ft_swp_bits(x, param->size);
+	ft_strdel(&s);
+	write(fd2, &x, param->size);
 	return (ret);
 }
 
@@ -94,7 +94,7 @@ char	*ft_print_label(t_ins *instruct, t_ins *in, t_param *p)
 	return (0);
 }
 
-char	*ft_param(t_ins *in, t_ins *instruct)
+void	*ft_param(t_ins *in, t_ins *instruct)
 {
 	t_ins	*i;
 	t_label	*l;
@@ -123,6 +123,7 @@ char	*ft_param(t_ins *in, t_ins *instruct)
 			// }
 		}
 		else
+
 			s = ft_arrg_join(s, ft_count_len(p->value, p));
 		p = p->next;
 	}
@@ -130,18 +131,19 @@ char	*ft_param(t_ins *in, t_ins *instruct)
 }
 
 
-void	ft_write_in(t_ins *instruct)
+void	ft_write_in(t_ins *instruct, int fd2)
 {
 	char	*str;
 	t_label	*l;
 	t_ins	*in;
 	t_param	*p;
 	char	*cod;
+	int		x;
 
 	str = NULL;
 	while (in)
 	{
-		str = ft_arrg_join(str, in->opcode);
+		write(fd2, &in->opcode, 1);//str = ft_arrg_join(str, in->opcode);// печатаем опкод
 		if (in->cod_oct == 1)
 		{
 			p = in->param;
@@ -159,9 +161,12 @@ void	ft_write_in(t_ins *instruct)
 			}
 			while (ft_strlen(cod) < 8)
 				cod = ft_arrg_join(cod, "00");
-			str = ft_arrg_join(str, ft_bin_to_hex(cod));
+			x = ft_bin_to(cod);
+			write(fd2, &x, 1);//печатаем кодировку параметров
+			//str = ft_arrg_join(str, ft_bin_to(cod));
 		}
-		str = ft_arrg_join(str, ft_param(in, instruct)); //вот вызов
+		ft_param(in, instruct, fd2);
+		//str = ft_arrg_join(str, ft_param(in, instruct)); //вот вызов
 		//ft_to_file();// в str записана вся инструкция, можно записывать в файл
 		in = in->next;
 	}
