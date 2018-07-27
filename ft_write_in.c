@@ -24,7 +24,7 @@ int	*ft_bin_to(char *bin)
 
 void		ft_count_len(long long int value, t_param *param)// свапаем бит и печатаем
 {
-	char				*s;
+	//char				*s;
 	char				*ret;
 	int					i;
 	char				*ret2;
@@ -64,13 +64,16 @@ void		ft_count_len(long long int value, t_param *param)// свапаем бит 
 	}
 	//else
 	//	s = ft_itoa_base(value, 16);
+	else
+		x = value;
+	//	s = ft_itoa_base(value, 16);
 	x = ft_swp_bits(x, param->size);
-	ft_strdel(&s);
+	//ft_strdel(&s);
 	write(fd2, &x, param->size);
 	return (ret);
 }
 
-char	*ft_print_label(t_ins *instruct, t_ins *in, t_param *p)
+void		ft_print_label(t_ins *instruct, t_ins *in, t_param *p)
 {
 	t_ins *i;
 	t_label	*l;
@@ -106,7 +109,8 @@ void	*ft_param(t_ins *in, t_ins *instruct)
 	{
 		if (p->label != NULL)
 		{
-			s = ft_arrg_join(s, ft_print_label(instruct, in, p));
+			ft_print_label(instruct, in, p);
+			//s = ft_arrg_join(s, ft_print_label(instruct, in, p));
 			// i = instruct;
 			// while (i)
 			// {

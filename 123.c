@@ -1,7 +1,7 @@
 #include "asm.h"
 #include "op.h"
 
-char	*ft_bin_to_hex(char *bin)
+int	ft_bin_to(char *bin)
 {
 	int		i;
 	int		x;
@@ -17,8 +17,9 @@ char	*ft_bin_to_hex(char *bin)
 		i--;
 		power *= 2;
 	}
-	str = ft_itoa_base(x, 16);
-	return (str);
+	//str = ft_itoa_base(x, 16);
+	//return (str);
+	return (x);
 }
 
 void		ft_count_len(long long int value, int size)// свапаем бит и печатаем
@@ -28,7 +29,9 @@ void		ft_count_len(long long int value, int size)// свапаем бит и п�
 	int					i;
 	char				*ret2;
 	unsigned int		x;
+	int					fd2;
 
+	fd2 = open("123.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);	
 	if (value < 0)//если число отриц то всё плохо
 	{
 		value = -value;
@@ -61,17 +64,18 @@ void		ft_count_len(long long int value, int size)// свапаем бит и п�
 		x = ft_bin_to(ret);
 		ft_strdel(&ret);
 	}
-	//else
+	else
+		x = value;
 	//	s = ft_itoa_base(value, 16);
 	x = ft_swp_bits(x, size);
 	ft_strdel(&s);
 	write(fd2, &x, size);
-	return (ret);
+	//return (ret);
 }
 
 int main()
 {
 	//char *s = "01101000";
 	//ft_printf("s %s\n", ft_bin_to_hex(s));
-	ft_count_len(23, 4)
+	ft_count_len(15, 2);
 }

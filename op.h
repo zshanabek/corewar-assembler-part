@@ -123,6 +123,6 @@ typedef struct	s_ins
 
 void			ft_hex(t_ins *instr);
 char 			*ft_arrg_join(char *s1, char *s2);
-unsigned int	ft_swp_bits(int n, int size);
+unsigned int	ft_swp_bits(unsigned int n, int size);
 
 #endif
