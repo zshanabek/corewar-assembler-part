@@ -7,13 +7,13 @@ static void	write_magic(int fd)
 {
 	long	magic;
 	unsigned int len;
-	//magic = COREWAR_EXEC_MAGIC;// 0xea83f3
+	magic = COREWAR_EXEC_MAGIC;// 0xea83f3
 	magic = ((magic >> 24) & 0xff) | ((magic << 8) & 0xff0000) |
 		((magic >> 8) & 0xff00) | ((magic << 24) & 0xff000000);
 	//magic = magic << 1;// nado swap bits
 	//magic = magic >> 1;
-	len = ft_swp_bits(magic, 4);
-	write(fd, &len, 4);
+	//len = ft_swp_bits(magic, 4);
+	write(fd, &magic, 4);
 }
 
 
@@ -123,7 +123,5 @@ int main(int ac, char **av)
 	write(fd2, &h->prog_name, PROG_NAME_LENGTH + 4);
 	ft_bot_size(fd2);
 	write(fd2, &h->comment, COMMENT_LENGTH + 4);
-	//i = 11;
-	//write(fd2, &i, 1);
 	ft_write_in(instr, fd2);// записываем в файл
 }

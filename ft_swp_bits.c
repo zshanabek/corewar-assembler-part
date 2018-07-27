@@ -24,19 +24,11 @@ unsigned int	ft_swp_bits(unsigned int n, int size)
 		return (n);
 	nn = (unsigned char *)&n;
 	res_char = (unsigned char *)&res_num;
-	//i = size;
 	i = 0;
 	while (size > 0)
 	{
 		res_char[i++] = nn[--size];
 	}
 	return (res_num);
-	// if (size == 4)
-	// {
-	// 	res_num[0] = nn[3];
-	// 	res_num[1] = nn[2];
-	// 	res_num[2] = nn[1];
-	// 	res_num[3] = nn[0];
-	// }
 }
 
