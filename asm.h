@@ -39,4 +39,6 @@ void		read_instr(int fd, char *line);
 t_param		*create_param(void);
 void		ft_lstaddendpar(t_param **head, t_param *item);
 void		show_error();
+t_op		*search_struct();
+
 #endif

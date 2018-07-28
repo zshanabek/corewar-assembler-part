@@ -45,7 +45,8 @@ void 	iter_param(t_param *head, void (*f)(t_param *elem))
 
 void	print_opcode(t_opcode *opcode)
 {
-	ft_printf("%s\n", opcode->name);
+	ft_printf("name: %s\n", opcode->name);
+	ft_printf("cod:  %d\n", opcode->codage);	
 	if (opcode->label != NULL)
 	{
 		ft_printf("labels:\n");
@@ -56,6 +57,7 @@ void	print_opcode(t_opcode *opcode)
 		ft_printf("params:\n");
 		iter_param(opcode->param, print_param);
 	}
+	ft_printf("////////////////\n");
 }
 
 void 	iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem))

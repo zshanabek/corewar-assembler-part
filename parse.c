@@ -79,6 +79,7 @@ void 	get_params(t_opcode *opcode, int i, char *line)
 void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 {
 	opcode->name = ft_strsub(line, h, i - h);
+	opcode->codage = search_struct(opcode->name)->codage;
 	get_params(opcode, i, line);
 }
 

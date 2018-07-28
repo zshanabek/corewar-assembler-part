@@ -66,9 +66,9 @@ void	ft_read_header(header_t *h, int fd)
 
 int main(int ac, char **av)
 {
-	int		fd;
-	int		fd2;
-	char	*line;
+	int			fd;
+	int			fd2;
+	char		*line;
 	header_t	*h;
 
 	line = NULL;
@@ -87,6 +87,4 @@ int main(int ac, char **av)
 	write(fd2, h->prog_name, PROG_NAME_LENGTH);
 	write(fd2, h->comment, COMMENT_LENGTH);
 	read_instr(fd, line);
-	
-
 }

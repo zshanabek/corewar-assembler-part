@@ -6,6 +6,7 @@ t_opcode	*create_opcode(void)
 
 	item = malloc(sizeof(t_opcode));
 	item->name = NULL;
+	item->codage = -1;
 	item->param = NULL;
 	item->label = NULL;	
 	item->next = NULL;

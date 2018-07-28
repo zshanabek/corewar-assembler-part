@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/07/26 18:58:46 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/28 13:07:56 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef	struct	s_op
 	char			opcode;		// номер инструкции
 	int				cycle;		// сколько циклов работает
 	char			*full_name;	// типа описание инструкции
-	int				coding_byte;// codage octal: true false
+	int				codage;		// codage octal: true false
 	int				two_bytes;	// вот это я не понял
 }				t_op;
 
