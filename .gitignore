@@ -8,8 +8,6 @@ tempCodeRunnerFile.c
 .DS_Store
 asm
 file
-mbappe.cor
-mbappe.s
-zork.cor
-zork.s
+*.s
+*.cor
 vm_champs/

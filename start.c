@@ -87,4 +87,6 @@ int main(int ac, char **av)
 	write(fd2, h->prog_name, PROG_NAME_LENGTH);
 	write(fd2, h->comment, COMMENT_LENGTH);
 	read_instr(fd, line);
+	
+
 }

@@ -6,9 +6,9 @@
 typedef struct			s_param
 {
 	int					type;
-	char				*sval;
 	int					ival;
 	size_t				size;
+	char				*sval;
 	struct s_param		*next;
 }						t_param;
 
@@ -20,10 +20,10 @@ typedef struct			s_label
 
 typedef struct			s_opcode
 {
-	char				*name;		
-	int					codage;
-	char				*opcode;
+	int					codage;	
 	unsigned int		size;
+	char				*name;
+	char				*opcode;
 	t_param				*param;
 	t_label				*label;
 	struct s_opcode		*next;

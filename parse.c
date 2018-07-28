@@ -30,16 +30,6 @@ int		is_digital(char *line)
 	return (1);
 }
 
-void get_treg(t_param *item, char *str)
-{
-	char *temp;
-
-	item->type = REG_CODE;
-	temp = ft_strsub(str, 1, ft_strlen(str) - 1);
-	if (is_digital(temp))
-		item->ival = ft_atoi(temp);
-}
-
 void get_param(t_param *item, char *str, int code)
 {
 	char *temp;
@@ -99,6 +89,7 @@ t_label	*parse_instr(t_opcode **ohead, char *line)
 	t_label		*label;
 	t_opcode	*opcode;
 
+	ft_printf("%s\n", line);
 	i = 0;
 	label = NULL;
 	opcode = create_opcode();
