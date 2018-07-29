@@ -122,7 +122,7 @@ typedef struct	s_ins
 }				t_ins;
 
 void			ft_hex(t_ins *instr);
-char 			*ft_arrg_join(char *s1, char *s2);
+char 			*ft_arg_join(char *s1, char *s2, int arg);
 unsigned int	ft_swp_bits(unsigned int n, int size);
 
 #endif

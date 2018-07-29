@@ -55,7 +55,7 @@ void		ft_count_len(long long int value, int size)// свапаем бит и п�
 			}
 			if (i == 0)
 			{
-				ret = ft_arrg_join("1", ret); // LEAK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				ret = ft_arg_join("1", ret, 2); // LEAK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				break ;
 			}
 			i--;
@@ -79,4 +79,3 @@ int main()
 	//ft_printf("s %s\n", ft_bin_to_hex(s));
 	ft_count_len(15, 2);
 }
-

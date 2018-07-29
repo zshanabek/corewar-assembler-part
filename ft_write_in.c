@@ -49,7 +49,7 @@ void		ft_count_len(long long int value, t_param *param, int fd2)// свапае�
 			}
 			if (i == 0)
 			{
-				ret = ft_arrg_join("1", ret); // LEAK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				ret = ft_arg_join("1", ret, 2); // LEAK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				break ;
 			}
 			i--;
@@ -126,15 +126,15 @@ void	ft_write_in(t_ins *instruct, int fd2)
 				if (p->type == 0)
 					break ;
 				else if (p->type == 1)
-					cod = ft_arrg_join(cod, "01");
+					cod = ft_arg_join(cod, "01", 1);
 				else if (p->type == 2)
-					cod = ft_arrg_join(cod, "10");
+					cod = ft_arg_join(cod, "10", 1);
 				else if (p->type == 3)
-					cod = ft_arrg_join(cod, "11");
+					cod = ft_arg_join(cod, "11", 1);
 				p =p->next;
 			}
 			while (ft_strlen(cod) < 8)
-				cod = ft_arrg_join(cod, "00");
+				cod = ft_arg_join(cod, "00", 1);
 			x = ft_bin_to(cod);
 			write(fd2, &x, 1);//печатаем кодировку параметров
 		}

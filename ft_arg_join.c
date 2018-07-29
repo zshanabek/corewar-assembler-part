@@ -1,7 +1,20 @@
 #include "asm.h"
 #include "op.h"
 
-char *ft_arrg_join(char *s1, char *s2)
+static	void	ft_fr(char *s1, char *s2, int arg)
+{
+	if (arg == 1)
+		ft_strdel(&s1);
+	else if (arg == 2)
+		ft_strdel(&s2);
+	else if (arg == 3)
+	{
+		ft_strdel(&s1);
+		ft_strdel(&s2);
+	}
+}
+
+char			*ft_arg_join(char *s1, char *s2, int arg)
 {
     char *ret;
     char *anchor;
@@ -22,7 +35,7 @@ char *ft_arrg_join(char *s1, char *s2)
         while (*s2)
             ret[n++] = *s2++;
         ret[n] = '\0';
-        free(s1);
+		ft_fr(s1, s2, arg);
         free(anchor);
         return (ret);
     }
