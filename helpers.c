@@ -13,3 +13,23 @@ t_op	*search_struct(char *name)
 	}
 	return (0);
 }
+
+
+void	clear_comment(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ';' || line[i] == '#')
+		{
+			while (line[i])
+			{
+				line[i] = '\0';
+				i++;
+			}
+		}
+		i++;
+	}
+}

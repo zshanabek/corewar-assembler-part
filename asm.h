@@ -34,11 +34,14 @@ void		ft_lstaddendlabel(t_label **head, t_label *item);
 t_opcode	*create_opcode(void);
 void		ft_lstaddendopcode(t_opcode **head, t_opcode *item);
 void		iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem));
+void		iter_label(t_label *lhead, void (*f)(t_label *elem));
+void		print_label(t_label *label);
 void		print_opcode(t_opcode *opcode);
 void		read_instr(int fd, char *line);
 t_param		*create_param(void);
 void		ft_lstaddendpar(t_param **head, t_param *item);
 void		show_error();
 t_op		*search_struct();
-
+int			opcode_bar_ma(char *name);
+void		clear_comment(char *line);
 #endif

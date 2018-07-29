@@ -124,8 +124,13 @@ void	read_instr(int fd, char *line)
 
 	ohead = NULL;
 	while (get_next_line(fd, &line))
+	{
 		if (line[0] != '\0' && line[0] != COMMENT_CHAR)
+		{
+			clear_comment(line);
 			parse_instr(&ohead, line);
+		}
+	}
 	iter_opcode(ohead, print_opcode);
 }
 
