@@ -1,6 +1,6 @@
 #include "asm.h"
 #include "op.h"
-// gcc start.c ft_write_in.c ft_hex.c ft_arrg_join.c libft/libft.a op.h && ./a.out
+// gcc start.c ft_write_in.c ft_hex.c ft_arrg_join.c libft/libft.a op.h ft_swp_bits.c  && ./a.out zork.s
 
 
 static void	write_magic(int fd)
@@ -85,7 +85,7 @@ void	ft_bot_size(int fd2)
 	// 	i = i->next;
 	// }
 	//bot_size = i->pos + i->size;
-	bot_size = 23;
+	bot_size = 1023;
 	//size = ft_itoa_base(bot_size, 10);
 	//while (ft_strlen(size) < 8)
 	//	size = ft_arrg_join("0", size);//LEAK!!!!!!!!!!!!!!!!
@@ -123,5 +123,5 @@ int main(int ac, char **av)
 	write(fd2, &h->prog_name, PROG_NAME_LENGTH + 4);
 	ft_bot_size(fd2);
 	write(fd2, &h->comment, COMMENT_LENGTH + 4);
-	ft_write_in(instr, fd2);// записываем в файл
+	//ft_write_in(instr, fd2);// записываем в файл
 }

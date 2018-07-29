@@ -79,3 +79,4 @@ int main()
 	//ft_printf("s %s\n", ft_bin_to_hex(s));
 	ft_count_len(15, 2);
 }
+

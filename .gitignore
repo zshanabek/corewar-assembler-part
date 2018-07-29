@@ -8,3 +8,9 @@ zork.cor
 zork.s
 op.h.gch
 asm.h.gch
+vm_champs
+*.cor
+*.o
+*.s
+*.h.gch
+.DS_Store

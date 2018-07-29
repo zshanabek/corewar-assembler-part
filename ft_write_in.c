@@ -1,7 +1,7 @@
 #include "asm.h"
 #include "op.h"
 
-int	*ft_bin_to(char *bin)
+int	ft_bin_to(char *bin)
 {
 	int		i;
 	int		x;
@@ -19,7 +19,7 @@ int	*ft_bin_to(char *bin)
 	return (x);
 }
 
-void		ft_count_len(long long int value, t_param *param)// свапаем бит и печатаем
+void		ft_count_len(long long int value, t_param *param, int fd2)// свапаем бит и печатаем
 {
 	char				*ret;
 	int					i;
@@ -62,10 +62,10 @@ void		ft_count_len(long long int value, t_param *param)// свапаем бит 
 		x = value;
 	x = ft_swp_bits(x, param->size);
 	write(fd2, &x, param->size);
-	return (ret);
+	//return (ret);
 }
 
-void		ft_print_label(t_ins *instruct, t_ins *in, t_param *p)
+void		ft_print_label(t_ins *instruct, t_ins *in, t_param *p, int fd2)
 {
 	t_ins *i;
 	t_label	*l;
@@ -78,16 +78,14 @@ void		ft_print_label(t_ins *instruct, t_ins *in, t_param *p)
 		while (l)
 		{
 			if (ft_strequ(l->name, p->label))
-			{
-				return (ft_count_len(i->pos - in->pos, p));
-			}
+				return (ft_count_len(i->pos - in->pos, p, fd2));
 			l = l->next;
 		}
 	}
-	return (0);
+	//return (0);
 }
 
-void	*ft_param(t_ins *in, t_ins *instruct)
+void	*ft_param(t_ins *in, t_ins *instruct, int fd2)
 {
 	t_ins	*i;
 	t_label	*l;
@@ -98,12 +96,10 @@ void	*ft_param(t_ins *in, t_ins *instruct)
 	while (p)
 	{
 		if (p->label != NULL)
-		{
-			ft_print_label(instruct, in, p);
-		}
+			ft_print_label(instruct, in, p, fd2);
 		else
-
-			s = ft_arrg_join(s, ft_count_len(p->value, p));
+			ft_count_len(p->value, p, fd2);
+			//s = ft_arrg_join(s, ft_count_len(p->value, p, fd2));
 		p = p->next;
 	}
 	return (s);
@@ -118,7 +114,7 @@ void	ft_write_in(t_ins *instruct, int fd2)
 	char	*cod;
 	int		x;
 
-	str = NULL;
+	in = instruct;
 	while (in)
 	{
 		write(fd2, &in->opcode, 1);//str = ft_arrg_join(str, in->opcode);// печатаем опкод
