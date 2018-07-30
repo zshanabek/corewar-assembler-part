@@ -28,7 +28,6 @@ void	ft_fill_info(char *answer, int fd, char *str, int max)
 	s = ft_strdup(str + 1);
 	while (s[i] && s[i++] != '\"')
 	{
-		//i++;
 		len++;
 		if (s[i] == '\0' || s[i] == '\"')
 		{

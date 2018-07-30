@@ -6,16 +6,12 @@
 /*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/07/30 16:54:33 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/07/30 17:09:57 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** Toutes les tailles sont en octets.
-** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
-*/
 #ifndef OP_H
-#define OP_H
+# define OP_H
 
 #include "asm.h"
 
@@ -149,4 +145,32 @@ t_op		*search_struct();
 // char 			*ft_arg_join(char *s1, char *s2, int arg);
 // unsigned int	ft_swp_bits(unsigned int n, int size);
 
-#endif
+typedef struct		par_s
+{
+	char		*name;
+	int			p1[3]; //какие параметры:T_REG = 1; T_DIR = 2; T_IND = 3;  если нет аргумента = 0
+	int			p2[3];
+	int			p3[3];
+}					par_t;
+
+static par_t info[16] = 
+{
+	{"live",  {2}, {0}, {0}},
+	{"ld",    {2,3}, {1}, {0}},
+	{"st",    {1,0,0}, {1,0,1}, {0,0,0}},
+	{"add",   {1,0,0}, {1,0,0}, {1,0,0}},
+	{"sub",   {1,0,0}, {1,0,0}, {1,0,0}},
+	{"and",   {1,1,1}, {1,1,1}, {1,0,0}},
+	{"or",	  {1,1,1}, {1,1,1}, {1,0,0}},
+	{"xor",	  {1,1,1}, {1,1,1}, {1,0,0}},
+	{"zjmp",  {0,1,0}, {0,0,0}, {0,0,0}},
+	{"ldi",   {1,1,1}, {1,1,0}, {1,0,0}},
+	{"sti",   {1,0,0}, {1,1,1}, {1,1,0}},
+	{"fork",  {0,1,0}, {0,0,0}, {0,0,0}},
+	{"lld",   {0,1,1}, {1,0,0}, {0,0,0}},
+	{"lldi",  {1,1,1}, {1,1,0}, {1,0,0}},
+	{"lfork", {0,1,0}, {0,0,0}, {0,0,0}},
+	{"aff",   {1,0,0}, {0,0,0}, {0,0,0}}
+};
+
+#endif	
