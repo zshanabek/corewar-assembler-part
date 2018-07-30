@@ -56,6 +56,8 @@ void 	get_params(t_opcode *opcode, int i, char *line)
 	k = 0;
 	str = ft_strsub(line, i, ft_strlen(line) - i);
 	arr = ft_strsplit(str, SEPARATOR_CHAR);
+	if (ft_2darrlen(arr) != opcode->nb_param)
+		show_error();
 	while (arr[k])
 	{
 		arr[k] = ft_strtrim(arr[k]);
@@ -80,6 +82,7 @@ void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 {
 	opcode->name = ft_strsub(line, h, i - h);
 	opcode->codage = search_struct(opcode->name)->codage;
+	opcode->nb_param = search_struct(opcode->name)->nb_param;
 	get_params(opcode, i, line);
 }
 
@@ -99,18 +102,7 @@ void	parse_instr(t_opcode **ohead, t_label **lhead, char *line)
 	h = i;
 	while (is_label_char(line[i]) && line[i] != LABEL_CHAR)
 		i++;
-	if (line[i] == LABEL_CHAR)
-	{
-		i++;
-		while (line[i] && ft_isws(line[i]))
-			i++;
-		h = i;
-		while (line[i] && is_label_char(line[i]))
-			i++;
-		get_opcode(opcode, h, i, line);
-	}
-	else
-		get_opcode(opcode, h, i, line);		
+	get_opcode(opcode, h, i, line);		
 }	
 
 int	get_label(t_label **lhead, char *line)
@@ -159,6 +151,5 @@ void	read_instr(int fd, char *line)
 		}
 	}
 	iter_opcode(ohead, print_opcode);
-	// iter_label(lhead, print_label);
 }
 

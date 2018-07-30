@@ -13,7 +13,7 @@ void	print_param(t_param *param)
 		ft_printf("   ival: %d\n", param->ival);
 	ft_printf("   type: %d\n", param->type);
 	if (param->next != NULL)
-		ft_printf("----------------\n");
+		ft_printf("--------------\n");
 }
 
 void 	iter_label(t_label *lhead, void (*f)(t_label *elem))
@@ -46,7 +46,8 @@ void 	iter_param(t_param *head, void (*f)(t_param *elem))
 void	print_opcode(t_opcode *opcode)
 {
 	ft_printf("name: %s\n", opcode->name);
-	ft_printf("cod:  %d\n", opcode->codage);	
+	ft_printf("cod:  %d\n", opcode->codage);
+	ft_printf("npar:  %d\n", opcode->nb_param);	
 	if (opcode->label != NULL)
 	{
 		ft_printf("labels:\n");

@@ -20,7 +20,8 @@ typedef struct			s_label
 
 typedef struct			s_opcode
 {
-	int					codage;	
+	int					codage;
+	int 				nb_param;	
 	unsigned int		size;
 	char				*name;
 	char				*opcode;
