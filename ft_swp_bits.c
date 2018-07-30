@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_swp_bits.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 16:53:57 by vradchen          #+#    #+#             */
-/*   Updated: 2018/07/27 16:53:59 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/07/30 15:59:55 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ unsigned int	ft_swp_bits(unsigned int n, int size)
 	nn = (unsigned char *)&n;
 	res_char = (unsigned char *)&res_num;
 	i = 0;
-	ft_printf("n1 %lld\n", n);
+	//ft_printf("n1 %lld\n", n);
 	while (size > 0)
 	{
 		res_char[i++] = nn[--size];
 	}
-	ft_printf("n2 %lld\n", res_num);
+	//ft_printf("n2 %lld\n", res_num);
 	return (res_num);
 }
 

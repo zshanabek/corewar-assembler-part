@@ -6,7 +6,7 @@
 /*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/07/25 20:02:21 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/07/30 16:54:33 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,46 +83,70 @@ typedef struct		header_s
 
 typedef	struct	s_op
 {
-	char			*name;		// имя инструкции
+	char			*name;		//x имя инструкции
 	int				nb_param;	// сколько параментров
 	int				param[3];	// какие параметры:T_REG = 1; T_DIR = 2; T_IND = 3;  если нет аргумента = 0
-	int				opcode;		// номер инструкции
+	int				opcode;		//x номер инструкции
 	int				cycle;		// сколько циклов работает
 	char			*full_name;	// описание инструкции
 	int				coding_byte;// codage octal: true false
 	int				two_bytes;	// label size: 0 eto 2, 1 eto 4
 }				t_op;
 
-typedef	struct	s_param
-{
-	unsigned int	value;		//заполняй;значения аргумента
-	char			*label;		//заполняй;значение
-	int				type;		//заполняй;тип аргумента:T_REG = 1; T_DIR = 2; T_IND = 3;
-	int				size;		//длинна параметра
-	struct s_param	*next;		
-}				t_param;
 
-typedef struct	s_label
+static t_op    op_tab[17] =
 {
-	char			*name;		//заполняй;имя лейбла
-	struct s_label	*next;
-}				t_label;
+	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
+	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
+	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
+	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},
+	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},
+	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6,
+		"et (and  r1, r2, r3   r1&r2 -> r3", 1, 0},
+	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6,
+		"ou  (or   r1, r2, r3   r1 | r2 -> r3", 1, 0},
+	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6,
+		"ou (xor  r1, r2, r3   r1^r2 -> r3", 1, 0},
+	{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1},
+	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
+		"load index", 1, 1},
+	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
+		"store index", 1, 1},
+	{"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},
+	{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0},
+	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,
+		"long load index", 1, 1},
+	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
+	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
+	{0, 0, {0}, 0, 0, 0, 0, 0}
+};
 
-typedef struct	s_ins
-{
-	char			*name;		// заполняй;имя инструкции
-	t_param			*param;		// заполняй;данные аргументов инструкции
-	int				cod_oct;	// codage octal: 0 or 1
-	int				lab_size;	// label size: 2 or 4
-	char			*opcode;	// имя инструкц в хексе
-	t_label			*label;		// заполняй;имя лэйбла
-	unsigned int	size;		// длинна всей инструкции, по дефолту = 0
-	unsigned int	pos;		// позиция инструкц, по дефолту = 0
-	struct s_ins	*next;
-}				t_ins;
+t_op		*search_struct();
 
-void			ft_hex(t_ins *instr);
-char 			*ft_arg_join(char *s1, char *s2, int arg);
-unsigned int	ft_swp_bits(unsigned int n, int size);
+// typedef	struct	s_param
+// {
+// 	unsigned int	value;		//заполняй;значения аргумента
+// 	char			*label;		//заполняй;значение
+// 	int				type;		//заполняй;тип аргумента:T_REG = 1; T_DIR = 2; T_IND = 3;
+// 	int				size;		//длинна параметра
+// 	struct s_param	*next;		
+// }				t_param;
+
+// typedef struct	s_ins
+// {
+// 	char			*name;		//x заполняй;имя инструкции
+// 	t_param			*param;		//x заполняй;данные аргументов инструкции
+// 	int				cod_oct;	//x codage octal: 0 or 1
+// 	int				lab_size;	// label size: 2 or 4
+// 	char			*opcode;	// имя инструкц в хексе
+// 	t_label			*label;		//x заполняй;имя лэйбла
+// 	unsigned int	size;		// длинна всей инструкции, по дефолту = 0
+// 	unsigned int	pos;		// позиция инструкц, по дефолту = 0
+// 	struct s_ins	*next;		//x
+// }				t_ins;
+
+// void			ft_hex(t_ins *instr);
+// char 			*ft_arg_join(char *s1, char *s2, int arg);
+// unsigned int	ft_swp_bits(unsigned int n, int size);
 
 #endif

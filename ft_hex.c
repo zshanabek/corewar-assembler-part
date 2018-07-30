@@ -1,7 +1,7 @@
 #include "asm.h"
 #include "op.h"
 
-t_op    op_tab[17] =
+t_op    op_tab1[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
@@ -28,7 +28,7 @@ t_op    op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-int ft_param_len(t_ins *in, t_param *p)
+int ft_param_len(t_opcode *in, t_param *p)
 {
 	if (p->type == 0)
 		return (0);
@@ -40,11 +40,11 @@ int ft_param_len(t_ins *in, t_param *p)
 		return (2);
 }
 
-void	ft_hex(t_ins *instr)
+void	ft_hex(t_opcode *instr)
 {
-	int		len;
-	t_ins	*in;
-	t_param	*p;
+	int			len;
+	t_opcode	*in;
+	t_param		*p;
 	int		i;
 
 	len = 0;
@@ -54,11 +54,11 @@ void	ft_hex(t_ins *instr)
 		i = 0;
 		while (i < 17)
 		{
-			if (ft_strequ(in->name, op_tab[i].name))
+			if (ft_strequ(in->name, op_tab1[i].name))
 			{
-				in->opcode = ft_itoa_base(op_tab[i].opcode, 16);
-				in->cod_oct = op_tab[i].coding_byte;
-				if (op_tab[i].two_bytes == 1)
+				in->opcode = ft_itoa_base(op_tab1[i].opcode, 16);
+				in->codage = op_tab1[i].coding_byte;
+				if (op_tab1[i].two_bytes == 1)
 					in->lab_size = 4;
 				else
 					in->lab_size = 2;
@@ -67,7 +67,7 @@ void	ft_hex(t_ins *instr)
 			i++;
 		}
 		in->size = 1; // opcode name
-		if (in->cod_oct != 0)
+		if (in->codage != 0)
 			in->size++;
 		p = in->param;
 		while (p)

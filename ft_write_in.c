@@ -65,10 +65,10 @@ void		ft_count_len(long long int value, t_param *param, int fd2)// свапае�
 	//return (ret);
 }
 
-void		ft_print_label(t_ins *instruct, t_ins *in, t_param *p, int fd2)
+void		ft_print_label(t_opcode *instruct, t_opcode *in, t_param *p, int fd2)
 {
-	t_ins *i;
-	t_label	*l;
+	t_opcode	*i;
+	t_label		*l;
 	char *s;
 
 	i = instruct;
@@ -77,7 +77,7 @@ void		ft_print_label(t_ins *instruct, t_ins *in, t_param *p, int fd2)
 		l = i->label;
 		while (l)
 		{
-			if (ft_strequ(l->name, p->label))
+			if (ft_strequ(l->name, p->sval))
 				return (ft_count_len(i->pos - in->pos, p, fd2));
 			l = l->next;
 		}
@@ -85,20 +85,20 @@ void		ft_print_label(t_ins *instruct, t_ins *in, t_param *p, int fd2)
 	//return (0);
 }
 
-void	*ft_param(t_ins *in, t_ins *instruct, int fd2)
+void	*ft_param(t_opcode *in, t_opcode *instruct, int fd2)
 {
-	t_ins	*i;
-	t_label	*l;
-	t_param	*p;
-	char	*s;
+	t_opcode	*i;
+	t_label		*l;
+	t_param		*p;
+	char		*s;
 
 	p = in->param;
 	while (p)
 	{
-		if (p->label != NULL)
+		if (p->sval != NULL)
 			ft_print_label(instruct, in, p, fd2);
 		else
-			ft_count_len(p->value, p, fd2);
+			ft_count_len(p->ival, p, fd2);
 			//s = ft_arrg_join(s, ft_count_len(p->value, p, fd2));
 		p = p->next;
 	}
@@ -106,19 +106,19 @@ void	*ft_param(t_ins *in, t_ins *instruct, int fd2)
 }
 
 
-void	ft_write_in(t_ins *instruct, int fd2)
+void	ft_write_in(t_opcode *instruct, int fd2)
 {
-	t_label	*l;
-	t_ins	*in;
-	t_param	*p;
-	char	*cod;
-	int		x;
+	t_label		*l;
+	t_opcode	*in;
+	t_param		*p;
+	char		*cod;
+	int			x;
 
 	in = instruct;
 	while (in)
 	{
 		write(fd2, &in->opcode, 1);//str = ft_arrg_join(str, in->opcode);// печатаем опкод
-		if (in->cod_oct == 1)
+		if (in->codage == 1)
 		{
 			p = in->param;
 			while (p)

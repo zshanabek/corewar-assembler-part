@@ -24,7 +24,6 @@ typedef struct			s_opcode
 	unsigned int		size;	// длинна всей инструкции, по дефолту = 0
 	unsigned int		pos;		// позиция инструкц, по дефолту = 0
 	int					lab_size;
-	int 			nb_param;
 	char				*name;	//x заполняй;имя инструкции
 	char				*opcode;// имя инструкц в хексе
 	t_param				*param;	//x заполняй;данные аргументов инструкции
@@ -44,7 +43,7 @@ void		read_instr(int fd, char *line, t_opcode *ohead);
 t_param		*create_param(void);
 void		ft_lstaddendpar(t_param **head, t_param *item);
 void		show_error();
-t_op		*search_struct();
+
 int			opcode_bar_ma(char *name);
 void		clear_comment(char *line);
 
@@ -52,4 +51,5 @@ void			ft_hex(t_opcode *instr);
 char 			*ft_arg_join(char *s1, char *s2, int arg);
 unsigned int	ft_swp_bits(unsigned int n, int size);
 void			ft_write_in(t_opcode *instruct, int fd2);
+
 #endif

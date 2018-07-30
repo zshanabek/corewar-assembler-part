@@ -2,11 +2,10 @@
 #include "op.h"
 // gcc start.c ft_write_in.c ft_hex.c ft_arg_join.c libft/libft.a op.h ft_swp_bits.c  && ./a.out zork.s
 
-
 static void	write_magic(int fd)
 {
 	long	magic;
-	unsigned int len;
+	
 	magic = COREWAR_EXEC_MAGIC;// 0xea83f3
 	magic = ((magic >> 24) & 0xff) | ((magic << 8) & 0xff0000) |
 		((magic >> 8) & 0xff00) | ((magic << 24) & 0xff000000);
@@ -15,8 +14,6 @@ static void	write_magic(int fd)
 	//len = ft_swp_bits(magic, 4);
 	write(fd, &magic, 4);
 }
-
-
 
 void	ft_fill_info(char *answer, int fd, char *str, int max)
 {
@@ -73,22 +70,23 @@ void	ft_read_header(header_t *h, int fd)
 		exit(ft_printf("ERROR3\n"));
 }
 
-void	ft_bot_size(int fd2)
+void	ft_bot_size(int fd2, t_opcode *ohead)
 {
-	t_ins	*i;
-	int		bot_size;
-	char	*size;
+	t_opcode		*i;
+	int				bot_size;
+	char			*size;
 	unsigned int	len;
-	// i = ins;
-	// while (i->next)
-	// {
-	// 	i = i->next;
-	// }
-	//bot_size = i->pos + i->size;
-	bot_size = 100;
-	//size = ft_itoa_base(bot_size, 10);
-	//while (ft_strlen(size) < 8)
-	//	size = ft_arg_join("0", size, 2);//LEAK!!!!!!!!!!!!!!!!
+
+	i = ohead;
+	while (i->next)
+	{
+		i = i->next;
+	}
+	bot_size = i->pos + i->size;
+	//bot_size = 23;
+	size = ft_itoa_base(bot_size, 10);
+	while (ft_strlen(size) < 8)
+		size = ft_arg_join("0", size, 2);//LEAK!!!!!!!!!!!!!!!!
 	len = ft_swp_bits(bot_size, 4);
 	write(fd2, &len, 4);
 }
@@ -99,10 +97,9 @@ int main(int ac, char **av)
 	int			fd2;
 	char		*line;
 	header_t	*h;
-	t_ins		*instr;
-	char		*s;
-	int 		i;
+	t_opcode	*ohead;
 
+	ohead = NULL;
 	line = NULL;
 	if (ac != 2)
 	{
@@ -114,14 +111,16 @@ int main(int ac, char **av)
 		exit(1);
 	h = malloc(sizeof(header_t));
 	ft_read_header(h, fd);
-	get_next_line(fd, &line);
-	//ft_hex(instr);//проверка на длинну и некоторое заполнение
+	read_instr(fd, line, ohead);
+	iter_opcode(ohead, print_opcode);
+	//get_next_line(fd, &line);
+	ft_hex(ohead);//проверка на длинну и некоторое заполнение
 	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);	
 	write_magic(fd2);
 	//ft_printf("n %s\n", h->prog_name);
 	//ft_printf("c %s\n", h->comment);
 	write(fd2, &h->prog_name, PROG_NAME_LENGTH + 4);
-	ft_bot_size(fd2);
+	// ft_bot_size(fd2, ohead);
 	write(fd2, &h->comment, COMMENT_LENGTH + 4);
-	//ft_write_in(instr, fd2);// записываем в файл
+	ft_write_in(ohead, fd2);// записываем в файл
 }
