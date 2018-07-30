@@ -83,6 +83,7 @@ void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 	opcode->name = ft_strsub(line, h, i - h);
 	opcode->codage = search_struct(opcode->name)->coding_byte;
 	opcode->nb_param = search_struct(opcode->name)->nb_param;
+	opcode->opcode = search_struct(opcode->name)->opcode;	
 	get_params(opcode, i, line);
 }
 
@@ -144,7 +145,6 @@ int	get_label(t_label **lhead, char *line)
 	return (1);
 }
 
-
 void	read_instr(int fd, char *line, t_opcode *ohead)
 {
 	t_label 	*lhead;
@@ -159,6 +159,5 @@ void	read_instr(int fd, char *line, t_opcode *ohead)
 				parse_instr(&ohead, &lhead, line);
 		}
 	}
-	iter_opcode(ohead, print_opcode);
 }
 

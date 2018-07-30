@@ -1,6 +1,5 @@
 #include "asm.h"
 #include "op.h"
-// gcc start.c ft_write_in.c ft_hex.c ft_arg_join.c libft/libft.a op.h ft_swp_bits.c  && ./a.out zork.s
 
 static void	write_magic(int fd)
 {
@@ -111,7 +110,6 @@ int main(int ac, char **av)
 	h = malloc(sizeof(header_t));
 	ft_read_header(h, fd);
 	read_instr(fd, line, ohead);
-	iter_opcode(ohead, print_opcode);
 	//get_next_line(fd, &line);
 	ft_hex(ohead);//проверка на длинну и некоторое заполнение
 	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);	

@@ -24,9 +24,9 @@ typedef struct			s_opcode
 	unsigned int		size;	// длинна всей инструкции, по дефолту = 0
 	unsigned int		pos;		// позиция инструкц, по дефолту = 0
 	int					lab_size;
-	int 			nb_param;
+	int 				nb_param;
 	char				*name;	//x заполняй;имя инструкции
-	char				*opcode;// имя инструкц в хексе
+	long				opcode;// имя инструкц в хексе
 	t_param				*param;	//x заполняй;данные аргументов инструкции
 	t_label				*label;	//x заполняй;имя лэйбла
 	struct s_opcode		*next;

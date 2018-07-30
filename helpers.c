@@ -14,6 +14,30 @@ t_op	*search_struct(char *name)
 	return (0);
 }
 
+int		is_valid_param(t_opcode *elem)
+{
+	int		i;
+	int		j;	
+	t_param	*cur;
+
+	i = 0;
+	j = 0;
+	while (i < 16)
+	{
+		if (ft_strequ(info[i].name, elem->name))
+		{
+			i = 0;			
+			cur = elem->param;
+			while (j < 3)
+			{
+
+				j++;
+			}
+		}
+		i++;
+	}
+	return (0);
+}
 
 void	clear_comment(char *line)
 {
