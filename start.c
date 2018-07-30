@@ -81,7 +81,6 @@ void	ft_bot_size(int fd2, t_opcode *ohead)
 		i = i->next;
 	}
 	bot_size = i->pos + i->size;
-	//bot_size = 23;
 	size = ft_itoa_base(bot_size, 10);
 	while (ft_strlen(size) < 8)
 		size = ft_arg_join("0", size, 2);//LEAK!!!!!!!!!!!!!!!!
@@ -109,15 +108,13 @@ int main(int ac, char **av)
 		exit(1);
 	h = malloc(sizeof(header_t));
 	ft_read_header(h, fd);
-	read_instr(fd, line, ohead);
-	//get_next_line(fd, &line);
-	ft_hex(ohead);//проверка на длинну и некоторое заполнение
+	read_instr(fd, line, &ohead);
+	iter_opcode(ohead, print_opcode);
+	ft_hex(ohead); //проверка на длинну и некоторое заполнение
 	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);	
 	write_magic(fd2);
-	//ft_printf("n %s\n", h->prog_name);
-	//ft_printf("c %s\n", h->comment);
 	write(fd2, &h->prog_name, PROG_NAME_LENGTH + 4);
-	// ft_bot_size(fd2, ohead);
+	ft_bot_size(fd2, ohead);
 	write(fd2, &h->comment, COMMENT_LENGTH + 4);
 	ft_write_in(ohead, fd2);// записываем в файл
 }

@@ -145,7 +145,8 @@ int	get_label(t_label **lhead, char *line)
 	return (1);
 }
 
-void	read_instr(int fd, char *line, t_opcode *ohead)
+
+void	read_instr(int fd, char *line, t_opcode **ohead)
 {
 	t_label 	*lhead;
 
@@ -156,7 +157,7 @@ void	read_instr(int fd, char *line, t_opcode *ohead)
 		{
 			clear_comment(line);
 			if (get_label(&lhead, line))
-				parse_instr(&ohead, &lhead, line);
+				parse_instr(ohead, &lhead, line);
 		}
 	}
 }

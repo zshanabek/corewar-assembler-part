@@ -16,28 +16,43 @@ static	void	ft_fr(char *s1, char *s2, int arg)
 
 char			*ft_arg_join(char *s1, char *s2, int arg)
 {
-    char *ret;
-    char *anchor;
-    int  n;
-
-    if (s1 && s2)
+    char	*ret;
+    //char	*anchor;
+    int		n;
+	int		i;
+	
+	if (s1 == NULL && s2 != NULL)
+	{
+		if (!(ret = (char*)malloc(sizeof(char) * (ft_strlen(s2) + 1))))
+            return (NULL);
+		n = -1;
+		while (s2[++n])
+            ret[n] = s2[n];
+	}
+	else if (s2 == NULL && s1 != NULL)
+	{
+		if (!(ret = (char*)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
+            return (NULL);
+		n = -1;
+		while (s1[++n])
+            ret[n] = s1[n];
+	}
+    else if (s1 && s2)
     {
-        anchor = s2;
         if (!(ret = (char*)malloc(sizeof(char) * ((ft_strlen(s1)
                                                    + ft_strlen(s2)) + 1))))
             return (NULL);
-        n = 0;
-        while (s1[n] != '\0')
-        {
+        n = -1;
+        while (s1[++n])
             ret[n] = s1[n];
-            n++;
-        }
-        while (*s2)
-            ret[n++] = *s2++;
+		i = -1;
+        while (s2[++i])
+            ret[n++] = s2[i];
         ret[n] = '\0';
-		ft_fr(s1, s2, arg);
-        free(anchor);
-        return (ret);
     }
-    return (NULL);
+	else
+    	return (NULL);
+	ft_fr(s1, s2, arg);
+	return (ret);
+
 }

@@ -25,10 +25,10 @@ typedef struct			s_opcode
 	unsigned int		pos;		// позиция инструкц, по дефолту = 0
 	int					lab_size;
 	int 				nb_param;
-	char				*name;	//x заполняй;имя инструкции
-	long				opcode;// имя инструкц в хексе
-	t_param				*param;	//x заполняй;данные аргументов инструкции
-	t_label				*label;	//x заполняй;имя лэйбла
+	char				*name;		//x заполняй;имя инструкции
+	long				opcode;		// имя инструкц в long
+	t_param				*param;		//x заполняй;данные аргументов инструкции
+	t_label				*label;		//x заполняй;имя лэйбла
 	struct s_opcode		*next;
 }						t_opcode;
 
@@ -40,7 +40,7 @@ void		iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem));
 void		iter_label(t_label *lhead, void (*f)(t_label *elem));
 void		print_label(t_label *label);
 void		print_opcode(t_opcode *opcode);
-void		read_instr(int fd, char *line, t_opcode *ohead);
+void		read_instr(int fd, char *line, t_opcode **ohead);
 t_param		*create_param(void);
 void		ft_lstaddendpar(t_param **head, t_param *item);
 void		show_error();
