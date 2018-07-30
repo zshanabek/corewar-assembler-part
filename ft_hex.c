@@ -48,35 +48,38 @@ void	ft_hex(t_opcode *instr)
 	int		i;
 
 	len = 0;
+	in = instr;
 	while (in)
 	{
 		in->pos = len;
 		i = 0;
-		while (i < 17)
+		while (i < 16)
 		{
 			if (ft_strequ(in->name, op_tab1[i].name))
 			{
-				in->opcode = ft_itoa_base(op_tab1[i].opcode, 16);
+				in->opcode = op_tab1[i].opcode;//ft_itoa_base(op_tab1[i].opcode, 16);
 				in->codage = op_tab1[i].coding_byte;
 				if (op_tab1[i].two_bytes == 1)
-					in->lab_size = 4;
-				else
 					in->lab_size = 2;
+				else
+					in->lab_size = 4;
 				break ;
 			}
 			i++;
 		}
 		in->size = 1; // opcode name
-		if (in->codage != 0)
+		if (in->codage == 1)
 			in->size++;
 		p = in->param;
 		while (p)
 		{
 			p->size = ft_param_len(in, p);
+			//ft_printf("n %s size_param %i \n", in->name, p->size);
 			in->size += p->size;
 			p = p->next;
 		}
 		len += in->size;
+		//ft_printf("n %s size %i \n", in->name, in->size);
 		//if (len > )// тут нужна проверка что размер инструкций не вышел за макс
 		in = in->next;
 	}
