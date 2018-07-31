@@ -47,7 +47,7 @@ void	print_opcode(t_opcode *opcode)
 {
 	ft_printf("name: {magenta}%s{eoc}\n", opcode->name);
 	// ft_printf("cod:  %d\n", opcode->codage);
-	ft_printf("npar:  %d\n", opcode->nb_param);	
+	// ft_printf("npar:  %d\n", opcode->nb_param);	
 	if (opcode->label != NULL)
 	{
 		ft_printf("labels:\n");

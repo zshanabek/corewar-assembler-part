@@ -75,11 +75,15 @@ void	ft_bot_size(int fd2, t_opcode *ohead)
 	char			*size;
 	unsigned int	len;
 
+	len = 0;
+	if (ohead == NULL)
+	{
+		write(fd2, &len, 4);
+		return ;
+	}
 	i = ohead;
 	while (i->next)
-	{
 		i = i->next;
-	}
 	bot_size = i->pos + i->size;
 	size = ft_itoa_base(bot_size, 10);
 	while (ft_strlen(size) < 8)
