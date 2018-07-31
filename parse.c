@@ -144,7 +144,7 @@ void	parse_instr(t_opcode **ohead, t_label **lhead, char *line)
 	}
 	else
 		get_opcode(opcode, h, i, line);
-}	
+}
 
 int	get_label(t_label **lhead, char *line)
 {
@@ -156,7 +156,7 @@ int	get_label(t_label **lhead, char *line)
 	while (line[i] && ft_isws(line[i]))
 		i++;
 	h = i;
-	while (line[i] && line[i] != LABEL_CHAR)
+	while (line[i] && !ft_isws(line[i]) && line[i] != LABEL_CHAR)
 		i++;
 	if (line[i] == LABEL_CHAR)
 	{
@@ -175,7 +175,6 @@ int	get_label(t_label **lhead, char *line)
 		return (0);
 	return (1);
 }
-
 
 void	read_instr(int fd, char *line, t_opcode **ohead)
 {
