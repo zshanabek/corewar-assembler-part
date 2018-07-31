@@ -40,6 +40,8 @@ void		iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem));
 void		iter_label(t_label *lhead, void (*f)(t_label *elem));
 void		print_label(t_label *label);
 void		print_opcode(t_opcode *opcode);
+void		print_param(t_param *param);
+void		iter_param(t_param *head, void (*f)(t_param *elem));
 void		read_instr(int fd, char *line, t_opcode **ohead);
 t_param		*create_param(void);
 void		ft_lstaddendpar(t_param **head, t_param *item);
@@ -47,6 +49,7 @@ void		show_error();
 t_op		*search_struct();
 int			opcode_bar_ma(char *name);
 void		clear_comment(char *line);
+int			is_valid_param(t_opcode *to_find);
 
 void			ft_hex(t_opcode *instr);
 char 			*ft_arg_join(char *s1, char *s2, int arg);

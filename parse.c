@@ -83,8 +83,10 @@ void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 	opcode->name = ft_strsub(line, h, i - h);
 	opcode->codage = search_struct(opcode->name)->coding_byte;
 	opcode->nb_param = search_struct(opcode->name)->nb_param;
-	opcode->opcode = search_struct(opcode->name)->opcode;	
+	opcode->opcode = search_struct(opcode->name)->opcode;
 	get_params(opcode, i, line);
+	if (!is_valid_param(opcode))
+		show_error();
 }
 
 void	parse_instr(t_opcode **ohead, t_label **lhead, char *line)
