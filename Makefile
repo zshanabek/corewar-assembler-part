@@ -8,7 +8,7 @@ all: 		$(NAME)
 
 $(NAME):	$(FRC)
 			@make -C libft
-			@gcc $(SRC) $(LIB) -o $(NAME)
+			@gcc $(SRC) $(LIB) -o $(NAME) $(FLAGS)
 			@echo "\x1b[32mProject is successfully built!\x1b[0m"	
 
 clean:
