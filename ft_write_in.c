@@ -23,7 +23,6 @@ void		ft_count_len(long value, t_param *param, int fd2)// свапаем бит 
 {
 	char				*ret;
 	int					i;
-	char				*ret2;
 	unsigned int		x;
 
 	if (value < 0)//если число отриц то всё плохо
@@ -67,7 +66,6 @@ void		ft_print_label(t_opcode *instruct, t_opcode *in, t_param *p, int fd2)
 {
 	t_opcode	*i;
 	t_label		*l;
-	char *s;
 
 	i = instruct;
 	while (i)
@@ -76,22 +74,16 @@ void		ft_print_label(t_opcode *instruct, t_opcode *in, t_param *p, int fd2)
 		while (l)
 		{
 			if (ft_strequ(l->name, p->sval))
-			{
-				//ft_printf("SOVPALO %i\n", i->pos - in->pos);
 				return (ft_count_len(i->pos - in->pos, p, fd2));
-			}
 			l = l->next;
 		}
 		i = i->next;
 	}
 }
 
-void	*ft_param(t_opcode *in, t_opcode *instruct, int fd2)
+void	ft_param(t_opcode *in, t_opcode *instruct, int fd2)
 {
-	t_opcode	*i;
-	t_label		*l;
 	t_param		*p;
-	char		*s;
 
 	p = in->param;
 	while (p)
@@ -100,16 +92,13 @@ void	*ft_param(t_opcode *in, t_opcode *instruct, int fd2)
 			ft_print_label(instruct, in, p, fd2);
 		else
 			ft_count_len(p->ival, p, fd2);
-			//s = ft_arrg_join(s, ft_count_len(p->value, p, fd2));
 		p = p->next;
 	}
-	return (s);
 }
 
 
 void	ft_write_in(t_opcode *instruct, int fd2)
 {
-	t_label		*l;
 	t_opcode	*in;
 	t_param		*p;
 	char		*cod;
