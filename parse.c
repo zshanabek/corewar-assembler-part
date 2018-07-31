@@ -14,6 +14,25 @@ int is_label_char(char c)
 	return (0);
 }
 
+int is_valid_label(char *str)
+{
+	int i;
+	int flag;
+
+	flag = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (is_label_char(str[i]))
+			flag = 1;
+		if (flag == 0)
+			return (0);
+		flag = 0;
+		i++;
+	}
+	return (1);
+}
+
 int		is_digital(char *line)
 {
 	int i;
@@ -111,7 +130,7 @@ void	parse_instr(t_opcode **ohead, t_label **lhead, char *line)
 	while (line[i] && ft_isws(line[i]))
 		i++;
 	h = i;
-	while (is_label_char(line[i]) && line[i] != LABEL_CHAR)
+	while (line[i] && !ft_isws(line[i]) && line[i] != LABEL_CHAR)
 		i++;
 	if (line[i] == LABEL_CHAR)
 	{
@@ -119,7 +138,7 @@ void	parse_instr(t_opcode **ohead, t_label **lhead, char *line)
 		while (line[i] && ft_isws(line[i]))
 			i++;
 		h = i;
-		while (line[i] && is_label_char(line[i]))
+		while (line[i] && !ft_isws(line[i]))
 			i++;
 		get_opcode(opcode, h, i, line);
 	}
@@ -137,12 +156,14 @@ int	get_label(t_label **lhead, char *line)
 	while (line[i] && ft_isws(line[i]))
 		i++;
 	h = i;
-	while (is_label_char(line[i]) && line[i] != LABEL_CHAR)
+	while (line[i] && line[i] != LABEL_CHAR)
 		i++;
 	if (line[i] == LABEL_CHAR)
 	{
 		item = create_label();
 		item->name = ft_strsub(line, h, i-h);
+		if (!is_valid_label(item->name))
+			show_error();
 		ft_lstaddendlabel(lhead, item);
 	}
 	else
@@ -170,7 +191,5 @@ void	read_instr(int fd, char *line, t_opcode **ohead)
 				parse_instr(ohead, &lhead, line);
 		}
 	}
-	// if (*ohead == NULL)
-	// 	show_error();
 }
 
