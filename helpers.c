@@ -28,32 +28,52 @@ par_t	*search_param(t_opcode *elem)
 	return (0);
 }
 
-int is_valid_param(t_opcode *to_find)
+int		is_label_char(char c)
 {
-	int		i;
-	int		j;
-	int		k;
-	par_t	*elem;
-	t_param	*cur;
+	int i;
 
 	i = 0;
-	k = 0;
-	elem = search_param(to_find);
-	cur = to_find->param;
-	while (i < to_find->nb_param)
+	while (LABEL_CHARS[i])
 	{
-		j = 0;
-		while (j < 3)
-		{
-			if (elem->p[i][j] == cur->type)
-				k++;
-			j++;
-		}
+		if (LABEL_CHARS[i] == c)
+			return (1);
 		i++;
-		cur = cur->next;
 	}
-	if (k != to_find->nb_param)
+	return (0);
+}
+
+int		is_valid_label(char *str)
+{
+	int i;
+	int flag;
+
+	flag = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (is_label_char(str[i]))
+			flag = 1;
+		if (flag == 0)
+			return (0);
+		flag = 0;
+		i++;
+	}
+	return (1);
+}
+
+int		is_digital(char *line)
+{
+	int i;
+
+	i = 0;
+	if (line == NULL)
 		return (0);
+	while (line[i])
+	{
+		if (!ft_isdigit(line[i]) && line[i] != '-')
+			return (0);
+		i++;
+	}
 	return (1);
 }
 
