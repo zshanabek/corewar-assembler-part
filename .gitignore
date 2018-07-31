@@ -12,3 +12,6 @@ file
 *.cor
 vm_champs/
 examples/
+CMakeLists.txt
+cmake-build-debug
+.idea
