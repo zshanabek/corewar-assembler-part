@@ -2,7 +2,7 @@
 
 void	print_label(t_label *label)
 {
-	ft_printf("   %s\n", label->name);
+	ft_printf("{blue}   %s{eoc}\n", label->name);
 }
 
 void	print_param(t_param *param)
@@ -45,8 +45,8 @@ void 	iter_param(t_param *head, void (*f)(t_param *elem))
 
 void	print_opcode(t_opcode *opcode)
 {
-	ft_printf("name: %s\n", opcode->name);
-	ft_printf("cod:  %d\n", opcode->codage);
+	ft_printf("name: {magenta}%s{eoc}\n", opcode->name);
+	// ft_printf("cod:  %d\n", opcode->codage);
 	ft_printf("npar:  %d\n", opcode->nb_param);	
 	if (opcode->label != NULL)
 	{
