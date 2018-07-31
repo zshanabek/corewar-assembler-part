@@ -116,5 +116,6 @@ int main(int ac, char **av)
 	write(fd2, &h->prog_name, PROG_NAME_LENGTH + 4);
 	ft_bot_size(fd2, ohead);
 	write(fd2, &h->comment, COMMENT_LENGTH + 4);
-	ft_write_in(ohead, fd2);// записываем в файл
+	if (ohead != NULL)
+		ft_write_in(ohead, fd2);// записываем в файл
 }

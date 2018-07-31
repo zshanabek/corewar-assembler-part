@@ -17,7 +17,6 @@ static	void	ft_fr(char *s1, char *s2, int arg)
 char			*ft_arg_join(char *s1, char *s2, int arg)
 {
     char	*ret;
-    //char	*anchor;
     int		n;
 	int		i;
 	

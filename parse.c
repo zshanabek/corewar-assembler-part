@@ -147,7 +147,6 @@ int	get_label(t_label **lhead, char *line)
 	return (1);
 }
 
-
 void	read_instr(int fd, char *line, t_opcode **ohead)
 {
 	t_label 	*lhead;
