@@ -75,11 +75,15 @@ void	ft_bot_size(int fd2, t_opcode *ohead)
 	char			*size;
 	unsigned int	len;
 
+	len = 0;
+	if (ohead == NULL)
+	{
+		write(fd2, &len, 4);
+		return ;
+	}
 	i = ohead;
 	while (i->next)
-	{
 		i = i->next;
-	}
 	bot_size = i->pos + i->size;
 	size = ft_itoa_base(bot_size, 10);
 	while (ft_strlen(size) < 8)
@@ -116,5 +120,6 @@ int main(int ac, char **av)
 	write(fd2, &h->prog_name, PROG_NAME_LENGTH + 4);
 	ft_bot_size(fd2, ohead);
 	write(fd2, &h->comment, COMMENT_LENGTH + 4);
-	ft_write_in(ohead, fd2);// записываем в файл
+	if (ohead != NULL)
+		ft_write_in(ohead, fd2);// записываем в файл
 }

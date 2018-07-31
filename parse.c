@@ -45,19 +45,27 @@ void get_param(t_param *item, char *str, int code)
 	item->type = code;	
 }
 
+char	**get_params_array(t_opcode *opcode, int i, char *line)
+{
+	char	*str;
+	char	**arr;
+
+	str = ft_strsub(line, i, ft_strlen(line) - i);
+	arr = ft_strsplit(str, SEPARATOR_CHAR);
+	if (ft_2darrlen(arr) != opcode->nb_param)
+		show_error();
+	return (arr);
+}
+
 void 	get_params(t_opcode *opcode, int i, char *line)
 {
 	int			k;
-	char		*str;
 	char		*temp;
 	char		**arr;
 	t_param		*item;
 
 	k = 0;
-	str = ft_strsub(line, i, ft_strlen(line) - i);
-	arr = ft_strsplit(str, SEPARATOR_CHAR);
-	if (ft_2darrlen(arr) != opcode->nb_param)
-		show_error();
+	arr = get_params_array(opcode, i, line);
 	while (arr[k])
 	{
 		arr[k] = ft_strtrim(arr[k]);
@@ -162,5 +170,7 @@ void	read_instr(int fd, char *line, t_opcode **ohead)
 				parse_instr(ohead, &lhead, line);
 		}
 	}
+	// if (*ohead == NULL)
+	// 	show_error();
 }
 
