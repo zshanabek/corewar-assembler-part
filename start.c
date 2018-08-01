@@ -110,7 +110,7 @@ int main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("Can't read source file %s\n", av[1]);			
+		ft_printf("Can't read source file %s\n", av[1]);
 		exit(1);
 	}
 	h = malloc(sizeof(header_t));
@@ -125,4 +125,5 @@ int main(int ac, char **av)
 	write(fd2, &h->comment, COMMENT_LENGTH + 4);
 	if (ohead != NULL)
 		ft_write_in(ohead, fd2);// записываем в файл
+	system("leaks asm");
 }

@@ -29,26 +29,9 @@ int		is_valid_param(t_opcode *to_find)
 	return (1);
 }
 
-void	analyze_param(t_param *item, char *str, int code, int type)
-{
-	char	*temp;
 
-	if (str[1] == '\0')
-		show_error();
-	if (code == DIR_CODE)
-	{
-		str = ft_strsub(str, 1, ft_strlen(str) - 1);
-		if (str[0] == LABEL_CHAR)
-            type = 2;
-		else if (ft_isdigit(str[0]))
-        	type = 1;
-		else
-			show_error();			
-	}
-	if (str[0] == LABEL_CHAR || code == REG_CODE)
-		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
-	else
-		temp = str;
+void	analyze_type(t_param *item, char *temp, int type, int code)
+{
 	if (is_digital(temp) && type == 1)
 		item->ival = ft_atoi(temp);
 	else if (type == 2)
@@ -58,6 +41,34 @@ void	analyze_param(t_param *item, char *str, int code, int type)
 	if (code == REG_CODE && item->ival > REG_NUMBER)
 		show_error();
 	item->type = code;
+}
+
+void	analyze_param(t_param *item, char *str, int code, int type)
+{
+	char	*temp;
+
+	if (str[1] == '\0')
+		show_error();
+	if (code == DIR_CODE)
+	{
+		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
+		str = temp;
+		free(temp);
+		if (str[0] == LABEL_CHAR)
+            type = 2;
+		else if (ft_isdigit(str[0]))
+        	type = 1;
+		else
+			show_error();
+	}
+	if (str[0] == LABEL_CHAR || code == REG_CODE)
+	{
+		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
+		free(temp);
+	}
+	else
+		temp = str;
+	analyze_type(item, temp, type, code);
 }
 
 char	**get_params_array(t_opcode *opcode, int i, char *line)
@@ -73,32 +84,33 @@ char	**get_params_array(t_opcode *opcode, int i, char *line)
 		show_error();
 	if (ft_2darrlen(arr) != opcode->nb_param)
 		show_error();
+	free(str);
 	return (arr);
 }
 
-void	get_params(t_opcode *opcode, int i, char *line)
+void	get_params(t_opcode *opcode, char **arr)
 {
 	int			k;
-	char		**arr;
+	char 		*temp;
 	t_param		*item;
 
 	k = 0;
-	arr = get_params_array(opcode, i, line);
 	while (arr[k])
 	{
-		arr[k] = ft_strtrim(arr[k]);
+		temp = ft_strtrim(arr[k]);
 		item = create_param();	
-		if (arr[k][0] == 'r')
-			analyze_param(item, arr[k], REG_CODE, 1);
-		else if (arr[k][0] == DIRECT_CHAR)
-			analyze_param(item, arr[k], DIR_CODE, 0);
-		else if (ft_isdigit(arr[k][0]))
-			analyze_param(item, arr[k], IND_CODE, 1);
-		else if (arr[k][0] == LABEL_CHAR)
-			analyze_param(item, arr[k], IND_CODE, 2);
+		if (temp[0] == 'r')
+			analyze_param(item, temp, REG_CODE, 1);
+		else if (temp[0] == DIRECT_CHAR)
+			analyze_param(item, temp, DIR_CODE, 0);
+		else if (ft_isdigit(temp[0]))
+			analyze_param(item, temp, IND_CODE, 1);
+		else if (temp[0] == LABEL_CHAR)
+			analyze_param(item, temp, IND_CODE, 2);
 		else
 			show_error();
 		ft_lstaddendpar(&opcode->param, item);
+		free(temp);
 		k++;
 	}
 }

@@ -22,7 +22,7 @@ typedef struct			s_opcode
 {
 	int					codage;	// codage octal: 0 or 1
 	unsigned int		size;	// длинна всей инструкции, по дефолту = 0
-	unsigned int		pos;		// позиция инструкц, по дефолту = 0
+	unsigned int		pos;	// позиция инструкц, по дефолту = 0
 	int					lab_size;
 	int 				nb_param;
 	char				*name;		//x заполняй;имя инструкции
@@ -52,8 +52,10 @@ void		clear_comment(char *line);
 int			is_valid_param(t_opcode *to_find);
 int			is_digital(char *line);
 int			is_valid_label(char *str);
-void		get_params(t_opcode *opcode, int i, char *line);
+char		**get_params_array(t_opcode *opcode, int i, char *line);
+void		get_params(t_opcode *opcode, char **arr);
 int			count_commas(char *str);
+void		ft_inslstdel(t_opcode **head);
 
 void			ft_hex(t_opcode *instr);
 char 			*ft_arg_join(char *s1, char *s2, int arg);
