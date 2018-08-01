@@ -14,20 +14,6 @@ t_op	*search_struct(char *name)
 	return (0);
 }
 
-par_t	*search_param(t_opcode *elem)
-{
-	int		i;
-
-	i = 0;
-	while (i < 16)
-	{
-		if (ft_strequ(info[i].name, elem->name))
-			return (&info[i]);
-		i++;
-	}
-	return (0);
-}
-
 int		is_label_char(char c)
 {
 	int i;

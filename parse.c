@@ -9,8 +9,8 @@ void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 	opcode->nb_param = search_struct(opcode->name)->nb_param;
 	opcode->opcode = search_struct(opcode->name)->opcode;
 	get_params(opcode, i, line);
-	// if (!is_valid_param(opcode))
-	// 	show_error();
+	if (!is_valid_param(opcode))
+		show_error();
 }
 
 void	parse_instr(t_opcode **ohead, t_label **lhead, char *line)
@@ -86,7 +86,6 @@ void	read_instr(int fd, char *line, t_opcode **ohead)
 			if (get_label(&lhead, line))
 				parse_instr(ohead, &lhead, line);
 		}
-		// ft_printf("%s\n", line);
 	}
 }
 

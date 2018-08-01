@@ -53,7 +53,6 @@ int			is_valid_param(t_opcode *to_find);
 int			is_digital(char *line);
 int			is_valid_label(char *str);
 void		get_params(t_opcode *opcode, int i, char *line);
-par_t		*search_param(t_opcode *elem);
 int			count_commas(char *str);
 
 void			ft_hex(t_opcode *instr);

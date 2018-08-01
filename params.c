@@ -1,23 +1,23 @@
 #include "asm.h"
 
-int is_valid_param(t_opcode *to_find)
+int		is_valid_param(t_opcode *to_find)
 {
 	int		i;
 	int		j;
 	int		k;
-	par_t	*elem;
+	t_op	*elem;
 	t_param	*cur;
 
 	i = 0;
 	k = 0;
-	elem = search_param(to_find);
+	elem = search_struct(to_find->name);
 	cur = to_find->param;
 	while (i < to_find->nb_param)
 	{
 		j = 0;
 		while (j < 3)
 		{
-			if (elem->p[i][j] == cur->type)
+			if (elem->param[i][j] == cur->type)
 				k++;
 			j++;
 		}
