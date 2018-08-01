@@ -104,12 +104,15 @@ int main(int ac, char **av)
 	line = NULL;
 	if (ac != 2)
 	{
-		ft_putstr_fd("Usage: ./asm test\n", 2);
+		ft_putstr_fd("Usage: ./asm test.s\n", 2);
 		exit(1);
 	}
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
+	{
+		ft_printf("Can't read source file %s\n", av[1]);			
 		exit(1);
+	}
 	h = malloc(sizeof(header_t));
 	ft_read_header(h, fd);
 	read_instr(fd, line, &ohead);

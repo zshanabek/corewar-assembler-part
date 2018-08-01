@@ -33,6 +33,8 @@ void	analyze_param(t_param *item, char *str, int code, int type)
 {
 	char	*temp;
 
+	if (str[1] == '\0')
+		show_error();
 	if (code == DIR_CODE)
 	{
 		str = ft_strsub(str, 1, ft_strlen(str) - 1);
