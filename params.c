@@ -29,19 +29,33 @@ int is_valid_param(t_opcode *to_find)
 	return (1);
 }
 
-void get_param(t_param *item, char *str, int code)
+void	analyze_param(t_param *item, char *str, int code, int type)
 {
-	char *temp;
+	char	*temp;
 
+	if (code == DIR_CODE)
+	{
+		str = ft_strsub(str, 1, ft_strlen(str) - 1);
+		if (str[0] == LABEL_CHAR)
+            type = 2;
+		else if (ft_isdigit(str[0]))
+        	type = 1;
+		else
+			show_error();			
+	}
 	if (str[0] == LABEL_CHAR || code == REG_CODE)
 		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
 	else
 		temp = str;
-	if (!is_digital(temp) || (LABEL_CHAR == str[0] && code == IND_CODE))
+	if (is_digital(temp) && type == 1)
+		item->ival = ft_atoi(temp);
+	else if (type == 2)
 		item->sval = temp;
 	else
-		item->ival = ft_atoi(temp);
-	item->type = code;	
+		show_error();
+	if (code == REG_CODE && item->ival > REG_NUMBER)
+		show_error();
+	item->type = code;
 }
 
 char	**get_params_array(t_opcode *opcode, int i, char *line)
@@ -60,10 +74,9 @@ char	**get_params_array(t_opcode *opcode, int i, char *line)
 	return (arr);
 }
 
-void 	get_params(t_opcode *opcode, int i, char *line)
+void	get_params(t_opcode *opcode, int i, char *line)
 {
 	int			k;
-	char		*temp;
 	char		**arr;
 	t_param		*item;
 
@@ -72,16 +85,15 @@ void 	get_params(t_opcode *opcode, int i, char *line)
 	while (arr[k])
 	{
 		arr[k] = ft_strtrim(arr[k]);
-		item = create_param();
+		item = create_param();	
 		if (arr[k][0] == 'r')
-			get_param(item, arr[k], REG_CODE);
+			analyze_param(item, arr[k], REG_CODE, 1);
 		else if (arr[k][0] == DIRECT_CHAR)
-		{
-			temp = ft_strsub(arr[k], 1, ft_strlen(arr[k]) - 1);
-			get_param(item, temp, DIR_CODE);
-		}
-		else if (ft_isdigit(arr[k][0]) || arr[k][0] == LABEL_CHAR)
-			get_param(item, arr[k], IND_CODE);
+			analyze_param(item, arr[k], DIR_CODE, 0);
+		else if (ft_isdigit(arr[k][0]))
+			analyze_param(item, arr[k], IND_CODE, 1);
+		else if (arr[k][0] == LABEL_CHAR)
+			analyze_param(item, arr[k], IND_CODE, 2);
 		else
 			show_error();
 		ft_lstaddendpar(&opcode->param, item);

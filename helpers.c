@@ -84,7 +84,7 @@ void	clear_comment(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == ';' || line[i] == '#')
+		if (line[i] == ';' || line[i] == COMMENT_CHAR)
 		{
 			while (line[i])
 			{
