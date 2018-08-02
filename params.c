@@ -46,7 +46,6 @@ void	analyze_type(t_param *item, char *temp, int type, int code)
 void	analyze_param(t_param *item, char *str, int code, int type)
 {
 	char	*temp;
-	char 	*buf;
 
 	if (str[1] == '\0')
 		show_error();
@@ -63,11 +62,7 @@ void	analyze_param(t_param *item, char *str, int code, int type)
 			show_error();
 	}
 	if (str[0] == LABEL_CHAR || code == REG_CODE)
-	{
-		buf = ft_strsub(str, 1, ft_strlen(str) - 1);
-		temp = buf;
-		free(buf);
-	}
+		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
 	else
 		temp = str;
 	analyze_type(item, temp, type, code);
