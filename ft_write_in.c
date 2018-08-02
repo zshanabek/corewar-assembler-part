@@ -1,5 +1,4 @@
 #include "asm.h"
-#include "op.h"
 
 int	ft_bin_to(char *bin)
 {
@@ -117,11 +116,11 @@ void	ft_write_in(t_opcode *instruct, int fd2)
 				if (p->type == 0)
 					break ;
 				else if (p->type == 1)
-					cod = ft_arg_join(cod, ft_strdup("01"), 1);
+					cod = ft_arg_join(cod, "01", 1);//  ft_strdup("01")
 				else if (p->type == 2)
-					cod = ft_arg_join(cod, ft_strdup("10"), 1);
+					cod = ft_arg_join(cod, "10", 1);
 				else if (p->type == 3)
-					cod = ft_arg_join(cod, ft_strdup("11"), 1);
+					cod = ft_arg_join(cod, "11", 1);
 				p = p->next;
 			}
 			while (ft_strlen(cod) < 8)

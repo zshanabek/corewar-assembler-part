@@ -58,6 +58,7 @@ int			count_commas(char *str);
 void		ft_inslstdel(t_opcode **head);
 int			detect_blank_line(int fd1);
 
+int				ft_gnl(int fd, char **s);
 void			ft_hex(t_opcode *instr);
 char 			*ft_arg_join(char *s1, char *s2, int arg);
 unsigned int	ft_swp_bits(unsigned int n, int size);

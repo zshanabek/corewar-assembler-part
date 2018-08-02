@@ -6,12 +6,11 @@
 /*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 16:53:57 by vradchen          #+#    #+#             */
-/*   Updated: 2018/07/30 15:59:55 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/02 16:57:54 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#include "op.h"
 
 unsigned int	ft_swp_bits(unsigned int n, int size)
 {
@@ -27,9 +26,7 @@ unsigned int	ft_swp_bits(unsigned int n, int size)
 	i = 0;
 	//ft_printf("n1 %lld\n", n);
 	while (size > 0)
-	{
 		res_char[i++] = nn[--size];
-	}
 	//ft_printf("n2 %lld\n", res_num);
 	return (res_num);
 }
