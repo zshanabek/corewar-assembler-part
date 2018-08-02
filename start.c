@@ -18,6 +18,7 @@ void	ft_fill_info(char *answer, int fd, char *str, int max)
 	int		i;
 	int		len;
 	char	*s;
+	int 	x;
 
 	i = 0;
 	len = 1;
@@ -43,7 +44,9 @@ void	ft_fill_info(char *answer, int fd, char *str, int max)
 			ft_strcat(answer, "\n");
 			len++;
 			//ft_strdel(&s);
-			ft_gnl(fd, &s);
+			x = ft_gnl(fd, &s);
+			if (x == 0 || x == -1)
+				exit(ft_printf("No second \"\n"));
 			//get_next_line(fd, &s);
 			i = -1;
 		}
@@ -60,7 +63,7 @@ void	ft_read_header(header_t *h, int fd)
 	s = NULL;
 	str = NULL;
 	h->magic = COREWAR_EXEC_MAGIC;
-	while (ft_gnl(fd, &str))//while (get_next_line(fd, &str))
+	while (ft_gnl(fd, &str))
 	{
 		if (!(*h->prog_name) && ft_strncmp(str, NAME_CMD_STRING, 4) == 0)
 		{
@@ -74,11 +77,6 @@ void	ft_read_header(header_t *h, int fd)
 			ft_fill_info(h->comment, fd, s, COMMENT_LENGTH);
 			ft_strdel(&s);
 		}
-		else if (*h->prog_name && *h->comment)
-		{
-			ft_strdel(&str);
-			return ;
-		}
 		else if (ft_strequ(str, ""))
 		{
 
@@ -87,6 +85,11 @@ void	ft_read_header(header_t *h, int fd)
 		{
 			ft_strdel(&str);
 			exit(ft_printf("No name or header.\n"));
+		}
+		if (*h->prog_name && *h->comment)
+		{
+			ft_strdel(&str);
+			return ;
 		}
 		ft_strdel(&str);
 	}
@@ -97,7 +100,6 @@ void	ft_bot_size(int fd2, t_opcode *ohead)
 {
 	t_opcode		*i;
 	int				bot_size;
-	//char			*size;
 	unsigned int	len;
 
 	len = 0;
@@ -110,9 +112,6 @@ void	ft_bot_size(int fd2, t_opcode *ohead)
 	while (i->next)
 		i = i->next;
 	bot_size = i->pos + i->size;
-	//size = ft_itoa_base(bot_size, 10);
-	//while (ft_strlen(size) < 8)
-	//	size = ft_arg_join("0", size, 2);//LEAK!!!!!!!!!!!!!!!!
 	len = ft_swp_bits(bot_size, 4);
 	write(fd2, &len, 4);
 }
@@ -143,7 +142,7 @@ int main(int ac, char **av)
 	read_instr(fd, line, &ohead);
 	if (!detect_blank_line(fd))
 		show_error();
-	iter_opcode(ohead, print_opcode);
+//	iter_opcode(ohead, print_opcode);
 	ft_hex(ohead);
 	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);	
 	write_magic(fd2);
