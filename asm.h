@@ -56,6 +56,7 @@ char		**get_params_array(t_opcode *opcode, int i, char *line);
 void		get_params(t_opcode *opcode, char **arr);
 int			count_commas(char *str);
 void		ft_inslstdel(t_opcode **head);
+int			detect_blank_line(int fd1);
 
 void			ft_hex(t_opcode *instr);
 char 			*ft_arg_join(char *s1, char *s2, int arg);

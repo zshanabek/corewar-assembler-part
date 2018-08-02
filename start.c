@@ -116,7 +116,9 @@ int main(int ac, char **av)
 	h = malloc(sizeof(header_t));
 	ft_read_header(h, fd);
 	read_instr(fd, line, &ohead);
-	iter_opcode(ohead, print_opcode);
+	if (!detect_blank_line(fd))
+		show_error();
+	// iter_opcode(ohead, print_opcode);
 	ft_hex(ohead); //проверка на длинну и некоторое заполнение
 	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);	
 	write_magic(fd2);
@@ -125,5 +127,5 @@ int main(int ac, char **av)
 	write(fd2, &h->comment, COMMENT_LENGTH + 4);
 	if (ohead != NULL)
 		ft_write_in(ohead, fd2);// записываем в файл
-	system("leaks asm");
+	// system("leaks asm");
 }
