@@ -127,5 +127,5 @@ int main(int ac, char **av)
 	write(fd2, &h->comment, COMMENT_LENGTH + 4);
 	if (ohead != NULL)
 		ft_write_in(ohead, fd2);// записываем в файл
-	// system("leaks asm");
+	system("leaks asm");
 }
