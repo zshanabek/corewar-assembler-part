@@ -1,5 +1,4 @@
 #include "asm.h"
-#include "op.h"
 
 int ft_param_len(t_opcode *in, t_param *p)
 {

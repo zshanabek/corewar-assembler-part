@@ -27,9 +27,7 @@ unsigned int	ft_swp_bits(unsigned int n, int size)
 	i = 0;
 	//ft_printf("n1 %lld\n", n);
 	while (size > 0)
-	{
 		res_char[i++] = nn[--size];
-	}
 	//ft_printf("n2 %lld\n", res_num);
 	return (res_num);
 }
