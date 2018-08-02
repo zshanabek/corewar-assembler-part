@@ -74,13 +74,14 @@ void	ft_read_header(header_t *h, int fd)
 			ft_fill_info(h->comment, fd, s, COMMENT_LENGTH);
 			ft_strdel(&s);
 		}
-		else if (ft_strequ(str, ""))
-		{
-		}
 		else if (*h->prog_name && *h->comment)
 		{
 			ft_strdel(&str);
 			return ;
+		}
+		else if (ft_strequ(str, ""))
+		{
+
 		}
 		else
 		{
