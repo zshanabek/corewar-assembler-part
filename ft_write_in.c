@@ -116,7 +116,7 @@ void	ft_write_in(t_opcode *instruct, int fd2)
 				if (p->type == 0)
 					break ;
 				else if (p->type == 1)
-					cod = ft_arg_join(cod, ft_strdup("01"), 3);=
+					cod = ft_arg_join(cod, ft_strdup("01"), 3);
 				else if (p->type == 2)
 					cod = ft_arg_join(cod, ft_strdup("10"), 3);
 				else if (p->type == 3)
@@ -125,7 +125,6 @@ void	ft_write_in(t_opcode *instruct, int fd2)
 			}
 			while (ft_strlen(cod) < 8)
 				cod = ft_arg_join(cod, "00", 1);
-			ft_printf("cod %s\n", cod);
 			x = ft_bin_to(cod);
 			write(fd2, &x, 1);
 			ft_strdel(&cod);
