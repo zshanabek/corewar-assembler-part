@@ -46,7 +46,8 @@ void	analyze_param(t_param *item, char *str, int code, int type)
 {
 	char	*temp;
 
-	if (str[1] == '\0')
+	temp = NULL;
+	if (str[1] == '\0' && code != IND_CODE)
 		show_error();
 	if (code == DIR_CODE)
 	{
@@ -99,7 +100,7 @@ void	get_params(t_opcode *opcode, char **arr)
 			analyze_param(item, temp, REG_CODE, 1);
 		else if (temp[0] == DIRECT_CHAR)
 			analyze_param(item, temp, DIR_CODE, 0);
-		else if (ft_isdigit(temp[0]))
+		else if (ft_isdigit(temp[0]) || (temp[0] == '-' && ft_isdigit(temp[1])))
 			analyze_param(item, temp, IND_CODE, 1);
 		else if (temp[0] == LABEL_CHAR)
 			analyze_param(item, temp, IND_CODE, 2);
