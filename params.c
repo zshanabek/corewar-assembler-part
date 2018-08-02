@@ -37,7 +37,7 @@ void	analyze_type(t_param *item, char *temp, int type, int code)
 		item->sval = temp;
 	else
 		show_error();
-	if (code == REG_CODE && item->ival > REG_NUMBER)
+	if (code == REG_CODE && (item->ival > REG_NUMBER || item->ival < 0))
 		show_error();
 	item->type = code;
 }
@@ -56,7 +56,7 @@ void	analyze_param(t_param *item, char *str, int code, int type)
 		free(temp);
 		if (str[0] == LABEL_CHAR)
             type = 2;
-		else if (ft_isdigit(str[0]))
+		else if (ft_isdigit(str[0]) || (str[0] == '-' && ft_isdigit(str[1])))
         	type = 1;
 		else
 			show_error();
