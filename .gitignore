@@ -17,3 +17,4 @@ examples/
 CMakeLists.txt
 cmake-build-debug
 .idea
+*.swp

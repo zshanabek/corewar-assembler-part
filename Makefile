@@ -1,24 +1,39 @@
-NAME =		asm
-FLAGS =		-Wall -Wextra -Werror
-SRC	=		start.c params.c aux.c ft_arg_join.c ft_hex.c \
-			ft_swp_bits.c ft_write_in.c helpers.c parse.c \
-			print.c utils.c
-LIB	=		./libft/libft.a
+NAME = asm
 
-all: 		$(NAME)
+SRCDIR = ./
+SRCNAMES = $(shell ls $(SRCDIR) | grep -E ".+\.c")
+SRC = $(addprefix $(SRCDIR), $(SRCNAMES))
+INC = ./inc/
+BUILDDIR = ./
+BUILDOBJS = $(addprefix $(BUILDDIR), $(SRCNAMES:.c=.o))
 
-$(NAME):	$(FRC)
-			@make -C libft
-			@gcc $(SRC) $(LIB) -o $(NAME) $(FLAGS)
-			@echo "\x1b[32mProject is successfully built!\x1b[0m"	
+LIBDIR = ./libft/
+LIBFT = ./libft/libft.a
+LIBINC = ./libft/
+
+CC = gcc
+CFLAGS =
+
+all: $(NAME)
+
+$(BUILDDIR)%.o:$(SRCDIR)%.c
+	$(CC) $(CFLAGS) -I$(LIBINC) -I$(INC) -o $@ -c $<
+
+$(NAME): $(LIBFT) $(BUILDOBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(BUILDOBJS) $(LIBFT)
+
+$(LIBFT):
+	make -C $(LIBDIR)
 
 clean:
-			@make -C libft clean
+	rm -f $(BUILDOBJS)
+	make clean -C $(LIBDIR)
 
-fclean:		clean
-			@make -C libft fclean
-			@rm -f $(NAME)
+fclean: clean
+	rm -rf $(NAME)
+	make fclean -C $(LIBDIR)
 
-re: 		fclean all
+re: fclean all
 
-.PHONY:all clean fclean re
+.PHONY: all fclean clean re
+

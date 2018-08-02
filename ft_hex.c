@@ -12,6 +12,45 @@ int ft_param_len(t_opcode *in, t_param *p)
 		return (2);
 }
 
+void	ft_check2(char *name, t_opcode *instr)
+{
+	t_opcode	*in;
+	t_label		*l;
+
+	in = instr;
+	if (!name)
+		return ;
+	while (in)
+	{
+		l = in->label;
+		while (l)
+		{
+			if (ft_strequ(l->name, name))
+				return ;
+			l = l->next;
+		}
+		in = in->next;
+	}
+	exit(ft_printf("Bad label\n"));
+}
+
+void	ft_check_label(t_opcode *instr)
+{
+	t_opcode	*in;
+	t_param		*p;
+
+	in = instr;
+	while (in)
+	{
+		p = in->param;
+		while (p)
+		{
+			ft_check2(p->sval, instr);
+			p = p->next;
+		}
+		in = in->next;
+	}
+}
 void	ft_hex(t_opcode *instr)
 {
 	int			len;
@@ -55,5 +94,7 @@ void	ft_hex(t_opcode *instr)
 		//if (len > )// тут нужна проверка что размер инструкций не вышел за макс
 		in = in->next;
 	}
+	//in = instr;
+	ft_check_label(instr);
 	//ft_write_in(in);
 }
