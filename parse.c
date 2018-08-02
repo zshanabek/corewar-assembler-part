@@ -60,6 +60,8 @@ int	get_label(t_label **lhead, char *line)
 	{
 		item = create_label();
 		item->name = ft_strsub(line, h, i-h);
+		if (!ft_strcmp(item->name, "\0"))
+			show_error();
 		if (!is_valid_label(item->name))
 			show_error();
 		ft_lstaddendlabel(lhead, item);

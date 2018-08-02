@@ -118,7 +118,7 @@ int main(int ac, char **av)
 	read_instr(fd, line, &ohead);
 	if (!detect_blank_line(fd))
 		show_error();
-	// iter_opcode(ohead, print_opcode);
+	iter_opcode(ohead, print_opcode);
 	ft_hex(ohead); //проверка на длинну и некоторое заполнение
 	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);	
 	write_magic(fd2);
