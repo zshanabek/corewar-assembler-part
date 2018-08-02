@@ -2,7 +2,7 @@ NAME =		asm
 FLAGS =		-Wall -Wextra -Werror
 SRC	=		start.c params.c aux.c ft_arg_join.c ft_hex.c \
 			ft_swp_bits.c ft_write_in.c helpers.c parse.c \
-			print.c utils.c
+			print.c utils.c ft_gnl.c
 LIB	=		./libft/libft.a
 
 all: 		$(NAME)

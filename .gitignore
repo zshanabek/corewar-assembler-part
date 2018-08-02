@@ -4,6 +4,7 @@ test.c
 a.out
 .vscode/
 *.a
+*.swp
 tempCodeRunnerFile.c
 *.dSYM/
 *.h.gch

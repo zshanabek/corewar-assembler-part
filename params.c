@@ -29,7 +29,6 @@ int		is_valid_param(t_opcode *to_find)
 	return (1);
 }
 
-
 void	analyze_type(t_param *item, char *temp, int type, int code)
 {
 	if (is_digital(temp) && type == 1)
