@@ -1,44 +1,33 @@
-NAME =		asm
-FLAGS =		-Wall -Wextra -Werror
-SRC	=		start.c params.c aux.c ft_arg_join.c ft_hex.c \
-			ft_swp_bits.c ft_write_in.c helpers.c parse.c \
-			print.c utils.c ft_gnl.c
-LIB	=		./libft/libft.a
+NAME  =	asm
+SRC	  = start.c params.c aux.c ft_arg_join.c ft_hex.c \
+		ft_swp_bits.c ft_write_in.c helpers.c parse.c \
+		print.c utils.c ft_gnl.c
+OBJ   = $(SRC:.c=.o)
+LIB	  = libft/libft.a
+FLAGS =	-Wall -Wextra -Werror
 
-SRCDIR = ./
-SRCNAMES = $(shell ls $(SRCDIR) | grep -E ".+\.c")
-SRC = $(addprefix $(SRCDIR), $(SRCNAMES))
-INC = ./inc/
-BUILDDIR = ./
-BUILDOBJS = $(addprefix $(BUILDDIR), $(SRCNAMES:.c=.o))
+all: 	lib $(NAME)
 
-LIBDIR = ./libft/
-LIBFT = ./libft/libft.a
-LIBINC = ./libft/
+$(NAME):$(OBJ)
+		@gcc  $(OBJ) $(LIB) -o $(NAME) 
+		@echo "\x1b[32mProject is successfully built\x1b[0m"
 
-CC = gcc
-CFLAGS =
+lib:	
+		@make -C libft
 
-all: $(NAME)
+%.o: %.c
+		@gcc $(FLAGS) -o $@ -c $<
 
-$(BUILDDIR)%.o:$(SRCDIR)%.c
-	$(CC) $(CFLAGS) -I$(LIBINC) -I$(INC) -o $@ -c $<
+clean:	
+		@rm -f $(OBJ)
+		@make clean -C libft
+		@echo "\x1b[33mCleaned\x1b[0m"
 
-$(NAME): $(LIBFT) $(BUILDOBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(BUILDOBJS) $(LIBFT)
+fclean:	clean
+		@make fclean -C libft
+		@rm -f $(NAME)
+		@echo "\x1b[33mCleaned all\x1b[0m"		
 
-$(LIBFT):
-	make -C $(LIBDIR)
+re: 	fclean all
 
-clean:
-	rm -f $(BUILDOBJS)
-	make clean -C $(LIBDIR)
-
-fclean: clean
-	rm -rf $(NAME)
-	make fclean -C $(LIBDIR)
-
-re: fclean all
-
-.PHONY: all fclean clean re
-
+.PHONY:	all clean fclean re
