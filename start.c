@@ -13,6 +13,18 @@ static void	write_magic(int fd)
 	write(fd, &magic, 4);
 }
 
+void	ft_line_end(char *s, int i)
+{
+	clear_comment(s + i);
+	while (s[i])
+	{
+		if (!ft_isws(s[i]))
+			exit(ft_printf("Bad line1\n"));
+		i++;
+	}
+	return (ft_strdel(&s));
+}
+
 void	ft_fill_info(char *answer, int fd, char *str, int max)
 {
 	int		i;
@@ -20,34 +32,25 @@ void	ft_fill_info(char *answer, int fd, char *str, int max)
 	char	*s;
 	int 	x;
 
-	i = 0;
+	i = -1;
 	len = -1;
-	if (str[i] != '\"')
+	if (str[i + 1] != '\"')
 		exit(ft_printf("ERROR1\n"));
 	s = ft_strdup(str + 1);
+	ft_strdel(&str);
 	while (len++ < max)
 	{
-		if (s[i] == '\0' || s[i] == '\"')
+		if (s[++i] == '\0' || s[i] == '\"')
 		{
 			ft_strncat(answer, s, i);
 			if (s[i++] == '\"')
-			{
-				clear_comment(s + i);
-				while (s[i])
-				{
-					if (!ft_isws(s[i]))
-						exit(ft_printf("Bad line1\n"));
-					i++;
-				}
-				return (ft_strdel(&s));
-			}
+				return (ft_line_end(s, i));
 			ft_strcat(answer, "\n");
 			x = ft_gnl(fd, &s);
 			if (x == 0 || x == -1)
 				exit(ft_printf("No second \"\n"));
 			i = -1;
 		}
-		i++;
 	}
 	exit(ft_printf("Too big line\n"));
 }
@@ -55,7 +58,7 @@ void	ft_fill_info(char *answer, int fd, char *str, int max)
 void	ft_read_header(header_t *h, int fd)
 {
 	char	*str;
-	char	*s;
+	//char	*s;
 	int 	x;
 
 	x = 0;
@@ -65,16 +68,16 @@ void	ft_read_header(header_t *h, int fd)
 	{
 		if (!(*h->prog_name) && ft_strncmp(str, NAME_CMD_STRING, 4) == 0)
 		{
-			s = ft_strtrim(str + 5);
-			ft_fill_info(h->prog_name, fd, s, PROG_NAME_LENGTH);
-			ft_strdel(&s);
+			//s = ft_strtrim(str + 5);
+			ft_fill_info(h->prog_name, fd, ft_strtrim(str + 5), PROG_NAME_LENGTH);
+			//ft_strdel(&s);
 			x++;
 		}
 		else if (!(*h->comment) && ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0)
 		{
-			s = ft_strtrim(str + 8);
-			ft_fill_info(h->comment, fd, s, COMMENT_LENGTH);
-			ft_strdel(&s);
+			//s = ft_strtrim(str + 8);
+			ft_fill_info(h->comment, fd, ft_strtrim(str + 8), COMMENT_LENGTH);
+			//ft_strdel(&s);
 			x++;
 		}
 		else if (ft_strequ(str, ""))
@@ -85,11 +88,8 @@ void	ft_read_header(header_t *h, int fd)
 			ft_strdel(&str);
 			exit(ft_printf("No name or header.\n"));
 		}
-		if (x == 2)//(*h->prog_name && *h->comment)
-		{
-			ft_strdel(&str);
-			return ;
-		}
+		if (x == 2)
+			return (ft_strdel(&str));
 		ft_strdel(&str);
 	}
 	exit(ft_printf("No name or header.\n"));
