@@ -28,4 +28,3 @@ unsigned int	ft_swp_bits(unsigned int n, int size)
 		res_char[i++] = nn[--size];
 	return (res_num);
 }
-

@@ -58,9 +58,14 @@ int			count_commas(char *str);
 void		ft_inslstdel(t_opcode **head);
 int			detect_blank_line(int fd1);
 
+void			ft_read_header(header_t *h, int fd);
 int				ft_gnl(int fd, char **s);
 void			ft_hex(t_opcode *instr);
 char 			*ft_arg_join(char *s1, char *s2, int arg);
 unsigned int	ft_swp_bits(unsigned int n, int size);
 void			ft_write_in(t_opcode *instruct, int fd2);
+char			*ft_write_in2(t_opcode *in);
+void			ft_param(t_opcode *in, t_opcode *instruct, int fd2);
+void			ft_print_l(t_opcode *instr, t_opcode *in, t_param *p, int fd2);
+void			ft_count_len(long value, t_param *param, int fd2);
 #endif
