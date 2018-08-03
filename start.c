@@ -21,7 +21,7 @@ void	ft_fill_info(char *answer, int fd, char *str, int max)
 	int 	x;
 
 	i = 0;
-	len = 1;
+	len = -1;
 	if (str[i] != '\"')
 		exit(ft_printf("ERROR1\n"));
 	s = ft_strdup(str + 1);
@@ -42,25 +42,23 @@ void	ft_fill_info(char *answer, int fd, char *str, int max)
 				return (ft_strdel(&s));
 			}
 			ft_strcat(answer, "\n");
-			len++;
-			//ft_strdel(&s);
 			x = ft_gnl(fd, &s);
 			if (x == 0 || x == -1)
 				exit(ft_printf("No second \"\n"));
-			//get_next_line(fd, &s);
 			i = -1;
 		}
 		i++;
 	}
-	exit(ft_printf("ERROR2\n"));
+	exit(ft_printf("Too big line\n"));
 }
 
 void	ft_read_header(header_t *h, int fd)
 {
 	char	*str;
 	char	*s;
+	int 	x;
 
-	s = NULL;
+	x = 0;
 	str = NULL;
 	h->magic = COREWAR_EXEC_MAGIC;
 	while (ft_gnl(fd, &str))
@@ -70,23 +68,24 @@ void	ft_read_header(header_t *h, int fd)
 			s = ft_strtrim(str + 5);
 			ft_fill_info(h->prog_name, fd, s, PROG_NAME_LENGTH);
 			ft_strdel(&s);
+			x++;
 		}
 		else if (!(*h->comment) && ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0)
 		{
 			s = ft_strtrim(str + 8);
 			ft_fill_info(h->comment, fd, s, COMMENT_LENGTH);
 			ft_strdel(&s);
+			x++;
 		}
 		else if (ft_strequ(str, ""))
 		{
-
 		}
 		else
 		{
 			ft_strdel(&str);
 			exit(ft_printf("No name or header.\n"));
 		}
-		if (*h->prog_name && *h->comment)
+		if (x == 2)//(*h->prog_name && *h->comment)
 		{
 			ft_strdel(&str);
 			return ;
@@ -142,7 +141,7 @@ int main(int ac, char **av)
 	read_instr(fd, line, &ohead);
 	if (!detect_blank_line(fd))
 		show_error();
-//	iter_opcode(ohead, print_opcode);
+	iter_opcode(ohead, print_opcode);
 	ft_hex(ohead);
 	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);	
 	write_magic(fd2);
