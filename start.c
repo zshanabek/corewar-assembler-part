@@ -142,7 +142,7 @@ int main(int ac, char **av)
 	ft_read_header(h, fd);
 	read_instr(fd, line, &ohead);
 	if (!detect_blank_line(fd))
-		show_error();
+		exit(ft_printf("No blank line at the end of file"));
 	iter_opcode(ohead, print_opcode);
 	ft_hex(ohead);
 	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);	

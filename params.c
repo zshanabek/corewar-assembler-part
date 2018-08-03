@@ -36,9 +36,9 @@ void	analyze_type(t_param *item, char *temp, int type, int code)
 	else if (type == 2)
 		item->sval = temp;
 	else
-		show_error();
+		exit(ft_printf("Invalid param\n"));
 	if (code == REG_CODE && (item->ival > REG_NUMBER || item->ival < 0))
-		show_error();
+		exit(ft_printf("Invalid param\n"));
 	item->type = code;
 }
 
@@ -48,7 +48,7 @@ void	analyze_param(t_param *item, char *str, int code, int type)
 
 	temp = NULL;
 	if (str[1] == '\0' && code != IND_CODE)
-		show_error();
+		exit(ft_printf("Invalid param\n"));
 	if (code == DIR_CODE)
 	{
 		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
@@ -59,7 +59,7 @@ void	analyze_param(t_param *item, char *str, int code, int type)
 		else if (ft_isdigit(str[0]) || (str[0] == '-' && ft_isdigit(str[1])))
         	type = 1;
 		else
-			show_error();
+			exit(ft_printf("Invalid t_dir\n"));
 	}
 	if (str[0] == LABEL_CHAR || code == REG_CODE)
 		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
@@ -78,9 +78,9 @@ char	**get_params_array(t_opcode *opcode, int i, char *line)
 	commas = count_commas(str);
 	arr = ft_strsplit(str, SEPARATOR_CHAR);
 	if (ft_2darrlen(arr) != commas + 1)
-		show_error();
+		exit(ft_printf("Too many commas\n"));
 	if (ft_2darrlen(arr) != opcode->nb_param)
-		show_error();
+		exit(ft_printf("Too many parameters\n"));
 	free(str);
 	return (arr);
 }
@@ -105,7 +105,7 @@ void	get_params(t_opcode *opcode, char **arr)
 		else if (temp[0] == LABEL_CHAR)
 			analyze_param(item, temp, IND_CODE, 2);
 		else
-			show_error();
+			exit(ft_printf("Invalid parameter\n"));
 		ft_lstaddendpar(&opcode->param, item);
 		free(temp);
 		k++;
