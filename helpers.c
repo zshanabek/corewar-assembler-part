@@ -54,12 +54,18 @@ int		is_digital(char *line)
 	i = 0;
 	if (line == NULL)
 		return (0);
-	while (line[i])
+	if (line[i] == '-' || ft_isdigit(line[i]))
 	{
-		if (!ft_isdigit(line[i]) && line[i] != '-')
-			return (0);
 		i++;
+		while (line[i])
+		{
+			if (!ft_isdigit(line[i]))
+				return (0);
+			i++;
+		}
 	}
+	else
+		return (0);
 	return (1);
 }
 
