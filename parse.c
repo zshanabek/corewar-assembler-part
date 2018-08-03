@@ -6,7 +6,7 @@ void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 
 	opcode->name = ft_strsub(line, h, i - h);
 	if (!search_struct(opcode->name))
-		show_error();
+		exit(ft_printf("There is no instruction with such name: %s\n", opcode->name));
 	opcode->codage = search_struct(opcode->name)->coding_byte;
 	opcode->nb_param = search_struct(opcode->name)->nb_param;
 	opcode->opcode = search_struct(opcode->name)->opcode;
@@ -14,7 +14,7 @@ void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 	get_params(opcode, arr);
 	ft_del2darr(arr);	
 	if (!is_valid_param(opcode))
-		show_error();
+		exit(ft_printf("Invalid parameter\n"));
 }
 
 void	get_i_h(int *i, int *h, char *line)
@@ -61,9 +61,9 @@ int	get_label(t_label **lhead, char *line)
 		item = create_label();
 		item->name = ft_strsub(line, h, i-h);
 		if (!ft_strcmp(item->name, "\0"))
-			show_error();
+			exit(ft_printf("No label\n"));
 		if (!is_valid_label(item->name))
-			show_error();
+			exit(ft_printf("Invalid label: %s\n", item->name));
 		ft_lstaddendlabel(lhead, item);
 	}
 	else
