@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/03 15:37:37 by vradchen          #+#    #+#             */
+/*   Updated: 2018/08/03 15:37:39 by vradchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-static void	write_magic(int fd)
+static void		write_magic(int fd)
 {
 	long	magic;
-	
+
 	magic = COREWAR_EXEC_MAGIC;// 0xea83f3
 	magic = ((magic >> 24) & 0xff) | ((magic << 8) & 0xff0000) |
 		((magic >> 8) & 0xff00) | ((magic << 24) & 0xff000000);
@@ -13,91 +25,81 @@ static void	write_magic(int fd)
 	write(fd, &magic, 4);
 }
 
-void	ft_fill_info(char *answer, int fd, char *str, int max)
+void				ft_line_end(char *s, int i)
 {
-	int		i;
-	int		len;
-	char	*s;
+	clear_comment(s + i);
+	while (s[i])
+	{
+		if (!ft_isws(s[i]))
+			exit(ft_printf("Bad line1\n"));
+		i++;
+	}
+	return (ft_strdel(&s));
+}
 
-	i = 0;
-	len = 1;
-	if (str[i] != '\"')
+static void		ft_f(char *answer, int fd, char *str, int max)
+{
+	int				i;
+	int				len;
+	char			*s;
+	int				x;
+
+	i = -1;
+	len = -1;
+	if (str[i + 1] != '\"')
 		exit(ft_printf("ERROR1\n"));
 	s = ft_strdup(str + 1);
+	ft_strdel(&str);
 	while (len++ < max)
 	{
-		if (s[i] == '\0' || s[i] == '\"')
+		if (s[++i] == '\0' || s[i] == '\"')
 		{
 			ft_strncat(answer, s, i);
 			if (s[i++] == '\"')
-			{
-				clear_comment(s + i);
-				while (s[i])
-				{
-					if (!ft_isws(s[i]))
-						exit(ft_printf("Bad line1\n"));
-					i++;
-				}
-				return (ft_strdel(&s));
-			}
+				return (ft_line_end(s, i));
 			ft_strcat(answer, "\n");
-			len++;
-			//ft_strdel(&s);
-			ft_gnl(fd, &s);
-			//get_next_line(fd, &s);
+			x = ft_gnl(fd, &s);
+			if (x == 0 || x == -1)
+				exit(ft_printf("No second \"\n"));
 			i = -1;
 		}
-		i++;
 	}
-	exit(ft_printf("ERROR2\n"));
+	exit(ft_printf("Too big line\n"));
 }
 
-void	ft_read_header(header_t *h, int fd)
+void			ft_read_header(header_t *h, int fd)
 {
-	char	*str;
-	char	*s;
+	char			*s;
+	int				x;
 
+	x = 0;
 	s = NULL;
-	str = NULL;
 	h->magic = COREWAR_EXEC_MAGIC;
-	while (ft_gnl(fd, &str))//while (get_next_line(fd, &str))
+	while (ft_gnl(fd, &s))
 	{
-		if (!(*h->prog_name) && ft_strncmp(str, NAME_CMD_STRING, 4) == 0)
+		if (!(*h->p) && ft_strncmp(s, NAME_CMD_STRING, 4) == 0 && x++ > -1)
+			ft_f(h->p, fd, ft_strtrim(s + 5), PROG_NAME_LENGTH);
+		else if (!(*h->c) && ft_strncmp(s, COMMENT_CMD_STRING, 8) == 0 && ++x > 0)
+			ft_f(h->c, fd, ft_strtrim(s + 8), COMMENT_LENGTH);
+		else if (ft_strequ(s, ""))
 		{
-			s = ft_strtrim(str + 5);
-			ft_fill_info(h->prog_name, fd, s, PROG_NAME_LENGTH);
-			ft_strdel(&s);
-		}
-		else if (!(*h->comment) && ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0)
-		{
-			s = ft_strtrim(str + 8);
-			ft_fill_info(h->comment, fd, s, COMMENT_LENGTH);
-			ft_strdel(&s);
-		}
-		else if (*h->prog_name && *h->comment)
-		{
-			ft_strdel(&str);
-			return ;
-		}
-		else if (ft_strequ(str, ""))
-		{
-
 		}
 		else
 		{
-			ft_strdel(&str);
+			ft_strdel(&s);
 			exit(ft_printf("No name or header.\n"));
 		}
-		ft_strdel(&str);
+		if (x == 2)
+			return (ft_strdel(&s));
+		ft_strdel(&s);
 	}
 	exit(ft_printf("No name or header.\n"));
 }
 
-void	ft_bot_size(int fd2, t_opcode *ohead)
+void			ft_bot_size(int fd2, t_opcode *ohead)
 {
 	t_opcode		*i;
 	int				bot_size;
-	//char			*size;
 	unsigned int	len;
 
 	len = 0;
@@ -110,20 +112,31 @@ void	ft_bot_size(int fd2, t_opcode *ohead)
 	while (i->next)
 		i = i->next;
 	bot_size = i->pos + i->size;
-	//size = ft_itoa_base(bot_size, 10);
-	//while (ft_strlen(size) < 8)
-	//	size = ft_arg_join("0", size, 2);//LEAK!!!!!!!!!!!!!!!!
 	len = ft_swp_bits(bot_size, 4);
 	write(fd2, &len, 4);
 }
 
-int main(int ac, char **av)
+void			ft_main2(t_opcode *ohead, header_t *h)
 {
-	int			fd;
-	int			fd2;
-	char		*line;
-	header_t	*h;
-	t_opcode	*ohead;
+	int				fd2;
+
+	ft_hex(ohead);
+	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	write_magic(fd2);
+	write(fd2, &h->p, PROG_NAME_LENGTH + 4);
+	ft_bot_size(fd2, ohead);
+	write(fd2, &h->c, COMMENT_LENGTH + 4);
+	if (ohead != NULL)
+		ft_write_in(ohead, fd2);
+	system("leaks asm");
+}
+
+int				main(int ac, char **av)
+{
+	int				fd;
+	char			*line;
+	header_t		*h;
+	t_opcode		*ohead;
 
 	ohead = NULL;
 	line = NULL;
@@ -134,23 +147,12 @@ int main(int ac, char **av)
 	}
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-	{
-		ft_printf("Can't read source file %s\n", av[1]);
-		exit(1);
-	}
+		exit(ft_printf("Can't read source file %s\n", av[1]));
 	h = malloc(sizeof(header_t));
 	ft_read_header(h, fd);
 	read_instr(fd, line, &ohead);
 	if (!detect_blank_line(fd))
-		exit(ft_printf("No blank line at the end of file"));
+		show_error();
 	iter_opcode(ohead, print_opcode);
-	ft_hex(ohead);
-	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);	
-	write_magic(fd2);
-	write(fd2, &h->prog_name, PROG_NAME_LENGTH + 4);
-	ft_bot_size(fd2, ohead);
-	write(fd2, &h->comment, COMMENT_LENGTH + 4);
-	if (ohead != NULL)
-		ft_write_in(ohead, fd2);
-	// system("leaks asm");
+	ft_main2(ohead, h);
 }

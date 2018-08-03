@@ -8,7 +8,7 @@ int ft_param_len(t_opcode *in, t_param *p)
 		return (1);
 	else if	(p->type == 2 && in->lab_size == 4)
 		return (4);
-	else //if (in->op.param[i] == 3 ||)
+	else
 		return (2);
 }
 
@@ -51,50 +51,55 @@ void	ft_check_label(t_opcode *instr)
 		in = in->next;
 	}
 }
+
+void	ft_hex2(t_opcode *in)
+{
+	int 	i;
+
+	i = 0;
+	while (i < 16)
+	{
+		if (ft_strequ(in->name, op_tab[i].name))
+		{
+			in->opcode = op_tab[i].opcode;
+			in->codage = op_tab[i].coding_byte;
+			if (op_tab[i].two_bytes == 1)
+				in->lab_size = 2;
+			else
+				in->lab_size = 4;
+			break ;
+		}
+		i++;
+	}
+}
+
 void	ft_hex(t_opcode *instr)
 {
 	int			len;
 	t_opcode	*in;
 	t_param		*p;
-	int		i;
+	//int		i;
 
 	len = 0;
 	in = instr;
+	if (instr == NULL)
+		exit(ft_printf("No command\n"));
 	while (in)
 	{
 		in->pos = len;
-		i = 0;
-		while (i < 16)
-		{
-			if (ft_strequ(in->name, op_tab[i].name))
-			{
-				in->opcode = op_tab[i].opcode;//ft_itoa_base(op_tab[i].opcode, 16);
-				in->codage = op_tab[i].coding_byte;
-				if (op_tab[i].two_bytes == 1)
-					in->lab_size = 2;
-				else
-					in->lab_size = 4;
-				break ;
-			}
-			i++;
-		}
-		in->size = 1; // opcode name
+		ft_hex2(in);
+		in->size = 1;
 		if (in->codage == 1)
 			in->size++;
 		p = in->param;
 		while (p)
 		{
 			p->size = ft_param_len(in, p);
-			//ft_printf("n %s size_param %i \n", in->name, p->size);
 			in->size += p->size;
 			p = p->next;
 		}
 		len += in->size;
-		//ft_printf("n %s size %i \n", in->name, in->size);
-		//if (len > )// тут нужна проверка что размер инструкций не вышел за макс
 		in = in->next;
 	}
-	//in = instr;
 	ft_check_label(instr);
-	//ft_write_in(in);
 }
