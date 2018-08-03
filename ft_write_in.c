@@ -88,6 +88,8 @@ void			ft_write_in(t_opcode *instruct, int fd2)
 	long		x;
 
 	in = instruct;
+	if (in->opcode == -1)
+		return ;
 	while (in)
 	{
 		write(fd2, &in->opcode, 1);

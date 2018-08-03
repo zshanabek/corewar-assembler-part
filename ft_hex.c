@@ -57,7 +57,7 @@ void	ft_hex2(t_opcode *in)
 	int 	i;
 
 	i = 0;
-	while (i < 16)
+	while (i < 17)
 	{
 		if (ft_strequ(in->name, op_tab[i].name))
 		{
