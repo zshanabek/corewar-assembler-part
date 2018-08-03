@@ -38,7 +38,7 @@ void	analyze_type(t_param *item, char *temp, int type, int code)
 	else
 		exit(ft_printf("Invalid param\n"));
 	if (code == REG_CODE && (item->ival > REG_NUMBER || item->ival < 0))
-		exit(ft_printf("Invalid param\n"));
+		exit(ft_printf("t_dir value must be between 0 and 16\n"));
 	item->type = code;
 }
 

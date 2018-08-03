@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   start.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/03 15:37:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/03 15:37:39 by vradchen         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
 
 static void		write_magic(int fd)
@@ -81,5 +69,6 @@ int				main(int ac, char **av)
 			" (Perhaps you forgot to end with a newline ?)\n"));
 	iter_opcode(ohead, print_opcode);
 	ft_main2(ohead, h);
+	ft_printf("Writing output program\n");
 	//system("leaks asm");
 }
