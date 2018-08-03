@@ -21,12 +21,12 @@ lib:
 clean:	
 		@rm -f $(OBJ)
 		@make clean -C libft
-		@echo "\x1b[33mCleaned\x1b[0m"
+		@echo "\x1b[33mObject files are cleaned\x1b[0m"
 
 fclean: clean
 		@make fclean -C libft
 		@rm -f $(NAME)
-		@echo "\x1b[33mCleaned all\x1b[0m"		
+		@echo "\x1b[33mAll is cleaned\x1b[0m"		
 
 re:		fclean all
 

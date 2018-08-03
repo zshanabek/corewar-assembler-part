@@ -83,9 +83,9 @@ void	read_instr(int fd, char *line, t_opcode **ohead)
 	lhead = NULL;
 	while (get_next_line(fd, &line))
 	{
+		clear_comment(line);
 		if (line[0] != '\0' && line[0] != COMMENT_CHAR && !ft_isempty(line))
 		{
-			clear_comment(line);
 			if (get_label(&lhead, line))
 				parse_instr(ohead, &lhead, line);
 		}

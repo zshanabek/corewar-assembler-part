@@ -72,18 +72,16 @@ int		is_digital(char *line)
 void	clear_comment(char *line)
 {
 	int i;
+	int len;
 
 	i = 0;
 	while (line[i])
 	{
 		if (line[i] == ';' || line[i] == COMMENT_CHAR)
-		{
-			while (line[i])
-			{
-				line[i] = '\0';
-				i++;
-			}
-		}
+			break;
 		i++;
 	}
+	len = ft_strlen(line) - i;	
+	line = line + i;
+	ft_bzero(line, len);
 }
