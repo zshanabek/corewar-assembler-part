@@ -79,6 +79,7 @@ int	get_label(t_label **lhead, char *line)
 void	read_instr(int fd, char *line, t_opcode **ohead)
 {
 	t_label 	*lhead;
+	t_opcode 	*item;	
 
 	lhead = NULL;
 	while (get_next_line(fd, &line))
@@ -91,5 +92,10 @@ void	read_instr(int fd, char *line, t_opcode **ohead)
 		}
 		free(line);
 	}
+	if (lhead != NULL && *ohead == NULL)
+	{
+		item = create_opcode();
+		item->label = lhead;
+		ft_lstaddendopcode(ohead, item);
+	}
 }
-
