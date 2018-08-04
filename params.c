@@ -1,32 +1,32 @@
 #include "asm.h"
 
-int		is_valid_param(t_opcode *to_find)
+void	is_valid_param(t_op *elem, t_param *cur, int nb, char *name)
 {
 	int		i;
 	int		j;
 	int		k;
-	t_op	*elem;
-	t_param	*cur;
+	char	*massiv[3];
 
+	massiv[0] = ft_strdup("reg");
+	massiv[1] = ft_strdup("direct");
+	massiv[2] = ft_strdup("indirect");
 	i = 0;
 	k = 0;
-	elem = search_struct(to_find->name);
-	cur = to_find->param;
-	while (i < to_find->nb_param)
+	while (i < nb)
 	{
 		j = 0;
 		while (j < 3)
 		{
 			if (elem->param[i][j] == cur->type)
-				k++;
+				k = 1;
 			j++;
 		}
+		if (k == 0)
+			exit(ft_printf("Invalid parameter %d type %s for instruction: \"%s\"\n", i, massiv[cur->type - 1], name));						
+		k = 0;
 		i++;
 		cur = cur->next;
 	}
-	if (k != to_find->nb_param)
-		return (0);
-	return (1);
 }
 
 void	analyze_type(t_param *item, char *temp, int type, int code)
@@ -77,10 +77,12 @@ char	**get_params_array(t_opcode *opcode, int i, char *line)
 	str = ft_strsub(line, i, ft_strlen(line) - i);
 	commas = count_commas(str);
 	arr = ft_strsplit(str, SEPARATOR_CHAR);
+	if (ft_2darrlen(arr) <= 0 || ft_isempty(str))
+		exit(ft_printf("No parameters for opcode: %s\n", opcode->name));
 	if (ft_2darrlen(arr) != commas + 1)
 		exit(ft_printf("Too many commas\n"));
-	if (ft_2darrlen(arr) != opcode->nb_param)
-		exit(ft_printf("Too many parameters\n"));
+	if (ft_2darrlen(arr) > opcode->nb_param)
+		exit(ft_printf("Wrong number of parameters\n"));
 	free(str);
 	return (arr);
 }

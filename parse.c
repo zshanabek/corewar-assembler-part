@@ -3,6 +3,8 @@
 void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 {
 	char **arr;
+	t_op	*elem;
+	t_param	*cur;
 
 	opcode->name = ft_strsub(line, h, i - h);
 	if (!search_struct(opcode->name))
@@ -12,9 +14,10 @@ void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 	opcode->opcode = search_struct(opcode->name)->opcode;
 	arr = get_params_array(opcode, i, line);
 	get_params(opcode, arr);
+	elem = search_struct(opcode->name);
+	cur = opcode->param;
+	is_valid_param(elem, cur, opcode->nb_param, opcode->name);
 	ft_del2darr(arr);	
-	if (!is_valid_param(opcode))
-		exit(ft_printf("Invalid parameter\n"));
 }
 
 void	get_i_h(int *i, int *h, char *line)
@@ -90,6 +93,7 @@ void	read_instr(int fd, char *line, t_opcode **ohead)
 			if (get_label(&lhead, line))
 				parse_instr(ohead, &lhead, line);
 		}
+		// ft_printf("%s\n", line);
 		free(line);
 	}
 	if (lhead != NULL && *ohead == NULL)
