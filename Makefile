@@ -1,7 +1,7 @@
 NAME  =	asm
 SRC   =	start.c params.c aux.c ft_arg_join.c ft_hex.c \
 		ft_swp_bits.c ft_write_in.c helpers.c parse.c \
-		print.c utils.c ft_read_header.c ft_write_in2.c
+		print.c utils.c ft_read_header.c
 OBJ   = $(SRC:.c=.o)
 LIB   = libft/libft.a
 FLAGS = -Wall -Wextra -Werror
@@ -16,7 +16,7 @@ lib:
 		@make -C libft
 
 %.o:	%.c
-		@gcc -g $(FLAGS) -o $@ -c $<
+		@gcc -g -o $@ -c $<
 
 clean:	
 		@rm -f $(OBJ)

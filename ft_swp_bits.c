@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-unsigned int	ft_swp_bits(unsigned int n, int size)
+unsigned int	ft_swp_bits(int n, int size)
 {
 	unsigned char	*nn;
 	unsigned char	*res_char;

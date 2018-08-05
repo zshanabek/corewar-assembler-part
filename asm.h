@@ -62,7 +62,7 @@ void			ft_read_header(header_t *h, int fd);
 int				ft_gnl(int fd, char **s);
 void			ft_hex(t_opcode *instr);
 char 			*ft_arg_join(char *s1, char *s2, int arg);
-unsigned int	ft_swp_bits(unsigned int n, int size);
+unsigned int	ft_swp_bits(int n, int size);
 void			ft_write_in(t_opcode *instruct, int fd2);
 char			*ft_write_in2(t_opcode *in);
 void			ft_param(t_opcode *in, t_opcode *instruct, int fd2);

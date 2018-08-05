@@ -12,10 +12,77 @@
 
 #include "asm.h"
 
-int				ft_bin_to(char *bin)
+void			ft_print_l(t_opcode *instr, t_opcode *in, t_param *p, int fd2)
+{
+	t_opcode	*i;
+	t_label		*l;
+	int 		x;
+
+	i = instr;
+	while (i)
+	{
+		l = i->label;
+		while (l)
+		{
+			if (ft_strequ(l->name, p->sval))
+			{
+				x = ft_swp_bits(i->pos - in->pos, p->size);
+				write(fd2, &x, p->size);
+				return ;
+			}
+			l = l->next;
+		}
+		i = i->next;
+	}
+}
+
+void			ft_param(t_opcode *in, t_opcode *instruct, int fd2)
+{
+	t_param		*p;
+	int 		x;
+
+	p = in->param;
+	while (p)
+	{
+		if (p->sval != NULL)
+			ft_print_l(instruct, in, p, fd2);
+		else
+		{
+			x = ft_swp_bits(p->ival, p->size);
+			write(fd2, &x, p->size);
+		}
+		p = p->next;
+	}
+}
+
+char			*ft_write_in2(t_opcode *in)
+{
+	t_param		*p;
+	char		*cod;
+
+	cod = NULL;
+	p = in->param;
+	while (p)
+	{
+		if (p->type == 0)
+			break ;
+		else if (p->type == 1)
+			cod = ft_arg_join(cod, ft_strdup("01"), 3);
+		else if (p->type == 2)
+			cod = ft_arg_join(cod, ft_strdup("10"), 3);
+		else if (p->type == 3)
+			cod = ft_arg_join(cod, ft_strdup("11"), 3);
+		p = p->next;
+	}
+	while (ft_strlen(cod) < 8)
+		cod = ft_arg_join(cod, ft_strdup("00"), 3);
+	return (cod);
+}
+
+long				ft_bin_to(char *bin)
 {
 	int		i;
-	int		x;
+	long		x;
 	int		power;
 
 	power = 1;
@@ -29,56 +96,6 @@ int				ft_bin_to(char *bin)
 	}
 	ft_strdel(&bin);
 	return (x);
-}
-
-unsigned int	ft_count_len2(char *ret, int i)
-{
-	unsigned int	x;
-
-	while (i > -1)
-	{
-		if (ret[i] == '0')
-		{
-			ret[i] = '1';
-			break ;
-		}
-		if (i == 0)
-		{
-			ret = ft_arg_join(ft_strdup("1"), ret, 3);
-			break ;
-		}
-		i--;
-	}
-	x = ft_bin_to(ret);
-	return (x);
-}
-
-void			ft_count_len(long value, t_param *param, int fd2)
-{
-	char				*ret;
-	int					i;
-	unsigned int		x;
-
-	if (value < 0)
-	{
-		value = -value;
-		ret = ft_itoa_base(value, 2);
-		i = ft_strlen(ret) - 1;
-		while (i > -1)
-		{
-			if (ret[i] == '0')
-				ret[i] = '1';
-			else
-				ret[i] = '0';
-			i--;
-		}
-		i = ft_strlen(ret) - 1;
-		x = ft_count_len2(ret, i);
-	}
-	else
-		x = value;
-	x = ft_swp_bits(x, param->size);
-	write(fd2, &x, param->size);
 }
 
 void			ft_write_in(t_opcode *instruct, int fd2)
