@@ -77,7 +77,7 @@ int				main(int ac, char **av)
 	if (!detect_blank_line(fd))
 		exit(ft_printf("Syntax error - unexpected end of input"
 			" (Perhaps you forgot to end with a newline ?)\n"));
-	//iter_opcode(ohead, print_opcode);
+	iter_opcode(ohead, print_opcode);
 	ft_main2(ohead, h, av[1]);
 	//system("leaks asm");
 }

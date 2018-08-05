@@ -35,7 +35,7 @@ static void		ft_f(char *answer, int fd, char *str, int max)
 	i = -1;
 	len = -1;
 	if (str[i + 1] != '\"')
-		exit(ft_printf("ERROR1\n"));
+		exit(ft_printf("There is no \"\n"));
 	s = ft_strdup(str + 1);
 	while (len++ < max)
 	{
@@ -62,15 +62,12 @@ void			ft_read_header(header_t *h, int fd)
 	x = 0;
 	s = NULL;
 	h->magic = COREWAR_EXEC_MAGIC;
-	while (ft_gnl(fd, &s))
+	while (ft_gnl(fd, &s) > -1)
 	{
 		if (!(*h->p) && ft_strncmp(s, NAME_CMD_STRING, 4) == 0 && ++x > 0)
 			ft_f(h->p, fd, ft_strtrim(s + 5), PROG_NAME_LENGTH);
 		else if (!(*h->c) && ft_strncmp(s, COM_CMD_STRING, 8) == 0 && ++x > 0)
 			ft_f(h->c, fd, ft_strtrim(s + 8), COMMENT_LENGTH);
-		else if (ft_strequ(s, ""))
-		{
-		}
 		else
 		{
 			ft_strdel(&s);
