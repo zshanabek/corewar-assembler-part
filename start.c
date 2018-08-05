@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 15:37:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/03 15:37:39 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/05 22:03:05 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char 			*ft_name(char *av)
 		}
 		i--;
 	}
-	n = ft_arg_join(n, ft_strdup(".corr"), 3);
+	n = ft_arg_join(n, ft_strdup(".cor"), 3);
 	return (n);
 }
 
@@ -82,12 +82,7 @@ int				main(int ac, char **av)
 	ohead = NULL;
 	line = NULL;
 	if (ac != 2)
-	{
-		ft_putstr_fd("Usage: ./asm", 2);
-		ft_putstr_fd(av[1], 2);
-		ft_putstr_fd("\n", 2);
-		exit(1);
-	}
+		exit(ft_printf("Usage: ./asm %s\n", av[1]));
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		exit(ft_printf("Can't read source file %s\n", av[1]));
@@ -99,5 +94,5 @@ int				main(int ac, char **av)
 			" (Perhaps you forgot to end with a newline ?)\n"));
 	//iter_opcode(ohead, print_opcode);
 	ft_main2(ohead, h, av[1]);
-	// system("leaks asm");
+	system("leaks asm");
 }

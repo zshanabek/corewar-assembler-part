@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_header.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:28:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/03 17:28:38 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/05 22:02:39 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,13 @@ void			ft_read_header(header_t *h, int fd)
 	while (ft_gnl(fd, &s) > -1)
 	{
 		if (ft_strequ(s, ""))
-		{
-		}
+			continue;
 		else if (!(*h->p) && ft_strncmp(s, NAME_CMD_STRING, 4) == 0 && ++x > 0)
 			ft_f(h->p, fd, ft_strtrim(s + 5), PROG_NAME_LENGTH);
 		else if (!(*h->c) && ft_strncmp(s, COM_CMD_STRING, 8) == 0 && ++x > 0)
 			ft_f(h->c, fd, ft_strtrim(s + 8), COMMENT_LENGTH);
 		else
-		{
-			ft_strdel(&s);
 			exit(ft_printf("No name or header.\n"));
-		}
 		if (x == 2)
 			return (ft_strdel(&s));
 		ft_strdel(&s);
