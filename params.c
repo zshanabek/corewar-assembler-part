@@ -48,8 +48,7 @@ int		analyze_type(t_param *item, char *temp, int type, int code)
 
 int		analyze_param(t_param *item, char *str, int code, int type)
 {
-	char	*temp;
-	char	*buf;
+	char	*temp;	
 
 	if (str[1] == '\0' && code != IND_CODE)
 		return (0);
@@ -57,7 +56,7 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 	{
 		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
 		str = temp;
-		free(temp);
+		ft_strdel(&temp);
 		if (str[0] == LABEL_CHAR)
             type = 2;
 		else if (ft_isdigit(str[0]) || (str[0] == '-' && ft_isdigit(str[1])))
@@ -66,11 +65,7 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 			return (0);
 	}
 	if (str[0] == LABEL_CHAR || code == REG_CODE)
-	{
-		buf = ft_strsub(str, 1, ft_strlen(str) - 1);
-		temp = buf;
-		free(temp);
-	}
+		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
 	else
 		temp = str;
 	if (!analyze_type(item, temp, type, code))
@@ -91,7 +86,7 @@ char	**get_params_array(t_opcode *opcode, int i, int n, char *line)
 		exit(ft_printf("No parameters for opcode \"%s\"\n", opcode->name));
 	if (ft_2darrlen(arr) != commas + 1)
 		exit(ft_printf("Syntax error at [%d] SEPARATOR \",\"\n", n));
-	free(str);
+	ft_strdel(&str);
 	return (arr);
 }
 
@@ -120,7 +115,7 @@ void	get_params(t_opcode *opcode, char **arr, int n)
 		if (e == 0)
 			exit(ft_printf("Syntax error at [%03d] INSTRUCTION \"%s\"\n",
 			n, temp));
-		free(temp);		
+		ft_strdel(&temp);
 		k++;
 	}
 }

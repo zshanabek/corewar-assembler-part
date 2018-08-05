@@ -96,7 +96,7 @@ void	read_instr(int fd, char *line, t_opcode **ohead)
 				parse_instr(ohead, &lhead, i, line);
 		}
 		i++;
-		free(line);
+		ft_strdel(&line);
 	}
 	if (lhead != NULL && *ohead == NULL)
 	{
