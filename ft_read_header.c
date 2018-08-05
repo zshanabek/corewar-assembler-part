@@ -19,7 +19,7 @@ void			ft_line_end(char *s, int i, char *str)
 	while (s[i])
 	{
 		if (!ft_isws(s[i]))
-			exit(ft_printf("Bad line1\n"));
+			exit(ft_printf("Bad name or comment\n"));
 		i++;
 	}
 	return (ft_strdel(&s));
@@ -64,7 +64,10 @@ void			ft_read_header(header_t *h, int fd)
 	h->magic = COREWAR_EXEC_MAGIC;
 	while (ft_gnl(fd, &s) > -1)
 	{
-		if (!(*h->p) && ft_strncmp(s, NAME_CMD_STRING, 4) == 0 && ++x > 0)
+		if (ft_strequ(s, ""))
+		{
+		}
+		else if (!(*h->p) && ft_strncmp(s, NAME_CMD_STRING, 4) == 0 && ++x > 0)
 			ft_f(h->p, fd, ft_strtrim(s + 5), PROG_NAME_LENGTH);
 		else if (!(*h->c) && ft_strncmp(s, COM_CMD_STRING, 8) == 0 && ++x > 0)
 			ft_f(h->c, fd, ft_strtrim(s + 8), COMMENT_LENGTH);

@@ -32,6 +32,26 @@ void			ft_bot_size(int fd2, t_opcode *ohead)
 	write(fd2, &len, 4);
 }
 
+char 			*ft_name(char *av)
+{
+	char 	*n;
+	int 	i;
+
+	n = ft_strdup(av);
+	i = ft_strlen(n);
+	while (i > -1)
+	{
+		if (n[i] == '.' || i == 0)
+		{
+			ft_strclr(n + i);
+			break ;
+		}
+		i--;
+	}
+	n = ft_arg_join(n, ft_strdup(".corr"), 3);
+	return (n);
+}
+
 void			ft_main2(t_opcode *ohead, header_t *h, char *av)
 {
 	int				fd2;
@@ -39,9 +59,7 @@ void			ft_main2(t_opcode *ohead, header_t *h, char *av)
 	int 			i;
 
 	ft_hex(ohead);
-	name = ft_strdup(av);
-	ft_strclr(ft_strstr(name, ".s"));
-	name = ft_arg_join(name, ft_strdup(".corr"), 3);
+	name = ft_name(av);
 	fd2 = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	ft_printf("Writing output program to %s\n", name);
 	ft_strdel(&name);
@@ -65,7 +83,9 @@ int				main(int ac, char **av)
 	line = NULL;
 	if (ac != 2)
 	{
-		ft_putstr_fd("Usage: ./asm test.s\n", 2);
+		ft_putstr_fd("Usage: ./asm", 2);
+		ft_putstr_fd(av[1], 2);
+		ft_putstr_fd("\n", 2);
 		exit(1);
 	}
 	fd = open(av[1], O_RDONLY);
@@ -77,7 +97,7 @@ int				main(int ac, char **av)
 	if (!detect_blank_line(fd))
 		exit(ft_printf("Syntax error - unexpected end of input"
 			" (Perhaps you forgot to end with a newline ?)\n"));
-	iter_opcode(ohead, print_opcode);
+	//iter_opcode(ohead, print_opcode);
 	ft_main2(ohead, h, av[1]);
 	//system("leaks asm");
 }
