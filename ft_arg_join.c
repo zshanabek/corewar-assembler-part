@@ -6,12 +6,11 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 15:12:45 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/05 22:15:40 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/05 22:22:15 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#include "op.h"
 
 static	void	ft_fr(char *s1, char *s2, int arg)
 {
