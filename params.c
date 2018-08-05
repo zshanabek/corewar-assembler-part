@@ -5,8 +5,9 @@ void	is_valid_param(t_op *elem, t_param *cur, int nb, char *name)
 	int		i;
 	int		j;
 	int		k;
-	char	*massiv[3];
+	char	**massiv;
 
+	massiv = malloc(sizeof(char *) * 3);
 	massiv[0] = ft_strdup("reg");
 	massiv[1] = ft_strdup("direct");
 	massiv[2] = ft_strdup("indirect");
@@ -28,6 +29,7 @@ void	is_valid_param(t_op *elem, t_param *cur, int nb, char *name)
 		i++;
 		cur = cur->next;
 	}
+	ft_del2darr(massiv);
 }
 
 int		analyze_type(t_param *item, char *temp, int type, int code)
@@ -47,8 +49,8 @@ int		analyze_type(t_param *item, char *temp, int type, int code)
 int		analyze_param(t_param *item, char *str, int code, int type)
 {
 	char	*temp;
+	char	*buf;
 
-	temp = NULL;
 	if (str[1] == '\0' && code != IND_CODE)
 		return (0);
 	if (code == DIR_CODE)
@@ -64,7 +66,11 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 			return (0);
 	}
 	if (str[0] == LABEL_CHAR || code == REG_CODE)
-		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
+	{
+		buf = ft_strsub(str, 1, ft_strlen(str) - 1);
+		temp = buf;
+		free(temp);
+	}
 	else
 		temp = str;
 	if (!analyze_type(item, temp, type, code))
