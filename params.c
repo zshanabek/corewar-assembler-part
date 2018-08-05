@@ -12,7 +12,7 @@ void	is_valid_param(t_op *elem, t_param *cur, int nb, char *name)
 	massiv[2] = ft_strdup("indirect");
 	i = 0;
 	k = 0;
-	while (i < nb)
+	while (i < nb && cur != NULL)
 	{
 		j = 0;
 		while (j < 3)
@@ -81,7 +81,7 @@ char	**get_params_array(t_opcode *opcode, int i, char *line)
 		exit(ft_printf("No parameters for opcode: %s\n", opcode->name));
 	if (ft_2darrlen(arr) != commas + 1)
 		exit(ft_printf("Too many commas\n"));
-	if (ft_2darrlen(arr) > opcode->nb_param)
+	if (ft_2darrlen(arr) != opcode->nb_param)
 		exit(ft_printf("Wrong number of parameters\n"));
 	free(str);
 	return (arr);

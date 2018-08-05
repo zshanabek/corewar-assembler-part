@@ -17,7 +17,7 @@ void	get_opcode(t_opcode *opcode, int h, int i, char *line)
 	elem = search_struct(opcode->name);
 	cur = opcode->param;
 	is_valid_param(elem, cur, opcode->nb_param, opcode->name);
-	ft_del2darr(arr);	
+	ft_del2darr(arr);
 }
 
 void	get_i_h(int *i, int *h, char *line)
@@ -93,7 +93,6 @@ void	read_instr(int fd, char *line, t_opcode **ohead)
 			if (get_label(&lhead, line))
 				parse_instr(ohead, &lhead, line);
 		}
-		// ft_printf("%s\n", line);
 		free(line);
 	}
 	if (lhead != NULL && *ohead == NULL)

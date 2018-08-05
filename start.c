@@ -54,10 +54,7 @@ int				main(int ac, char **av)
 	ohead = NULL;
 	line = NULL;
 	if (ac != 2)
-	{
-		ft_putstr_fd("Usage: ./asm test.s\n", 2);
-		exit(1);
-	}
+		exit(ft_printf("Usage: ./asm test.s\n"));
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		exit(ft_printf("Can't read source file %s\n", av[1]));
@@ -67,7 +64,7 @@ int				main(int ac, char **av)
 	if (!detect_blank_line(fd))
 		exit(ft_printf("Syntax error - unexpected end of input"
 			" (Perhaps you forgot to end with a newline ?)\n"));
-	iter_opcode(ohead, print_opcode);
+	// iter_opcode(ohead, print_opcode);
 	ft_main2(ohead, h);
 	ft_printf("Writing output program\n");
 	//system("leaks asm");
