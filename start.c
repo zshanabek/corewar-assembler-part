@@ -61,9 +61,7 @@ int				main(int ac, char **av)
 	h = malloc(sizeof(header_t));
 	ft_read_header(h, fd);
 	read_instr(fd, line, &ohead);
-	if (!detect_blank_line(fd))
-		exit(ft_printf("Syntax error - unexpected end of input"
-			" (Perhaps you forgot to end with a newline ?)\n"));
+	
 	// iter_opcode(ohead, print_opcode);
 	ft_main2(ohead, h);
 	ft_printf("Writing output program\n");

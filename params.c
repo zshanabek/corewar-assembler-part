@@ -22,7 +22,7 @@ void	is_valid_param(t_op *elem, t_param *cur, int nb, char *name)
 			j++;
 		}
 		if (k == 0)
-			exit(ft_printf("Invalid parameter %d type %s for instruction: \"%s\"\n", i, massiv[cur->type - 1], name));						
+			exit(ft_printf("Invalid parameter %d type %s for instruction \"%s\"\n", i, massiv[cur->type - 1], name));						
 		k = 0;
 		i++;
 		cur = cur->next;
@@ -78,11 +78,11 @@ char	**get_params_array(t_opcode *opcode, int i, char *line)
 	commas = count_commas(str);
 	arr = ft_strsplit(str, SEPARATOR_CHAR);
 	if (ft_2darrlen(arr) <= 0 || ft_isempty(str))
-		exit(ft_printf("No parameters for opcode: %s\n", opcode->name));
+		exit(ft_printf("No parameters for opcode \"%s\"\n", opcode->name));
 	if (ft_2darrlen(arr) != commas + 1)
 		exit(ft_printf("Too many commas\n"));
 	if (ft_2darrlen(arr) != opcode->nb_param)
-		exit(ft_printf("Wrong number of parameters\n"));
+		exit(ft_printf("Wrong number of parameters for opcode \"%s\"\n", opcode->name));
 	free(str);
 	return (arr);
 }
