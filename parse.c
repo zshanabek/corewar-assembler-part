@@ -12,11 +12,13 @@ void	get_opcode(t_opcode *opcode, int h, int i, int n, char *line)
 	opcode->codage = search_struct(opcode->name)->coding_byte;
 	opcode->nb_param = search_struct(opcode->name)->nb_param;
 	opcode->opcode = search_struct(opcode->name)->opcode;
-	arr = get_params_array(opcode, i, line);
-	get_params(opcode, arr);
+	arr = get_params_array(opcode, i, n, line);
+	get_params(opcode, arr, n);
 	elem = search_struct(opcode->name);
 	cur = opcode->param;
 	is_valid_param(elem, cur, opcode->nb_param, opcode->name);
+	if (ft_2darrlen(arr) != opcode->nb_param)
+		exit(ft_printf("Invalid parameter count for instruction \"%s\"\n", opcode->name));
 	ft_del2darr(arr);
 }
 
