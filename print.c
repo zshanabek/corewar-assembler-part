@@ -9,8 +9,7 @@ void	print_param(t_param *param)
 {
 	if (param->sval != NULL)
 		ft_printf("   sval: %s\n", param->sval);
-	if (param->ival != -1)
-		ft_printf("   ival: {yellow}%d{eoc}\n", param->ival);
+	ft_printf("   ival: {yellow}%d{eoc}\n", param->ival);
 	ft_printf("   type: %d\n", param->type);
 	if (param->next != NULL)
 		ft_printf("--------------\n");
@@ -47,7 +46,7 @@ void	print_opcode(t_opcode *opcode)
 {
 	ft_printf("name: {magenta}%s{eoc}\n", opcode->name);
 	// ft_printf("cod:  %d\n", opcode->codage);
-	// ft_printf("npar:  %d\n", opcode->nb_param);	
+	// ft_printf("npar:  %d\n", opcode->nb_param);
 	if (opcode->label != NULL)
 	{
 		ft_printf("labels:\n");

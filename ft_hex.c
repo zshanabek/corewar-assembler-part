@@ -82,7 +82,7 @@ void	ft_hex(t_opcode *instr)
 	len = 0;
 	in = instr;
 	if (instr == NULL)
-		exit(ft_printf("No command\n"));
+		exit(ft_printf("Syntax error END \"(null)\"\n"));
 	while (in)
 	{
 		in->pos = len;

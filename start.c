@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   start.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/03 15:37:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/03 15:37:39 by vradchen         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
 
 void			ft_bot_size(int fd2, t_opcode *ohead)
@@ -64,10 +52,7 @@ int				main(int ac, char **av)
 	ohead = NULL;
 	line = NULL;
 	if (ac != 2)
-	{
-		ft_putstr_fd("Usage: ./asm test.s\n", 2);
-		exit(1);
-	}
+		exit(ft_printf("Usage: ./asm test.s\n"));
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		exit(ft_printf("Can't read source file %s\n", av[1]));
