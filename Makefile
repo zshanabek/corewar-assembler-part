@@ -9,14 +9,14 @@ FLAGS = -Wall -Wextra -Werror
 all: 	lib $(NAME)
 
 $(NAME):$(OBJ)
-		@gcc  $(OBJ) $(LIB) -o $(NAME) 
+		@gcc $(OBJ) $(LIB) -o $(NAME)
 		@echo "\x1b[32mProject is successfully built\x1b[0m"
 
 lib:
 		@make -C libft
 
 %.o:	%.c
-		@gcc $(FLAGS) -o $@ -c $<
+		@gcc -g $(FLAGS) -o $@ -c $<
 
 clean:	
 		@rm -f $(OBJ)
