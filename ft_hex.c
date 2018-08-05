@@ -78,7 +78,6 @@ void	ft_hex(t_opcode *instr)
 	int			len;
 	t_opcode	*in;
 	t_param		*p;
-	//int		i;
 
 	len = 0;
 	in = instr;
