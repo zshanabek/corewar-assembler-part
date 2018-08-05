@@ -13,6 +13,7 @@ asm
 file
 *.s
 *.cor
+*.corr
 vm_champs/
 examples/
 CMakeLists.txt
