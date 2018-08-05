@@ -42,12 +42,17 @@ void			ft_bot_size(int fd2, t_opcode *ohead)
 	write(fd2, &len, 4);
 }
 
-void			ft_main2(t_opcode *ohead, header_t *h)
+void			ft_main2(t_opcode *ohead, header_t *h, char *av)
 {
 	int				fd2;
+	char			*name;
 
 	ft_hex(ohead);
-	fd2 = open("try.cor", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	name = ft_strdup(av);
+	ft_strclr(ft_strstr(name, ".s"));
+	name = ft_arg_join(name, ft_strdup(".cor"), 3);
+	fd2 = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	ft_strdel(&name);
 	write_magic(fd2);
 	write(fd2, &h->p, PROG_NAME_LENGTH + 4);
 	ft_bot_size(fd2, ohead);
@@ -80,6 +85,6 @@ int				main(int ac, char **av)
 		exit(ft_printf("Syntax error - unexpected end of input"
 			" (Perhaps you forgot to end with a newline ?)\n"));
 	iter_opcode(ohead, print_opcode);
-	ft_main2(ohead, h);
-	//system("leaks asm");
+	ft_main2(ohead, h, av[1]);
+	system("leaks asm");
 }
