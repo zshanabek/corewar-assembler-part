@@ -27,7 +27,6 @@ int				ft_bin_to(char *bin)
 		i--;
 		power *= 2;
 	}
-	ft_strdel(&bin);
 	return (x);
 }
 
