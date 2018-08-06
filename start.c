@@ -48,7 +48,7 @@ char 			*ft_name(char *av)
 		}
 		i--;
 	}
-	n = ft_arg_join(n, ft_strdup(".cor"), 3);
+	n = ft_arg_join(n, ft_strdup(".corr"), 3);
 	return (n);
 }
 
@@ -94,5 +94,5 @@ int				main(int ac, char **av)
 			" (Perhaps you forgot to end with a newline ?)\n"));
 	//iter_opcode(ohead, print_opcode);
 	ft_main2(ohead, h, av[1]);
-	system("leaks asm");
+	//system("leaks asm");
 }

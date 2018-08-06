@@ -30,7 +30,6 @@ static void		ft_f(char *answer, int fd, char *str, int max)
 	int				i;
 	int				len;
 	char			*s;
-	int				x;
 
 	i = -1;
 	len = -1;
@@ -45,13 +44,14 @@ static void		ft_f(char *answer, int fd, char *str, int max)
 			if (s[i++] == '\"')
 				return (ft_line_end(s, i, str));
 			ft_strcat(answer, "\n");
-			x = ft_gnl(fd, &s);
-			if (x == 0 || x == -1)
+			if (ft_gnl(fd, &s) < 1)
 				exit(ft_printf("No second \"\n"));
 			i = -1;
 		}
 	}
-	exit(ft_printf("Too big line\n"));
+	if (max == 128)
+		exit(ft_printf("Champion name too long (Max length 128)\n"));
+	exit(ft_printf("Champion comment too long (Max length 2048)\n"));
 }
 
 void			ft_read_header(header_t *h, int fd)
