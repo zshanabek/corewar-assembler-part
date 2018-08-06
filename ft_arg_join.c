@@ -45,18 +45,11 @@ static char		*ft_arg_join2(char *s1, char *s2)
 char			*ft_arg_join(char *s1, char *s2, int arg)
 {
 	char	*ret;
-	int		n;
 
 	if (s1 == NULL && s2 != NULL)
-	{
-		ret = ft_strnew(ft_strlen(s2));
-		ft_strcpy(ret, s2);
-	}
+		ret = ft_strdup(s2);
 	else if (s2 == NULL && s1 != NULL)
-	{
-		ret = ft_strnew(ft_strlen(s1));
-		ft_strcpy(ret, s1);
-	}
+		ret = ft_strdup(s1);
 	else if (s1 && s2)
 		ret = ft_arg_join2(s1, s2);
 	else
