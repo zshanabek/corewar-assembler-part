@@ -1,6 +1,6 @@
 #include "asm.h"
 
-void	is_valid_param(t_op *elem, t_param *cur, int nb, char *name)
+void	is_valid_param(t_op *elem, t_param *cur, char *name)
 {
 	int		i;
 	int		j;
@@ -75,7 +75,7 @@ char	**get_params_array(int i, int n, char *line)
 	str = ft_strsub(line, i, ft_strlen(line) - i);
 	commas = count_commas(str);
 	arr = ft_strsplit(str, SEPARATOR_CHAR);
-	if (ft_2darrlen(arr) <= 0 || ft_isempty(str))
+	if (ft_2darrlen(arr) == 0 || ft_isempty(str))
 		show_error(2, n, 0, "");
 	if (ft_2darrlen(arr) != commas + 1)
 		show_error(1, n, 0, "");

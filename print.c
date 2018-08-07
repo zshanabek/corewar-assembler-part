@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/07 17:28:42 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/08/07 17:51:19 by zshanabe         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
 
 void	print_label(t_label *label)
@@ -75,6 +63,7 @@ void	print_opcode(t_opcode *opcode)
 void 	iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem))
 {
 	t_opcode *cur;
+
 	if (!ohead)
 		return ;
 	cur = ohead;
@@ -89,10 +78,11 @@ void	show_error(int type, int n, int a, char *str)
 {
 	char	**arr;
 
-	arr = malloc(sizeof(char *) * 3);
+	arr = malloc(sizeof(char *) * 4);
 	arr[0] = ft_strdup("reg");
 	arr[1] = ft_strdup("direct");
 	arr[2] = ft_strdup("indirect");
+	arr[3] = 0;
 	if (type == 0)
 		ft_printf("Syntax error at token [%03d] INSTRUCTION \"%s\"\n", n, str);
 	else if (type == 1)
@@ -109,6 +99,6 @@ void	show_error(int type, int n, int a, char *str)
 		ft_printf("Lexical error at [%d]\n", n);
 	else if (type == 7)
 		ft_printf("Syntax error at token [%03d] END \"(null)\"\n", n);
-	// ft_del2darr(arr);
+	ft_del2darr(arr);
 	exit(1);
 }

@@ -16,7 +16,7 @@ void	get_opcode(t_opcode *opcode, int h, int i, int n, char *line)
 	opcode->opcode = search_struct(opcode->name)->opcode;
 	elem = search_struct(opcode->name);
 	cur = opcode->param;
-	is_valid_param(elem, cur, opcode->nb_param, opcode->name);
+	is_valid_param(elem, cur, opcode->name);
 	if (ft_2darrlen(arr) != opcode->nb_param)
 		show_error(5, 0, 0, opcode->name);
 	ft_del2darr(arr);

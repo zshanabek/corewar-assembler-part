@@ -49,7 +49,7 @@ void		show_error(int type, int n, int a, char *str);
 t_op		*search_struct();
 int			opcode_bar_ma(char *name);
 void		clear_comment(char *line);
-void		is_valid_param(t_op *elem, t_param *cur, int nb, char *name);
+void		is_valid_param(t_op *elem, t_param *cur, char *name);
 int			is_digital(char *line);
 int			is_valid_label(char *str);
 char		**get_params_array(int i, int n, char *line);
