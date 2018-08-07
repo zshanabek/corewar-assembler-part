@@ -30,26 +30,23 @@ int		analyze_type(t_param *item, char *temp, int type, int code)
 	if (is_digital(temp) && type == 1)
 		item->ival = ft_atoi(temp);
 	else if (type == 2)
-		item->sval = temp;
+		item->sval = ft_strdup(temp);
 	else
 		return (0);
 	if (code == REG_CODE && (item->ival > REG_NUMBER || item->ival < 0))
-		return (0);	
+		return (0);
 	item->type = code;
+	ft_strdel(&temp);
 	return (1);
 }
 
 int		analyze_param(t_param *item, char *str, int code, int type)
 {
-	char	*temp;	
-
 	if (str[1] == '\0' && code != IND_CODE)
 		return (0);
 	if (code == DIR_CODE)
 	{
-		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
-		str = temp;
-		ft_strdel(&temp);
+		str = ft_strresub(str, 1, ft_strlen(str) - 1);
 		if (str[0] == LABEL_CHAR)
             type = 2;
 		else if (ft_isdigit(str[0]) || (str[0] == '-' && ft_isdigit(str[1])))
@@ -58,10 +55,8 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 			return (-1);
 	}
 	if (str[0] == LABEL_CHAR || code == REG_CODE)
-		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
-	else
-		temp = str;
-	if (!analyze_type(item, temp, type, code))
+		str = ft_strresub(str, 1, ft_strlen(str) - 1);
+	if (!analyze_type(item, str, type, code))
 		return (0);
 	return (1);
 }
@@ -109,7 +104,6 @@ void	get_params(t_opcode *opcode, char **arr, int n)
 			show_error(0, n, 0, temp);
 		if (e == -1)
 			show_error(6, n, 0, temp);
-		ft_strdel(&temp);
 		k++;
 	}
 }

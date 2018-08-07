@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   start.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/03 15:37:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/07 16:22:53 by zshanabe         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
 
 void			ft_bot_size(int fd2, t_opcode *ohead)
@@ -96,5 +84,5 @@ int				main(int ac, char **av)
 			" (Perhaps you forgot to end with a newline ?)\n"));
 	//iter_opcode(ohead, print_opcode);
 	ft_main2(ohead, h, av[1], n);
-	//system("leaks asm");
+	// system("leaks asm");
 }
