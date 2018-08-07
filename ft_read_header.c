@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:28:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/07 16:32:22 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/07 17:23:32 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static void		ft_f(int *n, int fd, int max, char *answer, char *str)
 			if (s[i++] == '\"')
 				return (ft_line_end(s, i, str));
 			ft_strcat(answer, "\n");
+			(*n)++;					
 			if (ft_gnl(fd, &s) < 1)
 				exit(ft_printf("No second \"\n"));				
-			(*n)++;		
 			i = -1;
 		}
 	}
@@ -65,6 +65,7 @@ void			ft_read_header(header_t *h, int *n, int fd)
 	h->magic = COREWAR_EXEC_MAGIC;
 	while (ft_gnl(fd, &s) > -1)
 	{
+		(*n)++;						
 		if (ft_strequ(s, ""))
 			continue;
 		else if (!(*h->p) && ft_strncmp(s, NAME_CMD_STRING, 4) == 0 && ++x > 0)
@@ -76,7 +77,6 @@ void			ft_read_header(header_t *h, int *n, int fd)
 		if (x == 2)
 			return (ft_strdel(&s));
 		ft_strdel(&s);
-		(*n)++;
 	}
 	exit(ft_printf("No name or header.\n"));
 }

@@ -8,7 +8,7 @@ void	is_valid_param(t_op *elem, t_param *cur, int nb, char *name)
 
 	i = 0;
 	k = 0;
-	while (i < nb && cur != NULL)
+	while (cur != NULL)
 	{
 		j = 0;
 		while (j < 3)
@@ -55,7 +55,7 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 		else if (ft_isdigit(str[0]) || (str[0] == '-' && ft_isdigit(str[1])))
         	type = 1;
 		else
-			return (0);
+			return (-1);
 	}
 	if (str[0] == LABEL_CHAR || code == REG_CODE)
 		temp = ft_strsub(str, 1, ft_strlen(str) - 1);
@@ -107,6 +107,8 @@ void	get_params(t_opcode *opcode, char **arr, int n)
 		ft_lstaddendpar(&opcode->param, item);
 		if (e == 0)
 			show_error(0, n, 0, temp);
+		if (e == -1)
+			show_error(6, n, 0, temp);
 		ft_strdel(&temp);
 		k++;
 	}

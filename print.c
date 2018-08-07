@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/07 17:28:42 by zshanabe          #+#    #+#             */
+/*   Updated: 2018/08/07 17:51:19 by zshanabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 void	print_label(t_label *label)
@@ -82,21 +94,21 @@ void	show_error(int type, int n, int a, char *str)
 	arr[1] = ft_strdup("direct");
 	arr[2] = ft_strdup("indirect");
 	if (type == 0)
-		ft_printf("Syntax error at [%03d] INSTRUCTION \"%s\"\n", n, str);
+		ft_printf("Syntax error at token [%03d] INSTRUCTION \"%s\"\n", n, str);
 	else if (type == 1)
-		ft_printf("Syntax error at [%d] SEPARATOR \",\"\n", n);
+		ft_printf("Syntax error at token [%03d] SEPARATOR \",\"\n", n);
 	else if (type == 2)
-		ft_printf("Syntax error at [%d] ENDLINE\n", n);
+		ft_printf("Syntax error at token [%03d] ENDLINE\n", n);
 	else if (type == 3)
 		ft_printf("Invalid instruction at token [%03d] INSTRUCTION \"%s\"\n", n, str);
 	else if (type == 4)
-		ft_printf("Invalid param %d type %s for command %s\n", n, arr[a], str);
+		ft_printf("Invalid parameter %d type %s for instruction %s\n", n, arr[a], str);
 	else if (type == 5)
 		ft_printf("Invalid parameter count for instruction \"%s\"\n", str);
 	else if (type == 6)
 		ft_printf("Lexical error at [%d]\n", n);
 	else if (type == 7)
-		ft_printf("Syntax error at [%03d] END \"(null)\"\n", n);
+		ft_printf("Syntax error at token [%03d] END \"(null)\"\n", n);
 	// ft_del2darr(arr);
 	exit(1);
 }

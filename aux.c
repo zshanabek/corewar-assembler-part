@@ -49,3 +49,20 @@ int	ft_gnl(int fd, char **s)
 	i = get_next_line(fd, s);
 	return (i);
 }
+
+unsigned int	ft_swp_bits(int n, int size)
+{
+	unsigned char	*nn;
+	unsigned char	*res_char;
+	unsigned int	res_num;
+	int				i;
+
+	if (size == 1)
+		return (n);
+	nn = (unsigned char *)&n;
+	res_char = (unsigned char *)&res_num;
+	i = 0;
+	while (size > 0)
+		res_char[i++] = nn[--size];
+	return (res_num);
+}
