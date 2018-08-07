@@ -92,7 +92,11 @@ void	show_error(int type, int n, int a, char *str)
 	else if (type == 4)
 		ft_printf("Invalid param %d type %s for command %s\n", n, arr[a], str);
 	else if (type == 5)
-		ft_printf("Invalid parameter count for instruction \"%s\"\n", str);		
+		ft_printf("Invalid parameter count for instruction \"%s\"\n", str);
+	else if (type == 6)
+		ft_printf("Lexical error at [%d]\n", n);
+	else if (type == 7)
+		ft_printf("Syntax error at [%03d] END \"(null)\"\n", n);
 	// ft_del2darr(arr);
 	exit(1);
 }

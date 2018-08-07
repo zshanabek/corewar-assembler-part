@@ -66,7 +66,7 @@ int	get_label(t_label **lhead, int n, char *line)
 		item = create_label();
 		item->name = ft_strsub(line, h, i - h);
 		if (!ft_strcmp(item->name, "\0") || !is_valid_label(item->name))
-			exit(ft_printf("Lexical error at [%d]\n", n));
+			show_error(6, n, 0, "");
 		ft_lstaddendlabel(lhead, item);
 	}
 	else
@@ -79,23 +79,21 @@ int	get_label(t_label **lhead, int n, char *line)
 	return (1);
 }
 
-void	read_instr(int fd, char *line, t_opcode **ohead)
+void	read_instr(int fd, char *line, int *n, t_opcode **ohead)
 {
-	int			i;	
 	t_label 	*lhead;
 	t_opcode 	*item;
 
-	i = 0;
 	lhead = NULL;
 	while (get_next_line(fd, &line))
 	{
 		clear_comment(line);
 		if (line[0] != '\0' && line[0] != COMMENT_CHAR && !ft_isempty(line))
 		{
-			if (get_label(&lhead, i, line))
-				parse_instr(ohead, &lhead, i, line);
+			if (get_label(&lhead, *n, line))
+				parse_instr(ohead, &lhead, *n, line);
 		}
-		i++;
+		(*n)++;
 		ft_strdel(&line);
 	}
 	if (lhead != NULL && *ohead == NULL)
@@ -104,6 +102,6 @@ void	read_instr(int fd, char *line, t_opcode **ohead)
 		item->label = lhead;
 		ft_lstaddendopcode(ohead, item);
 		if (!detect_blank_line(fd))
-			exit(ft_printf("Syntax error at [%03d] END \"(null)\"\n", i));
+			show_error(7, *n, 0, "");
 	}
 }

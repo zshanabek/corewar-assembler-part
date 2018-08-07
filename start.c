@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 15:37:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/07 13:49:21 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/07 16:22:53 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ char 			*ft_name(char *av)
 	return (n);
 }
 
-void			ft_main2(t_opcode *ohead, header_t *h, char *av)
+void			ft_main2(t_opcode *ohead, header_t *h, char *av, int n)
 {
 	int				fd2;
 	char			*name;
 	int 			i;
 
-	ft_hex(ohead);
+	ft_hex(ohead, n);
 	name = ft_name(av);
 	fd2 = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	ft_printf("Writing output program to %s\n", name);
@@ -74,11 +74,13 @@ void			ft_main2(t_opcode *ohead, header_t *h, char *av)
 
 int				main(int ac, char **av)
 {
+	int				n;	
 	int				fd;
 	char			*line;
 	header_t		*h;
 	t_opcode		*ohead;
 
+	n = 0;
 	ohead = NULL;
 	line = NULL;
 	if (ac != 2)
@@ -87,12 +89,12 @@ int				main(int ac, char **av)
 	if (fd == -1)
 		exit(ft_printf("Can't read source file %s\n", av[1]));
 	h = malloc(sizeof(header_t));
-	ft_read_header(h, fd);
-	read_instr(fd, line, &ohead);
+	ft_read_header(h, &n, fd);
+	read_instr(fd, line, &n, &ohead);
 	if (!detect_blank_line(fd))
 		exit(ft_printf("Syntax error - unexpected end of input"
 			" (Perhaps you forgot to end with a newline ?)\n"));
 	//iter_opcode(ohead, print_opcode);
-	ft_main2(ohead, h, av[1]);
+	ft_main2(ohead, h, av[1], n);
 	//system("leaks asm");
 }

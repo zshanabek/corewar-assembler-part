@@ -73,7 +73,7 @@ void	ft_hex2(t_opcode *in)
 	}
 }
 
-void	ft_hex(t_opcode *instr)
+void	ft_hex(t_opcode *instr, int n)
 {
 	int			len;
 	t_opcode	*in;
@@ -82,7 +82,7 @@ void	ft_hex(t_opcode *instr)
 	len = 0;
 	in = instr;
 	if (instr == NULL)
-		exit(ft_printf("Syntax error END \"(null)\"\n"));
+		show_error(7, n, 0, "");
 	while (in)
 	{
 		in->pos = len;
