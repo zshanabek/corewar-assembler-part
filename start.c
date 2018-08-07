@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 15:37:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/05 22:03:05 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/07 13:49:21 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char 			*ft_name(char *av)
 		}
 		i--;
 	}
-	n = ft_arg_join(n, ft_strdup(".corr"), 3);
+	n = ft_arg_join(n, ft_strdup(".cor"), 3);
 	return (n);
 }
 

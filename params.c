@@ -5,12 +5,7 @@ void	is_valid_param(t_op *elem, t_param *cur, int nb, char *name)
 	int		i;
 	int		j;
 	int		k;
-	char	**massiv;
 
-	massiv = malloc(sizeof(char *) * 3);
-	massiv[0] = ft_strdup("reg");
-	massiv[1] = ft_strdup("direct");
-	massiv[2] = ft_strdup("indirect");
 	i = 0;
 	k = 0;
 	while (i < nb && cur != NULL)
@@ -23,13 +18,11 @@ void	is_valid_param(t_op *elem, t_param *cur, int nb, char *name)
 			j++;
 		}
 		if (k == 0)
-			exit(ft_printf("Invalid param %d type %s for command %s\n", i, 
-			massiv[cur->type - 1], name));						
+			show_error(4, i, cur->type - 1, name);						
 		k = 0;
 		i++;
 		cur = cur->next;
 	}
-	ft_del2darr(massiv);
 }
 
 int		analyze_type(t_param *item, char *temp, int type, int code)
@@ -73,7 +66,7 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 	return (1);
 }
 
-char	**get_params_array(t_opcode *opcode, int i, int n, char *line)
+char	**get_params_array(int i, int n, char *line)
 {
 	char	*str;
 	char	**arr;
@@ -83,9 +76,9 @@ char	**get_params_array(t_opcode *opcode, int i, int n, char *line)
 	commas = count_commas(str);
 	arr = ft_strsplit(str, SEPARATOR_CHAR);
 	if (ft_2darrlen(arr) <= 0 || ft_isempty(str))
-		exit(ft_printf("No parameters for opcode \"%s\"\n", opcode->name));
+		show_error(2, n, 0, "");
 	if (ft_2darrlen(arr) != commas + 1)
-		exit(ft_printf("Syntax error at [%d] SEPARATOR \",\"\n", n));
+		show_error(1, n, 0, "");
 	ft_strdel(&str);
 	return (arr);
 }
@@ -113,8 +106,7 @@ void	get_params(t_opcode *opcode, char **arr, int n)
 			e = analyze_param(item, temp, IND_CODE, 2);
 		ft_lstaddendpar(&opcode->param, item);
 		if (e == 0)
-			exit(ft_printf("Syntax error at [%03d] INSTRUCTION \"%s\"\n",
-			n, temp));
+			show_error(0, n, 0, temp);
 		ft_strdel(&temp);
 		k++;
 	}

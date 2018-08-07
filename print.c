@@ -73,8 +73,26 @@ void 	iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem))
 	}
 }
 
-void	show_error()
+void	show_error(int type, int n, int a, char *str)
 {
-	ft_printf("ERROR\n");
+	char	**arr;
+
+	arr = malloc(sizeof(char *) * 3);
+	arr[0] = ft_strdup("reg");
+	arr[1] = ft_strdup("direct");
+	arr[2] = ft_strdup("indirect");
+	if (type == 0)
+		ft_printf("Syntax error at [%03d] INSTRUCTION \"%s\"\n", n, str);
+	else if (type == 1)
+		ft_printf("Syntax error at [%d] SEPARATOR \",\"\n", n);
+	else if (type == 2)
+		ft_printf("Syntax error at [%d] ENDLINE\n", n);
+	else if (type == 3)
+		ft_printf("Invalid instruction at token [%03d] INSTRUCTION \"%s\"\n", n, str);
+	else if (type == 4)
+		ft_printf("Invalid param %d type %s for command %s\n", n, arr[a], str);
+	else if (type == 5)
+		ft_printf("Invalid parameter count for instruction \"%s\"\n", str);		
+	// ft_del2darr(arr);
 	exit(1);
 }
