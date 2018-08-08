@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:12:22 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/08 11:12:23 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/08 17:28:15 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	read_instr(int fd, char *line, int *n, t_opcode **ohead)
 		}
 		ft_strdel(&line);
 	}
-	if (lhead != NULL && *ohead == NULL)
+	if (lhead != NULL)
 	{
 		item = create_opcode();
 		item->label = lhead;
