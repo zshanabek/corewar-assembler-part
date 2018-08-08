@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/08 11:15:14 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/08 11:15:15 by vradchen         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
 
 void	print_label(t_label *label)
@@ -86,17 +74,24 @@ void 	iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem))
 	}
 }
 
+char	**get_array()
+{
+	char	**mrr;
+
+	mrr = malloc(sizeof(char *) * 4);
+	mrr[0] = ft_strdup("reg");
+	mrr[1] = ft_strdup("direct");
+	mrr[2] = ft_strdup("indirect");
+	mrr[3] = NULL;
+	return (mrr);
+}
+
 void	show_error(int type, int n, int a, char *str)
 {
-	char	**arr;
-
-	arr = malloc(sizeof(char *) * 4);
-	arr[0] = ft_strdup("reg");
-	arr[1] = ft_strdup("direct");
-	arr[2] = ft_strdup("indirect");
-	arr[3] = 0;
+	char	**mrr;
+	
 	if (type == 0)
-		ft_printf("Syntax error at token [%03d] INSTRUCTION \"%s\"\n", n, str);
+		printf("Syntax error at token [%03d] INSTRUCTION %s\n", n, str);
 	else if (type == 1)
 		ft_printf("Syntax error at token [%03d] SEPARATOR \",\"\n", n);
 	else if (type == 2)
@@ -104,13 +99,15 @@ void	show_error(int type, int n, int a, char *str)
 	else if (type == 3)
 		ft_printf("Invalid instruction at token [%03d] INSTRUCTION \"%s\"\n", n, str);
 	else if (type == 4)
-		ft_printf("Invalid parameter %d type %s for instruction %s\n", n, arr[a], str);
+	{
+		mrr = get_array();
+		ft_printf("Invalid parameter %d type %s for instruction %s\n", n, mrr[a], str);		
+	}
 	else if (type == 5)
 		ft_printf("Invalid parameter count for instruction \"%s\"\n", str);
 	else if (type == 6)
 		ft_printf("Lexical error at [%d]\n", n);
 	else if (type == 7)
 		ft_printf("Syntax error at token [%03d] END \"(null)\"\n", n);
-	ft_del2darr(arr);
 	exit(1);
 }
