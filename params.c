@@ -59,8 +59,6 @@ int		analyze_type(t_param *item, char *temp, int type, int code)
 
 int		analyze_param(t_param *item, char *str, int code, int type)
 {
-	if (!check_param(str))
-		return (-1);
 	if (str[1] == '\0' && code != IND_CODE)
 		return (0);
 	if (code == DIR_CODE)
