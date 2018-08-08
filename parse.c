@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/08 11:12:22 by vradchen          #+#    #+#             */
+/*   Updated: 2018/08/08 11:12:23 by vradchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 void	get_opcode(t_opcode *opcode, int h, int i, int n, char *line)
 {
-	char **arr;
+	char	**arr;
 	t_op	*elem;
 	t_param	*cur;
 
@@ -53,10 +65,10 @@ void	parse_instr(t_opcode **ohead, t_label **lhead, int n, char *line)
 		get_opcode(elem, h, i, n, line);
 }
 
-int	get_label(t_label **lhead, int n, char *line)
+int		get_label(t_label **lhead, int n, char *line)
 {
 	int			i;
-	int			h;	
+	int			h;
 	t_label		*item;
 
 	i = 0;
@@ -81,13 +93,13 @@ int	get_label(t_label **lhead, int n, char *line)
 
 void	read_instr(int fd, char *line, int *n, t_opcode **ohead)
 {
-	t_label 	*lhead;
-	t_opcode 	*item;
+	t_label		*lhead;
+	t_opcode	*item;
 
 	lhead = NULL;
 	while (get_next_line(fd, &line))
 	{
-		(*n)++;		
+		(*n)++;
 		clear_comment(line);
 		if (line[0] != '\0' && line[0] != COMMENT_CHAR && !ft_isempty(line))
 		{
@@ -104,4 +116,5 @@ void	read_instr(int fd, char *line, int *n, t_opcode **ohead)
 		if (!detect_blank_line(fd))
 			show_error(7, *n, 0, "");
 	}
+	(*n)++;
 }

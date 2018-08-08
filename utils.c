@@ -11,9 +11,9 @@ t_opcode	*create_opcode(void)
 	item->opcode = -1;
 	item->lab_size = 0;
 	item->size = 0;
-	item->pos = 0;	
+	item->pos = 0;
 	item->param = NULL;
-	item->label = NULL;	
+	item->label = NULL;
 	item->next = NULL;
 	return (item);
 }
@@ -34,8 +34,8 @@ t_param		*create_param(void)
 
 	item = malloc(sizeof(t_param));
 	item->ival = 0;
-	item->type = 0;	
-	item->sval = NULL;	
+	item->type = 0;
+	item->sval = NULL;
 	item->next = NULL;
 	return (item);
 }

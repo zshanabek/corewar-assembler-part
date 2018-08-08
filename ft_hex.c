@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_hex.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/08 12:23:47 by vradchen          #+#    #+#             */
+/*   Updated: 2018/08/08 12:23:48 by vradchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 int ft_param_len(t_opcode *in, t_param *p)
@@ -87,7 +99,8 @@ void	ft_hex(t_opcode *instr, int n)
 	{
 		in->pos = len;
 		ft_hex2(in);
-		in->size = 1;
+		if (in->opcode != -1)
+			in->size++;
 		if (in->codage == 1)
 			in->size++;
 		p = in->param;

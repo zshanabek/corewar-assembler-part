@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
+/*   Updated: 2018/08/08 11:16:47 by vradchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 void			ft_bot_size(int fd2, t_opcode *ohead)
@@ -20,10 +32,10 @@ void			ft_bot_size(int fd2, t_opcode *ohead)
 	write(fd2, &len, 4);
 }
 
-char 			*ft_name(char *av)
+char			*ft_name(char *av)
 {
-	char 	*n;
-	int 	i;
+	char	*n;
+	int		i;
 
 	n = ft_strdup(av);
 	i = ft_strlen(n);
@@ -36,7 +48,7 @@ char 			*ft_name(char *av)
 		}
 		i--;
 	}
-	n = ft_arg_join(n, ft_strdup(".cor"), 3);
+	n = ft_arg_join(n, ft_strdup(".corr"), 3);
 	return (n);
 }
 
@@ -44,7 +56,7 @@ void			ft_main2(t_opcode *ohead, header_t *h, char *av, int n)
 {
 	int				fd2;
 	char			*name;
-	int 			i;
+	int				i;
 
 	ft_hex(ohead, n);
 	name = ft_name(av);
@@ -62,7 +74,7 @@ void			ft_main2(t_opcode *ohead, header_t *h, char *av, int n)
 
 int				main(int ac, char **av)
 {
-	int				n;	
+	int				n;
 	int				fd;
 	char			*line;
 	header_t		*h;
@@ -84,5 +96,7 @@ int				main(int ac, char **av)
 			" (Perhaps you forgot to end with a newline ?)\n"));
 	//iter_opcode(ohead, print_opcode);
 	ft_main2(ohead, h, av[1], n);
+//	ft_printf(" % -15s % 5d\n", "vadim", 43);
+//	ft_printf(" % -15s % 5d\n", "zhunissali", 54);
 	// system("leaks asm");
 }
