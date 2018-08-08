@@ -116,4 +116,5 @@ void	read_instr(int fd, char *line, int *n, t_opcode **ohead)
 		if (!detect_blank_line(fd))
 			show_error(7, *n, 0, "");
 	}
+	(*n)++;
 }
