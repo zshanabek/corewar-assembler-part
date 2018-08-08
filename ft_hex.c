@@ -87,7 +87,8 @@ void	ft_hex(t_opcode *instr, int n)
 	{
 		in->pos = len;
 		ft_hex2(in);
-		in->size = 1;
+		if (in->opcode != -1)
+			in->size++;
 		if (in->codage == 1)
 			in->size++;
 		p = in->param;
