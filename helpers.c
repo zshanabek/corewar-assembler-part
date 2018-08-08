@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/08 11:09:52 by vradchen          #+#    #+#             */
+/*   Updated: 2018/08/08 11:09:53 by vradchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 t_op	*search_struct(char *name)
@@ -8,7 +20,7 @@ t_op	*search_struct(char *name)
 	while (i < 16)
 	{
 		if (ft_strequ(op_tab[i].name, name))
-			return (&op_tab[i]);					
+			return (&op_tab[i]);
 		i++;
 	}
 	return (0);

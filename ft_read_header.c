@@ -44,9 +44,9 @@ static void		ft_f(int *n, int fd, int max, char *answer, char *str)
 			if (s[i++] == '\"')
 				return (ft_line_end(s, i, str));
 			ft_strcat(answer, "\n");
-			(*n)++;					
+			(*n)++;
 			if (ft_gnl(fd, &s) < 1)
-				exit(ft_printf("No second \"\n"));				
+				exit(ft_printf("No second \"\n"));
 			i = -1;
 		}
 	}
@@ -57,8 +57,8 @@ static void		ft_f(int *n, int fd, int max, char *answer, char *str)
 
 char			*ft_white(char *s)
 {
-	int 	i;
-	char 	*s2;
+	int		i;
+	char	*s2;
 
 	i = 0;
 	while (ft_isws(s[i]))
@@ -73,7 +73,7 @@ void			ft_read_header(header_t *h, int *n, int fd)
 {
 	char			*s;
 	int				x;
-	char 			*s2;
+	char			*s2;
 
 	x = 0;
 	s = NULL;

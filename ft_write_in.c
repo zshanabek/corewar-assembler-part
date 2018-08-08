@@ -16,7 +16,7 @@ void			ft_print_l(t_opcode *instr, t_opcode *in, t_param *p, int fd2)
 {
 	t_opcode	*i;
 	t_label		*l;
-	int 		x;
+	int			x;
 
 	i = instr;
 	while (i)
@@ -39,7 +39,7 @@ void			ft_print_l(t_opcode *instr, t_opcode *in, t_param *p, int fd2)
 void			ft_param(t_opcode *in, t_opcode *instruct, int fd2)
 {
 	t_param		*p;
-	int 		x;
+	int			x;
 
 	p = in->param;
 	while (p)
@@ -79,10 +79,10 @@ char			*ft_write_in2(t_opcode *in)
 	return (cod);
 }
 
-long				ft_bin_to(char *bin)
+long			ft_bin_to(char *bin)
 {
 	int		i;
-	long		x;
+	long	x;
 	int		power;
 
 	power = 1;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   params.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/08 11:12:00 by vradchen          #+#    #+#             */
+/*   Updated: 2018/08/08 11:12:00 by vradchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 void	is_valid_param(t_op *elem, t_param *cur, char *name)
@@ -18,7 +30,7 @@ void	is_valid_param(t_op *elem, t_param *cur, char *name)
 			j++;
 		}
 		if (k == 0)
-			show_error(4, i, cur->type - 1, name);						
+			show_error(4, i, cur->type - 1, name);
 		k = 0;
 		i++;
 		cur = cur->next;
@@ -48,9 +60,9 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 	{
 		str = ft_strresub(str, 1, ft_strlen(str) - 1);
 		if (str[0] == LABEL_CHAR)
-            type = 2;
+			type = 2;
 		else if (ft_isdigit(str[0]) || (str[0] == '-' && ft_isdigit(str[1])))
-        	type = 1;
+			type = 1;
 		else
 			return (-1);
 	}
@@ -80,9 +92,9 @@ char	**get_params_array(int i, int n, char *line)
 
 void	get_params(t_opcode *opcode, char **arr, int n)
 {
-	int 		e;	
+	int			e;
 	int			k;
-	char 		*temp;
+	char		*temp;
 	t_param		*item;
 
 	e = 1;
@@ -90,7 +102,7 @@ void	get_params(t_opcode *opcode, char **arr, int n)
 	while (arr[k])
 	{
 		temp = ft_strtrim(arr[k]);
-		item = create_param();	
+		item = create_param();
 		if (temp[0] == 'r')
 			e = analyze_param(item, temp, REG_CODE, 1);
 		else if (temp[0] == DIRECT_CHAR)

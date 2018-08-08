@@ -1,3 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
+/*   Updated: 2018/08/08 11:16:47 by vradchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/08 11:16:43 by vradchen          #+#    #+#             */
+/*   Updated: 2018/08/08 11:16:43 by vradchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/08 11:16:37 by vradchen          #+#    #+#             */
+/*   Updated: 2018/08/08 11:16:38 by vradchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 void			ft_bot_size(int fd2, t_opcode *ohead)
@@ -20,10 +56,10 @@ void			ft_bot_size(int fd2, t_opcode *ohead)
 	write(fd2, &len, 4);
 }
 
-char 			*ft_name(char *av)
+char			*ft_name(char *av)
 {
-	char 	*n;
-	int 	i;
+	char	*n;
+	int		i;
 
 	n = ft_strdup(av);
 	i = ft_strlen(n);
@@ -44,7 +80,7 @@ void			ft_main2(t_opcode *ohead, header_t *h, char *av, int n)
 {
 	int				fd2;
 	char			*name;
-	int 			i;
+	int				i;
 
 	ft_hex(ohead, n);
 	name = ft_name(av);
@@ -62,7 +98,7 @@ void			ft_main2(t_opcode *ohead, header_t *h, char *av, int n)
 
 int				main(int ac, char **av)
 {
-	int				n;	
+	int				n;
 	int				fd;
 	char			*line;
 	header_t		*h;
