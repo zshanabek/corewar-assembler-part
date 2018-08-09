@@ -72,6 +72,19 @@ void	print_opcode(t_opcode *opcode)
 	ft_printf("////////////////\n");
 }
 
+void 	iter_opcode2(t_opcode *ohead, void (*f)(t_opcode *elem, t_opcode *h))
+{
+	t_opcode *cur;
+
+	if (!ohead)
+		return;
+	cur = ohead;
+	while (cur != NULL)
+	{
+		f(cur, ohead);
+		cur = cur->next;
+	}
+}
 void 	iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem))
 {
 	t_opcode *cur;
