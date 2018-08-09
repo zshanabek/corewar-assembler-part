@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "asm.h"
-#include <stdio.h>
 
 void			ft_bot_size(int fd2, t_opcode *ohead)
 {
@@ -91,7 +90,6 @@ int 			ft_check_ac(int ac, char **av, char **name)
 		exit(ft_printf("Usage: ./asm %s\n", av[1]));
 	*name = av[1];
 	return (0);
-	//return (av[1]);
 }
 
 int 			ft_ohead_size(t_opcode *ohead)
@@ -110,21 +108,64 @@ int 			ft_ohead_size(t_opcode *ohead)
 void			ft_pr_param1(t_param *p)
 {
 	if (p->type == 1)
-		ft_printf("r%-18i",p->ival);
+		ft_printf("r%-17i",p->ival);
 	else if (p->type == 2)
 	{
 		if (p->sval == NULL)
-			ft_printf("%%%-18i", p->ival);
+			ft_printf("%%%-17i", p->ival);
 		else
-			ft_printf("%%:%-17s", p->sval);
+			ft_printf("%%:%-16s", p->sval);
 	}
 	else if (p->type == 3)
 	{
 		if (p->sval == NULL)
-			ft_printf("%-19i",p->ival);
+			ft_printf("%-18i",p->ival);
 		else
-			ft_printf(":%-18s",p->sval);
+			ft_printf(":%-17s",p->sval);
 	}
+}
+
+char 			*ft_console(int v)//t_param *p)
+{
+	char 	*ret;
+	int 	value;
+	int 	i;
+
+	value = v;//-p->ival;
+	ret = ft_itoa_base(value, 2);
+//	if (p->size == 4)
+//	{
+//		while (ft_strlen(ret) < 32)
+//			ret = ft_arg_join(ft_strdup("0"), ret, 3);
+//	}
+//	else
+		while (ft_strlen(ret) < 16)
+			ret = ft_arg_join(ft_strdup("0"), ret, 3);
+	i = ft_strlen(ret) - 1;
+	while (i > -1)
+	{
+		if (ret[i] == '0')
+			ret[i] = '1';
+		else
+			ret[i] = '0';
+		i--;
+	}
+	i = ft_strlen(ret) - 1;
+	while (i > -1)
+	{
+		if (ret[i] == '0')
+		{
+			ret[i] = '1';
+			break ;
+		}
+		if (i == 0)
+		{
+			ret = ft_arg_join("1", ret, 3);
+			break ;
+		}
+		i--;
+	}
+	return (ret);
 }
 
 int			ft_print_l2(t_opcode *instr, t_opcode *in, t_param *p)
@@ -139,7 +180,11 @@ int			ft_print_l2(t_opcode *instr, t_opcode *in, t_param *p)
 		while (l)
 		{
 			if (ft_strequ(l->name, p->sval))
+			{
+				if (i->pos - in->pos > 0)
+					ft_console(i->pos - in->pos);
 				return (i->pos - in->pos);
+			}
 			l = l->next;
 		}
 		i = i->next;
@@ -152,15 +197,59 @@ void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead)
 	char 	*hex;
 	char 	*two;
 	int 	i;
-
+	int 	value;
+	char 	*ret;
 	two = ft_strnew(2);
 	i = 0;
 	if (p->type == 1)
-		ft_printf2("%-19i",p->ival);
-	else //if (p->type == 2)
+		ft_printf2("%-18i",p->ival);
+	else
 	{
 		if (p->sval == NULL)
-			hex = ft_itoa_base(p->ival, 16);
+		{
+			if (p->ival < 0)
+			{
+//				value = -p->ival;
+//				ret = ft_itoa_base(value, 2);
+//				if (p->size == 4)
+//				{
+//					while (ft_strlen(ret) < 32)
+//						ret = ft_arg_join(ft_strdup("0"), ret, 3);
+//				}
+//				else
+//					while (ft_strlen(ret) < 16)
+//						ret = ft_arg_join(ft_strdup("0"), ret, 3);
+//				i = ft_strlen(ret) - 1;
+//				while (i > -1)
+//				{
+//					if (ret[i] == '0')
+//						ret[i] = '1';
+//					else
+//						ret[i] = '0';
+//					i--;
+//				}
+//				i = ft_strlen(ret) - 1;
+//				while (i > -1)
+//				{
+//					if (ret[i] == '0')
+//					{
+//						ret[i] = '1';
+//						break ;
+//					}
+//					if (i == 0)
+//					{
+//						ret = ft_arg_join("1", ret, 3);
+//						break ;
+//					}
+//					i--;
+//				}
+				ret = ft_console(p->ival);
+				hex = ft_itoa_base(ft_atoi_base(ret, 2), 16);
+				ft_strdel(&ret);
+			}
+			else
+				hex = ft_itoa_base(p->ival, 16);
+		}
 		else
 			hex = ft_itoa_base(ft_print_l2(ohead, in, p), 16);
 		while (ft_strlen(hex) < 8)
@@ -174,7 +263,7 @@ void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead)
 				ft_printf2("%-4i", ft_atoi_base(two, 16));
 				i += 2;
 			}
-			ft_printf2("%3s", " ");
+			ft_printf2("%2s", " ");
 		}
 		else if (p->size == 2)
 		{
@@ -186,19 +275,7 @@ void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead)
 				ft_printf2("%-4i", ft_atoi_base(two, 16));
 				i += 2;
 			}
-			ft_printf2("%11s", " ");
-		}
-		else if (p->size == 1)
-		{
-			i = 6;
-			while (i != 8)
-			{
-				two[0] = hex[i];
-				two[1] = hex[i + 1];
-				ft_printf2("%-4i", ft_atoi_base(two, 16));
-				i += 2;
-			}
-			ft_printf2("%15s", " ");
+			ft_printf2("%10s", " ");
 		}
 	}
 //	else if (p->type == 3)
@@ -217,13 +294,13 @@ void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead)
 void			ft_pr_param3(t_param *p, t_opcode *in, t_opcode *ohead)
 {
 	if (p->type == 1)
-		ft_printf2("%-19i",p->ival);
+		ft_printf2("%-18i",p->ival);
 	else //if (p->type == 2)
 	{
 		if (p->sval == NULL)
-			ft_printf2("%-19i",p->ival);
+			ft_printf2("%-18i",p->ival);
 		else
-			ft_printf2("%-19i", ft_print_l2(ohead, in, p));
+			ft_printf2("%-18i", ft_print_l2(ohead, in, p));
 	}
 //	else if (p->type == 3)
 //	{
@@ -244,10 +321,11 @@ void			ft_print_flag(t_opcode *in, t_opcode *ohead)
 	l = in->label;
 	while (l)
 	{
-		ft_printf("\n%-11i:%6s:", in->pos, l->name);
+		ft_printf("\n%-11i:    %s:", in->pos, l->name);
 		l = l->next;
 	}
-	ft_printf("\n%-5i(%-3i) :        %-10s", in->pos, in->size, op_tab[in->opcode - 1].name);
+	ft_printf("\n%-5i(%-3i) :        %-10s", in->pos, in->size,
+		op_tab[in->opcode - 1].name);
 	p = in->param;
 	while (p)
 	{
@@ -277,6 +355,8 @@ void			ft_print_flag(t_opcode *in, t_opcode *ohead)
 		p = p->next;
 	}
 	ft_printf2("\n");
+	if (in->next == NULL)
+		ft_printf2("\n");
 }
 
 int				main(int ac, char **av)
@@ -312,7 +392,7 @@ int				main(int ac, char **av)
 	if (flag > 0)
 	{
 		ft_printf(("Dumping annotated program on standard output\nProgram size "
-		": %i bytes\nName : \"%s\"\nComment : \"%s\""),ft_ohead_size(ohead),
+		": %i bytes\nName : \"%s\"\nComment : \"%s\"\n"),ft_ohead_size(ohead),
 		h->p, h->c);
 		iter_opcode2(ohead, ft_print_flag);
 	}
