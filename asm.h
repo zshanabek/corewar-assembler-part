@@ -60,14 +60,15 @@ int					is_valid_label(char *str);
 int					count_commas(char *str);
 int					detect_blank_line(int fd1);
 
-void				ft_read_header(header_t *h, int *n, int fd);
-int					ft_gnl(int fd, char **s);
-void				ft_hex(t_opcode *instr, int n);
-char				*ft_arg_join(char *s1, char *s2, int arg);
-unsigned int		ft_swp_bits(int n, int size);
-void				ft_write_in(t_opcode *instruct, int fd2);
-char				*ft_write_in2(t_opcode *in);
-void				ft_param(t_opcode *in, t_opcode *instruct, int fd2);
-void				ft_print_l(t_opcode *ins, t_opcode *in, t_param *p, int fd);
-void				ft_count_len(long value, t_param *param, int fd2);
+void			ft_read_header(header_t *h, int *n, int fd);
+int				ft_gnl(int fd, char **s);
+void			ft_h(t_opcode *instr, int n);
+char 			*ft_arg_join(char *s1, char *s2, int arg);
+unsigned int	ft_swp_bits(int n, int size);
+void			ft_write_in(t_opcode *instruct, int fd2);
+char			*ft_write_in2(t_opcode *in);
+void			ft_param(t_opcode *in, t_opcode *instruct, int fd2);
+void			ft_print_l(t_opcode *instr, t_opcode *in, t_param *p, int fd2);
+void			ft_count_len(long value, t_param *param, int fd2);
+long			ft_bin_to(char *bin);
 #endif
