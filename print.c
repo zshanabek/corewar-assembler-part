@@ -101,7 +101,8 @@ void	show_error(int type, int n, int a, char *str)
 	else if (type == 4)
 	{
 		mrr = get_array();
-		ft_printf("Invalid parameter %d type %s for instruction %s\n", n, mrr[a], str);		
+		ft_printf("Invalid parameter %d type %s for instruction %s\n", n, mrr[a], str);
+		ft_del2darr(mrr);	
 	}
 	else if (type == 5)
 		ft_printf("Invalid parameter count for instruction \"%s\"\n", str);
