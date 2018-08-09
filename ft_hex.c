@@ -85,7 +85,7 @@ void	ft_hex2(t_opcode *in)
 	}
 }
 
-void	ft_hex(t_opcode *instr, int n)
+void	ft_h(t_opcode *instr, int n)
 {
 	int			len;
 	t_opcode	*in;
