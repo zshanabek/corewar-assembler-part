@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:28:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/10 18:33:21 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/10 18:53:58 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			ft_read_header(header_t *h, int *n, int fd)
 		s2 = ft_white(s);
 		if (s2 == NULL || ft_strequ(s2, ""))
 			continue ;
-		else if (!(*h->p) && ft_strncmp(s2, NAME_CMD_STRING, 4) == 0 && ++x > 0)
+		else if (!(*h->p) && ft_strncmp(s2, NAME_CMD_STRING, 5) == 0 && ++x > 0)
 			*n += ft_f(fd, PROG_NAME_LENGTH, h->p, ft_strtrim(s2 + 5));
 		else if (!(*h->c) && ft_strncmp(s2, COM_CMD_STRING, 8) == 0 && ++x > 0)
 			*n += ft_f(fd, COMMENT_LENGTH, h->c, ft_strtrim(s2 + 8));
