@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:28:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/07 17:23:32 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/10 18:33:21 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void			ft_read_header(header_t *h, int *n, int fd)
 	x = 0;
 	s = NULL;
 	h->magic = COREWAR_EXEC_MAGIC;
-	while (ft_gnl(fd, &s) > -1)
+	while (ft_gnl(fd, &s) > 0)
 	{
 		(*n)++;
 		s2 = ft_white(s);
