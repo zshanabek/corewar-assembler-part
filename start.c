@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/09 12:06:46 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/11 13:18:14 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void			ft_main2(t_opcode *ohead, header_t *h, char *av, int n)
 
 int 			ft_check_ac(int ac, char **av, char **name)
 {
+	char *temp;
+
 	if (ac == 3)
 	{
 		if (!(ft_strequ(av[1], "-a") || ft_strequ(av[2], "-a")))
@@ -89,6 +91,9 @@ int 			ft_check_ac(int ac, char **av, char **name)
 	else if (ac != 2)
 		exit(ft_printf("Usage: ./asm %s\n", av[1]));
 	*name = av[1];
+	temp = *name;
+	if (temp[ft_strlen(temp) - 1] != 's')
+		exit(ft_printf("Wrong file without .s extension\n"));
 	return (0);
 	//return (av[1]);
 }
