@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   params.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/11 21:40:33 by zshanabe          #+#    #+#             */
+/*   Updated: 2018/08/11 21:40:34 by zshanabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 char	**get_params_array(int i, int n, char *line)
@@ -15,31 +27,6 @@ char	**get_params_array(int i, int n, char *line)
 		show_error(1, n, 0, "");
 	ft_strdel(&str);
 	return (arr);
-}
-
-void	is_valid_param(t_op *elem, t_param *cur, char *name)
-{
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	k = 0;
-	while (cur != NULL)
-	{
-		j = 0;
-		while (j < 3)
-		{
-			if (elem->param[i][j] == cur->type)
-				k = 1;
-			j++;
-		}
-		if (k == 0)
-			show_error(4, i, cur->type - 1, name);
-		k = 0;
-		i++;
-		cur = cur->next;
-	}
 }
 
 int		analyze_type(t_param *item, char *temp, int type, int code)
@@ -78,32 +65,38 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 	return (1);
 }
 
+void	make_choice(t_opcode *opcode, t_param *item, char *temp, int n)
+{
+	int e;
+
+	e = 1;
+	if (temp[0] == 'r')
+		e = analyze_param(item, temp, REG_CODE, 1);
+	else if (temp[0] == DIRECT_CHAR)
+		e = analyze_param(item, temp, DIR_CODE, 0);
+	else if (ft_isdigit(temp[0]) || (temp[0] == '-' && ft_isdigit(temp[1])))
+		e = analyze_param(item, temp, IND_CODE, 1);
+	else if (temp[0] == LABEL_CHAR)
+		e = analyze_param(item, temp, IND_CODE, 2);
+	ft_lstaddendpar(&opcode->param, item);
+	if (e == 0)
+		show_error(0, n, 0, temp);
+	if (e == -1)
+		show_error(6, n, 0, temp);
+}
+
 void	get_params(t_opcode *opcode, char **arr, int n)
 {
-	int			e;
 	int			k;
 	char		*temp;
 	t_param		*item;
 
-	e = 1;
 	k = 0;
 	while (arr[k])
 	{
 		temp = ft_strtrim(arr[k]);
 		item = create_param();
-		if (temp[0] == 'r')
-			e = analyze_param(item, temp, REG_CODE, 1);
-		else if (temp[0] == DIRECT_CHAR)
-			e = analyze_param(item, temp, DIR_CODE, 0);
-		else if (ft_isdigit(temp[0]) || (temp[0] == '-' && ft_isdigit(temp[1])))
-			e = analyze_param(item, temp, IND_CODE, 1);
-		else if (temp[0] == LABEL_CHAR)
-			e = analyze_param(item, temp, IND_CODE, 2);
-		ft_lstaddendpar(&opcode->param, item);
-		if (e == 0)
-			show_error(0, n, 0, temp);
-		if (e == -1)
-			show_error(6, n, 0, temp);
+		make_choice(opcode, item, temp, n);
 		k++;
 	}
 }

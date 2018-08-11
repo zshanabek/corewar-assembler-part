@@ -53,6 +53,7 @@ void				print_param(t_param *param);
 void				read_instr(int fd, char *line, int *n, t_opcode **ohead);
 void				show_error(int type, int n, int a, char *str);
 void				clear_comment(char *line);
+void				get_i_h(int *i, int *h, char *line);
 void				get_params(t_opcode *opcode, char **arr, int i);
 void				is_valid_param(t_op *elem, t_param *cur, char *name);
 char				**get_params_array(int i, int n, char *line);

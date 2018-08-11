@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/11 21:41:18 by zshanabe          #+#    #+#             */
+/*   Updated: 2018/08/11 21:41:47 by zshanabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 t_opcode	*create_opcode(int n)
@@ -5,7 +17,7 @@ t_opcode	*create_opcode(int n)
 	t_opcode *item;
 
 	item = malloc(sizeof(t_opcode));
-	item->n = n;	
+	item->n = n;
 	item->name = NULL;
 	item->codage = -1;
 	item->nb_param = 0;
@@ -41,7 +53,7 @@ t_param		*create_param(void)
 	return (item);
 }
 
-void	ft_lstaddendopcode(t_opcode **head, t_opcode *item)
+void		ft_lstaddendopcode(t_opcode **head, t_opcode *item)
 {
 	t_opcode	*current;
 
@@ -59,21 +71,6 @@ void	ft_lstaddendopcode(t_opcode **head, t_opcode *item)
 void		ft_lstaddendlabel(t_label **head, t_label *item)
 {
 	t_label	*current;
-
-	if (*head == NULL)
-	{
-		*head = item;
-		return ;
-	}
-	current = *head;
-	while (current->next != NULL)
-		current = current->next;
-	current->next = item;
-}
-
-void	ft_lstaddendpar(t_param **head, t_param *item)
-{
-	t_param	*current;
 
 	if (*head == NULL)
 	{

@@ -6,19 +6,18 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:12:22 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/11 20:11:41 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/11 20:52:49 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	get_opcode(t_opcode *opcode, int h, int i, int n, char *line)
+void	get_opcode(t_opcode *opcode, int i, int n, char *line)
 {
 	char	**arr;
 	t_op	*elem;
 	t_param	*cur;
 
-	opcode->name = ft_strsub(line, h, i - h);
 	arr = get_params_array(i, n, line);
 	get_params(opcode, arr, n);
 	if (!search_struct(opcode->name))
@@ -32,15 +31,6 @@ void	get_opcode(t_opcode *opcode, int h, int i, int n, char *line)
 	if (ft_2darrlen(arr) != opcode->nb_param)
 		show_error(5, 0, 0, opcode->name);
 	ft_del2darr(arr);
-}
-
-void	get_i_h(int *i, int *h, char *line)
-{
-	while (line[*i] && ft_isws(line[*i]))
-		(*i)++;
-	(*h) = (*i);
-	while (line[*i] && !ft_isws(line[*i]) && line[*i] != LABEL_CHAR)
-		(*i)++;
 }
 
 void	parse_instr(t_opcode **ohead, t_label **lhead, int n, char *line)
@@ -59,10 +49,14 @@ void	parse_instr(t_opcode **ohead, t_label **lhead, int n, char *line)
 	{
 		i++;
 		get_i_h(&i, &h, line);
-		get_opcode(elem, h, i, n, line);
+		elem->name = ft_strsub(line, h, i - h);
+		get_opcode(elem, i, n, line);
 	}
 	else
-		get_opcode(elem, h, i, n, line);
+	{
+		elem->name = ft_strsub(line, h, i - h);
+		get_opcode(elem, i, n, line);
+	}
 }
 
 int		get_label(t_label **lhead, int n, char *line)

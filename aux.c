@@ -1,25 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   aux.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/11 20:27:58 by zshanabe          #+#    #+#             */
+/*   Updated: 2018/08/11 20:28:00 by zshanabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-int		count_commas(char *str)
+int				count_commas(char *str)
 {
 	int		i;
-	int		count;	
+	int		count;
 
 	i = 0;
 	count = 0;
 	while (str[i])
 	{
 		if (str[i] == SEPARATOR_CHAR)
-			count++;			
+			count++;
 		i++;
 	}
 	return (count);
 }
 
-int		detect_blank_line(int fd)
+int				detect_blank_line(int fd)
 {
-	int		offset;   	
-	char	c;      
+	int		offset;
+	char	c;
 	char	*line;
 
 	offset = lseek(fd, 0, SEEK_END);
@@ -33,7 +45,7 @@ int		detect_blank_line(int fd)
 		lseek(fd, -2, SEEK_CUR);
 		offset--;
 	}
-	lseek(fd, 2, SEEK_CUR);   
+	lseek(fd, 2, SEEK_CUR);
 	get_next_line(fd, &line);
 	clear_comment(line);
 	if (ft_isempty(line))
@@ -41,7 +53,7 @@ int		detect_blank_line(int fd)
 	return (0);
 }
 
-int	ft_gnl(int fd, char **s)
+int				ft_gnl(int fd, char **s)
 {
 	int i;
 
