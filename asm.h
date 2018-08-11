@@ -24,6 +24,7 @@ struct				s_label
 
 struct				s_opcode
 {
+	int 			n;
 	int				codage;
 	int				nb_param;
 	int				lab_size;
@@ -37,7 +38,7 @@ struct				s_opcode
 };
 
 t_label				*create_label(void);
-t_opcode			*create_opcode(void);
+t_opcode			*create_opcode(int n);
 t_param				*create_param(void);
 t_op				*search_struct();
 void				ft_lstaddendlabel(t_label **head, t_label *item);

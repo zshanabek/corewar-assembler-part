@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/11 18:23:16 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/11 20:14:32 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,10 +387,10 @@ int				main(int ac, char **av)
 	h = malloc(sizeof(header_t));
 	ft_read_header(h, &n, fd);
 	read_instr(fd, line, &n, &ohead);
+	// iter_opcode(ohead, print_opcode);
 	if (!detect_blank_line(fd))
 		exit(ft_printf("Syntax error - unexpected end of input"
 			" (Perhaps you forgot to end with a newline ?)\n"));
-	//	iter_opcode(ohead, print_opcode);
 	ft_h(ohead, n);
 	name = ft_name(name);
 	fd2 = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);

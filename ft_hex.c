@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 12:23:47 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/08 12:23:48 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/11 20:21:23 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,26 @@ int ft_param_len(t_opcode *in, t_param *p)
 		return (2);
 }
 
-void	ft_check2(char *name, t_opcode *instr)
+int		ft_check2(char *name, t_opcode *instr)
 {
 	t_opcode	*in;
 	t_label		*l;
 
 	in = instr;
 	if (!name)
-		return ;
+		return (1);
 	while (in)
 	{
 		l = in->label;
 		while (l)
 		{
 			if (ft_strequ(l->name, name))
-				return ;
+				return (1);
 			l = l->next;
 		}
 		in = in->next;
 	}
-	exit(ft_printf("Bad label\n"));
+	return (0);
 }
 
 void	ft_check_label(t_opcode *instr)
@@ -57,7 +57,8 @@ void	ft_check_label(t_opcode *instr)
 		p = in->param;
 		while (p)
 		{
-			ft_check2(p->sval, instr);
+			if (!ft_check2(p->sval, instr))
+				show_error(8, in->n, 0, p->sval);								
 			p = p->next;
 		}
 		in = in->next;

@@ -47,6 +47,7 @@ void	print_opcode(t_opcode *opcode)
 	ft_printf("name: {magenta}%s{eoc}\n", opcode->name);
 	// ft_printf("cod:  %d\n", opcode->codage);
 	// ft_printf("npar:  %d\n", opcode->nb_param);
+	// ft_printf("n:  %d\n", opcode->n);
 	if (opcode->label != NULL)
 	{
 		ft_printf("labels:\n");
@@ -123,5 +124,7 @@ void	show_error(int type, int n, int a, char *str)
 		ft_printf("Lexical error at [%d]\n", n);
 	else if (type == 7)
 		ft_printf("Syntax error at token [%03d] END \"(null)\"\n", n);
+	else if (type == 8)
+		ft_printf("No such label %s while attempting to dereference token [%03d] DIRECT_LABEL \"%%:%s\"\n", str, n, str);
 	exit(1);
 }

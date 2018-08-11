@@ -1,10 +1,11 @@
 #include "asm.h"
 
-t_opcode	*create_opcode(void)
+t_opcode	*create_opcode(int n)
 {
 	t_opcode *item;
 
 	item = malloc(sizeof(t_opcode));
+	item->n = n;	
 	item->name = NULL;
 	item->codage = -1;
 	item->nb_param = 0;

@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:12:22 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/08 17:28:15 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/11 20:11:41 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	parse_instr(t_opcode **ohead, t_label **lhead, int n, char *line)
 	t_opcode	*elem;
 
 	i = 0;
-	elem = create_opcode();
+	elem = create_opcode(n);
 	elem->label = *lhead;
 	*lhead = NULL;
 	ft_lstaddendopcode(ohead, elem);
@@ -110,7 +110,7 @@ void	read_instr(int fd, char *line, int *n, t_opcode **ohead)
 	}
 	if (lhead != NULL)
 	{
-		item = create_opcode();
+		item = create_opcode(*n);
 		item->label = lhead;
 		ft_lstaddendopcode(ohead, item);
 		if (!detect_blank_line(fd))
