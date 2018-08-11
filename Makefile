@@ -1,6 +1,6 @@
 NAME  =	asm
 SRC   =	start.c params.c aux.c ft_arg_join.c ft_hex.c \
-		ft_write_in.c helpers.c parse.c print.c ft_atoi_base.c      \
+		ft_write_in.c helpers.c parse.c print.c       \
 		utils.c ft_read_header.c
 OBJ   = $(SRC:.c=.o)
 LIB   = libft/libft.a

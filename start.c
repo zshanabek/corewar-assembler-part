@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/11 13:18:14 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/11 18:23:16 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,8 +202,8 @@ void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead)
 	char 	*hex;
 	char 	*two;
 	int 	i;
-	int 	value;
 	char 	*ret;
+
 	two = ft_strnew(2);
 	i = 0;
 	if (p->type == 1)
