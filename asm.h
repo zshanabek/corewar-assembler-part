@@ -73,5 +73,4 @@ void			ft_count_len(long value, t_param *param, int fd2);
 long			ft_bin_to(char *bin);
 void 			iter_opcode2(t_opcode *ohead, void (*f)(t_opcode *elem,
 														t_opcode *h));
-int				ft_atoi_base(const char *str, int str_base);
 #endif
