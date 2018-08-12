@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:42:20 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/08/11 21:42:20 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/12 21:05:47 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	show_error(int type, int n, int a, char *str)
 	else if (type == 2)
 		ft_printf("Syntax error at token [%03d] ENDLINE\n", n);
 	else if (type == 3)
-		ft_printf("Invalid instruction at token [%03d] \
-		INSTRUCTION \"%s\"\n", n, str);
+		ft_printf("Invalid instruction at token [%03d] "
+		"INSTRUCTION \"%s\"\n", n, str);
 	else if (type == 4)
 		get_array(n, a, str);
 	else if (type == 5)
@@ -112,7 +112,7 @@ void	show_error(int type, int n, int a, char *str)
 	else if (type == 7)
 		ft_printf("Syntax error at token [%03d] END \"(null)\"\n", n);
 	else if (type == 8)
-		ft_printf("No such label %s while attempting to dereference \
-		token [%03d] DIRECT_LABEL \"%%:%s\"\n", str, n, str);
+		ft_printf("No such label %s while attempting to dereference "
+		"token [%03d] DIRECT_LABEL \"%%:%s\"\n", str, n, str);
 	exit(1);
 }
