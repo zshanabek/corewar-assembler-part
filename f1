@@ -1,14 +1,6 @@
 Dumping annotated program on standard output
-Program size : 8 bytes
+Program size : 0 bytes
 Name : "zork"
 Comment : "I'M ALIIIIVE"
 
 0          :    live:
-0    (5  ) :        live      %1                
-                    1         0   0   0   1     
-                    1         1                 
-
-5    (3  ) :        zjmp      %:live            
-                    9         255 251           
-                    9         -5                
-

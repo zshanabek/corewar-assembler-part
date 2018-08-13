@@ -49,7 +49,7 @@ void				iter_param(t_param *head, void (*f)(t_param *elem));
 void				print_label(t_label *label);
 void				print_opcode(t_opcode *opcode);
 void				print_param(t_param *param);
-void				read_instr(int fd, char *line, int *n, t_opcode **ohead);
+void				read_instr(int fd, int *n, t_opcode **ohead);
 void				show_error(int type, int n, int a, char *str);
 void				clear_comment(char *line);
 void				get_params(t_opcode *opcode, char **arr, int i);
