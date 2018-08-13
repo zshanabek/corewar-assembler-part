@@ -98,6 +98,7 @@ void			ft_read_header(t_header *h, int *n, int fd)
 			*n += ft_f(fd, COMMENT_LENGTH, h->c, ft_strtrim(s2 + 8));
 		else
 			exit(ft_printf("No name or header.\n"));
+		ft_strdel(&s2);
 		if (x == 2)
 			return (ft_strdel(&s));
 	}

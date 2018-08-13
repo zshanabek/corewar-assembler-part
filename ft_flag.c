@@ -48,6 +48,8 @@ char			*ft_console(int v)
 			ret[i] = '1';
 			break ;
 		}
+		else
+			ret[i] = '0';
 		if (i == 0)
 		{
 			ret = ft_arg_join("1", ret, 3);

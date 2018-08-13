@@ -71,4 +71,5 @@ int				main(int ac, char **av)
 	else
 		ft_printf("Writing output program to %s\n", name);
 	ft_main2(ohead, h, &name);
+	system("leaks asm");
 }
