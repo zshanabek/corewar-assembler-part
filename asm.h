@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 15:56:19 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/08/13 16:13:32 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/13 17:43:49 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ void				ft_lstaddendpar(t_param **head, t_param *item);
 void				iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem));
 void				iter_label(t_label *lhead, void (*f)(t_label *elem));
 void				iter_param(t_param *head, void (*f)(t_param *elem));
-void				print_label(t_label *label);
-void				print_opcode(t_opcode *opcode);
-void				print_param(t_param *param);
 void				read_instr(int fd, int *n, t_opcode **ohead);
 void				show_error(int type, int n, int a, char *str);
 void				clear_comment(char *line);
