@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_flag.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 11:47:01 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/13 11:47:02 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/13 16:45:07 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void			ft_print_flag2(t_opcode *in, t_opcode *ohead)
 	t_param		*p;
 
 	ft_printf2("\n%-5i(%-3i) :        %-10s", in->pos, in->size,
-		op_tab[in->opcode - 1].name);
+		g_op[in->opcode - 1].name);
 	p = in->param;
 	while (p)
 	{

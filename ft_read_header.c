@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:28:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/10 18:53:58 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/13 16:13:34 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char			*ft_white(char *s)
 	return (s2);
 }
 
-void			ft_read_header(header_t *h, int *n, int fd)
+void			ft_read_header(t_header *h, int *n, int fd)
 {
 	char			*s;
 	int				x;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:09:52 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/08 11:09:53 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/13 16:45:07 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_op	*search_struct(char *name)
 	i = 0;
 	while (i < 16)
 	{
-		if (ft_strequ(op_tab[i].name, name))
-			return (&op_tab[i]);
+		if (ft_strequ(g_op[i].name, name))
+			return (&g_op[i]);
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 12:23:47 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/11 20:21:23 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/13 16:45:54 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_check_label(t_opcode *instr)
 		while (p)
 		{
 			if (!ft_check2(p->sval, instr))
-				show_error(8, in->n, 0, p->sval);								
+				show_error(8, in->n, 0, p->sval);
 			p = p->next;
 		}
 		in = in->next;
@@ -70,13 +70,13 @@ void	ft_hex2(t_opcode *in)
 	int		i;
 
 	i = 0;
-	while (i < 17)
+	while (i < 16)
 	{
-		if (ft_strequ(in->name, op_tab[i].name))
+		if (ft_strequ(in->name, g_op[i].name))
 		{
-			in->opcode = op_tab[i].opcode;
-			in->codage = op_tab[i].coding_byte;
-			if (op_tab[i].two_bytes == 1)
+			in->opcode = g_op[i].opcode;
+			in->codage = g_op[i].coding_byte;
+			if (g_op[i].two_bytes == 1)
 				in->lab_size = 2;
 			else
 				in->lab_size = 4;
