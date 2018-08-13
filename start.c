@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/08 11:16:47 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/11 18:23:16 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void			ft_main2(t_opcode *ohead, header_t *h, char *av, int n)
 
 int 			ft_check_ac(int ac, char **av, char **name)
 {
+	char *temp;
+
 	if (ac == 3)
 	{
 		if (!(ft_strequ(av[1], "-a") || ft_strequ(av[2], "-a")))
@@ -89,6 +91,9 @@ int 			ft_check_ac(int ac, char **av, char **name)
 	else if (ac != 2)
 		exit(ft_printf("Usage: ./asm %s\n", av[1]));
 	*name = av[1];
+	temp = *name;
+	if (temp[ft_strlen(temp) - 1] != 's')
+		exit(ft_printf("Wrong file without .s extension\n"));
 	return (0);
 }
 
@@ -197,8 +202,8 @@ void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead)
 	char 	*hex;
 	char 	*two;
 	int 	i;
-	int 	value;
 	char 	*ret;
+
 	two = ft_strnew(2);
 	i = 0;
 	if (p->type == 1)

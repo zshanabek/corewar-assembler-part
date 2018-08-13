@@ -1,16 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/08 11:12:00 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/08 11:12:00 by vradchen         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
+
+char	**get_params_array(int i, int n, char *line)
+{
+	char	*str;
+	char	**arr;
+	int		commas;
+
+	str = ft_strsub(line, i, ft_strlen(line) - i);
+	commas = count_commas(str);
+	arr = ft_strsplit(str, SEPARATOR_CHAR);
+	if (ft_2darrlen(arr) == 0 || ft_isempty(str))
+		show_error(2, n, 0, "");
+	if (ft_2darrlen(arr) != commas + 1)
+		show_error(1, n, 0, "");
+	ft_strdel(&str);
+	return (arr);
+}
 
 void	is_valid_param(t_op *elem, t_param *cur, char *name)
 {
@@ -71,23 +76,6 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 	if (!analyze_type(item, str, type, code))
 		return (0);
 	return (1);
-}
-
-char	**get_params_array(int i, int n, char *line)
-{
-	char	*str;
-	char	**arr;
-	int		commas;
-
-	str = ft_strsub(line, i, ft_strlen(line) - i);
-	commas = count_commas(str);
-	arr = ft_strsplit(str, SEPARATOR_CHAR);
-	if (ft_2darrlen(arr) == 0 || ft_isempty(str))
-		show_error(2, n, 0, "");
-	if (ft_2darrlen(arr) != commas + 1)
-		show_error(1, n, 0, "");
-	ft_strdel(&str);
-	return (arr);
 }
 
 void	get_params(t_opcode *opcode, char **arr, int n)
