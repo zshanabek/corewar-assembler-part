@@ -74,4 +74,15 @@ long			ft_bin_to(char *bin);
 void 			iter_opcode2(t_opcode *ohead, void (*f)(t_opcode *elem,
 														t_opcode *h));
 int				ft_atoi_base(const char *str, int str_base);
+int 			ft_check_ac(int ac, char **av, char **name);
+void			ft_bot_size(int fd2, t_opcode *ohead);
+int 			ft_ohead_size(t_opcode *ohead);
+void			ft_print_flag(t_opcode *in, t_opcode *ohead);
+char			*ft_name(char *av);
+void			ft_pr_param1(t_param *p);
+void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead);
+void			ft_pr_param3(t_param *p, t_opcode *in, t_opcode *ohead);
+char 			*ft_console(int v);
+int				ft_print_l2(t_opcode *instr, t_opcode *in, t_param *p);
+
 #endif

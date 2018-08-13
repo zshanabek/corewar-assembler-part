@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/13 12:46:00 by vradchen          #+#    #+#             */
+/*   Updated: 2018/08/13 12:46:01 by vradchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 static int	ft_iswhitespace(char c)
@@ -9,10 +21,13 @@ static int	ft_iswhitespace(char c)
 
 int			base(int c, int base)
 {
-	char *str = "0123456789abcdef";
-	char *str2 = "0123456789abcdef";
-	int  i = 0;
+	char	*str;
+	char	*str2;
+	int		i;
 
+	i = 0;
+	str = "0123456789abcdef";
+	str2 = "0123456789abcdef";
 	while (i < base)
 	{
 		if (c == str[i] || c == str2[i])
@@ -24,10 +39,13 @@ int			base(int c, int base)
 
 int			ft_atoi_base(const char *str, int str_base)
 {
-	int		nb = 0;
-	int		negatif = 0;
-	int		i = 0;
+	int		nb;
+	int		negatif;
+	int		i;
 
+	i = 0;
+	nb = 0;
+	negatif = 0;
 	while (ft_iswhitespace(str[i]))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
@@ -46,4 +64,3 @@ int			ft_atoi_base(const char *str, int str_base)
 		return (-nb);
 	return (nb);
 }
-

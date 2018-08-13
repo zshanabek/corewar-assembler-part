@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-void			ft_line_end(char *s, int i, char *str)
+static int		ft_line_end(char *s, int i, char *str, int gnl)
 {
 	ft_strdel(&str);
 	clear_comment(s + i);
@@ -22,7 +22,16 @@ void			ft_line_end(char *s, int i, char *str)
 			exit(ft_printf("Bad name or comment\n"));
 		i++;
 	}
-	return (ft_strdel(&s));
+	ft_strdel(&s);
+	return (gnl);
+}
+
+static void		ft_f2(int *gnl, int fd, char *s, int *i)
+{
+	*gnl += 1;
+	if (ft_gnl(fd, &s) < 1)
+		exit(ft_printf("No second \"\n"));
+	*i = -1;
 }
 
 static int		ft_f(int fd, int max, char *answer, char *str)
@@ -30,7 +39,7 @@ static int		ft_f(int fd, int max, char *answer, char *str)
 	int				i;
 	int				len;
 	char			*s;
-	int 			gnl;
+	int				gnl;
 
 	gnl = 0;
 	i = -1;
@@ -44,15 +53,9 @@ static int		ft_f(int fd, int max, char *answer, char *str)
 		{
 			ft_strncat(answer, s, i);
 			if (s[i++] == '\"')
-			{
-				ft_line_end(s, i, str);
-				return (gnl);
-			}
+				return (ft_line_end(s, i, str, gnl));
 			ft_strcat(answer, "\n");
-			gnl++;
-			if (ft_gnl(fd, &s) < 1)
-				exit(ft_printf("No second \"\n"));
-			i = -1;
+			ft_f2(&gnl, fd, s, &i);
 		}
 	}
 	if (max == 128)
