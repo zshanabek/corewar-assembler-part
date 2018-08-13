@@ -50,7 +50,7 @@ void				iter_param(t_param *head, void (*f)(t_param *elem));
 void				print_label(t_label *label);
 void				print_opcode(t_opcode *opcode);
 void				print_param(t_param *param);
-void				read_instr(int fd, char *line, int *n, t_opcode **ohead);
+void				read_instr(int fd, int *n, t_opcode **ohead);
 void				show_error(int type, int n, int a, char *str);
 void				clear_comment(char *line);
 void				get_i_h(int *i, int *h, char *line);
@@ -68,11 +68,23 @@ void			ft_h(t_opcode *instr, int n);
 char 			*ft_arg_join(char *s1, char *s2, int arg);
 unsigned int	ft_swp_bits(int n, int size);
 void			ft_write_in(t_opcode *instruct, int fd2);
-char			*ft_write_in2(t_opcode *in);
+char			*ft_w(t_opcode *in);
 void			ft_param(t_opcode *in, t_opcode *instruct, int fd2);
 void			ft_print_l(t_opcode *instr, t_opcode *in, t_param *p, int fd2);
 void			ft_count_len(long value, t_param *param, int fd2);
 long			ft_bin_to(char *bin);
 void 			iter_opcode2(t_opcode *ohead, void (*f)(t_opcode *elem,
 														t_opcode *h));
+int				ft_atoi_base(const char *str, int str_base);
+int 			ft_check_ac(int ac, char **av, char **name);
+void			ft_bot_size(int fd2, t_opcode *ohead);
+int 			ft_ohead_size(t_opcode *ohead);
+void			ft_print_flag(t_opcode *in, t_opcode *ohead);
+char			*ft_name(char *av);
+void			ft_pr_param1(t_param *p);
+void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead);
+void			ft_pr_param3(t_param *p, t_opcode *in, t_opcode *ohead);
+char 			*ft_console(int v);
+int				ft_print_l2(t_opcode *instr, t_opcode *in, t_param *p);
+
 #endif

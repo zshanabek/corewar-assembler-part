@@ -22,3 +22,5 @@ cmake-build-debug
 *.sw*
 file*
 zs.sh
+f1
+f2

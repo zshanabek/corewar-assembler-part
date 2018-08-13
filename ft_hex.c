@@ -12,13 +12,13 @@
 
 #include "asm.h"
 
-int ft_param_len(t_opcode *in, t_param *p)
+int		ft_param_len(t_opcode *in, t_param *p)
 {
 	if (p->type == 0)
 		return (0);
 	else if (p->type == 1)
 		return (1);
-	else if	(p->type == 2 && in->lab_size == 4)
+	else if (p->type == 2 && in->lab_size == 4)
 		return (4);
 	else
 		return (2);
@@ -67,7 +67,7 @@ void	ft_check_label(t_opcode *instr)
 
 void	ft_hex2(t_opcode *in)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	while (i < 17)
@@ -84,6 +84,10 @@ void	ft_hex2(t_opcode *in)
 		}
 		i++;
 	}
+	if (in->opcode != -1)
+		in->size++;
+	if (in->codage == 1)
+		in->size++;
 }
 
 void	ft_h(t_opcode *instr, int n)
@@ -100,10 +104,6 @@ void	ft_h(t_opcode *instr, int n)
 	{
 		in->pos = len;
 		ft_hex2(in);
-		if (in->opcode != -1)
-			in->size++;
-		if (in->codage == 1)
-			in->size++;
 		p = in->param;
 		while (p)
 		{

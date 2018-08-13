@@ -85,11 +85,13 @@ int		get_label(t_label **lhead, int n, char *line)
 	return (1);
 }
 
-void	read_instr(int fd, char *line, int *n, t_opcode **ohead)
+void	read_instr(int fd, int *n, t_opcode **ohead)
 {
 	t_label		*lhead;
 	t_opcode	*item;
+	char 		*line;
 
+	line = NULL;
 	lhead = NULL;
 	while (get_next_line(fd, &line))
 	{

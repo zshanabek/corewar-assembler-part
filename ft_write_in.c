@@ -55,7 +55,7 @@ void			ft_param(t_opcode *in, t_opcode *instruct, int fd2)
 	}
 }
 
-char			*ft_write_in2(t_opcode *in)
+char			*ft_w(t_opcode *in)
 {
 	t_param		*p;
 	char		*cod;
@@ -111,7 +111,7 @@ void			ft_write_in(t_opcode *instruct, int fd2)
 		write(fd2, &in->opcode, 1);
 		if (in->codage == 1)
 		{
-			x = ft_bin_to(ft_write_in2(in));
+			x = ft_bin_to(ft_w(in));
 			write(fd2, &x, 1);
 		}
 		ft_param(in, instruct, fd2);
