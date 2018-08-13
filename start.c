@@ -181,8 +181,8 @@ int			ft_print_l2(t_opcode *instr, t_opcode *in, t_param *p)
 		{
 			if (ft_strequ(l->name, p->sval))
 			{
-				if (i->pos - in->pos > 0)
-					ft_console(i->pos - in->pos);
+				//if (i->pos - in->pos > 0)
+				//	ft_console(i->pos - in->pos);
 				return (i->pos - in->pos);
 			}
 			l = l->next;
@@ -209,40 +209,6 @@ void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead)
 		{
 			if (p->ival < 0)
 			{
-//				value = -p->ival;
-//				ret = ft_itoa_base(value, 2);
-//				if (p->size == 4)
-//				{
-//					while (ft_strlen(ret) < 32)
-//						ret = ft_arg_join(ft_strdup("0"), ret, 3);
-//				}
-//				else
-//					while (ft_strlen(ret) < 16)
-//						ret = ft_arg_join(ft_strdup("0"), ret, 3);
-//				i = ft_strlen(ret) - 1;
-//				while (i > -1)
-//				{
-//					if (ret[i] == '0')
-//						ret[i] = '1';
-//					else
-//						ret[i] = '0';
-//					i--;
-//				}
-//				i = ft_strlen(ret) - 1;
-//				while (i > -1)
-//				{
-//					if (ret[i] == '0')
-//					{
-//						ret[i] = '1';
-//						break ;
-//					}
-//					if (i == 0)
-//					{
-//						ret = ft_arg_join("1", ret, 3);
-//						break ;
-//					}
-//					i--;
-//				}
 				ret = ft_console(p->ival);
 				hex = ft_itoa_base(ft_atoi_base(ret, 2), 16);
 				ft_strdel(&ret);
@@ -251,7 +217,16 @@ void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead)
 				hex = ft_itoa_base(p->ival, 16);
 		}
 		else
-			hex = ft_itoa_base(ft_print_l2(ohead, in, p), 16);
+		{
+			if (ft_print_l2(ohead, in, p) < 0)
+			{
+				ret = ft_console(ft_print_l2(ohead, in, p));
+				hex = ft_itoa_base(ft_atoi_base(ret, 2), 16);
+				ft_strdel(&ret);
+			}
+			else
+				hex = ft_itoa_base(ft_print_l2(ohead, in, p), 16);
+		}
 		while (ft_strlen(hex) < 8)
 			hex = ft_arg_join(ft_strdup("0"), hex, 3);
 		if (p->size == 4)
