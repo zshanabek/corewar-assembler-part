@@ -29,7 +29,7 @@ lib:
 		@make -C libft
 
 %.o:	%.c
-		@gcc $(FLAGS) -g -o $@ -c $<
+		@gcc -g -o $@ -c $<
 
 clean:	
 		@rm -f $(OBJ)
