@@ -19,7 +19,7 @@ static int	ft_iswhitespace(char c)
 	return (0);
 }
 
-int			base(int c, int base)
+static int	ft_base(int c, int base)
 {
 	char	*str;
 	char	*str2;
@@ -40,27 +40,27 @@ int			base(int c, int base)
 int			ft_atoi_base(const char *str, int str_base)
 {
 	int		nb;
-	int		negatif;
+	int		minus;
 	int		i;
 
 	i = 0;
 	nb = 0;
-	negatif = 0;
+	minus = 0;
 	while (ft_iswhitespace(str[i]))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
-			negatif = 1;
+			minus = 1;
 		i++;
 	}
-	while (base(str[i], str_base) != -1)
+	while (ft_base(str[i], str_base) != -1)
 	{
-		nb = nb * str_base;
-		nb = nb + base(str[i], str_base);
+		nb *= str_base;
+		nb += ft_base(str[i], str_base);
 		i++;
 	}
-	if (negatif)
+	if (minus)
 		return (-nb);
 	return (nb);
 }
