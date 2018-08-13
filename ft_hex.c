@@ -83,6 +83,10 @@ void	ft_hex2(t_opcode *in)
 		}
 		i++;
 	}
+	if (in->opcode != -1)
+		in->size++;
+	if (in->codage == 1)
+		in->size++;
 }
 
 void	ft_h(t_opcode *instr, int n)
@@ -99,10 +103,6 @@ void	ft_h(t_opcode *instr, int n)
 	{
 		in->pos = len;
 		ft_hex2(in);
-		if (in->opcode != -1)
-			in->size++;
-		if (in->codage == 1)
-			in->size++;
 		p = in->param;
 		while (p)
 		{

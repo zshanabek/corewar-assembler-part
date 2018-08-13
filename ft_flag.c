@@ -90,11 +90,10 @@ void			ft_print_flag2(t_opcode *in, t_opcode *ohead)
 		ft_pr_param1(p);
 		p = p->next;
 	}
-	ft_printf2("\n                    %-4lld", in->opcode);
 	if (in->codage == 1)
-		ft_printf2("%-6lld", ft_bin_to(ft_write_in2(in)));
+		ft_printf2("\n% 20s%-4lld%-6lld", " ", in->opcode, ft_bin_to(ft_w(in)));
 	else
-		ft_printf2("%6s", " ");
+		ft_printf2("\n% 20s%-4lld%6s", " ", in->opcode, " ");
 	p = in->param;
 	while (p)
 	{
@@ -103,7 +102,7 @@ void			ft_print_flag2(t_opcode *in, t_opcode *ohead)
 	}
 	ft_printf2("\n                    %-4lld", in->opcode);
 	if (in->codage == 1)
-		ft_printf2("%-6lld", ft_bin_to(ft_write_in2(in)));
+		ft_printf2("%-6lld", ft_bin_to(ft_w(in)));
 	else
 		ft_printf2("%6s", " ");
 }

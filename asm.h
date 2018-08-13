@@ -66,7 +66,7 @@ void			ft_h(t_opcode *instr, int n);
 char 			*ft_arg_join(char *s1, char *s2, int arg);
 unsigned int	ft_swp_bits(int n, int size);
 void			ft_write_in(t_opcode *instruct, int fd2);
-char			*ft_write_in2(t_opcode *in);
+char			*ft_w(t_opcode *in);
 void			ft_param(t_opcode *in, t_opcode *instruct, int fd2);
 void			ft_print_l(t_opcode *instr, t_opcode *in, t_param *p, int fd2);
 void			ft_count_len(long value, t_param *param, int fd2);
