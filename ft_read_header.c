@@ -74,7 +74,6 @@ char			*ft_white(char *s)
 	if (s[i] == '\0' || s[i] == '#' || s[i] == ';')
 		return (0);
 	s2 = ft_strdup(s + i);
-	//ft_strdel(&s);
 	return (s2);
 }
 
