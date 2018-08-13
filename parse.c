@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:12:22 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/11 20:52:49 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/13 15:49:37 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,10 @@ int		get_label(t_label **lhead, int n, char *line)
 
 void	read_instr(int fd, int *n, t_opcode **ohead)
 {
+	char		*line;
 	t_label		*lhead;
 	t_opcode	*item;
-	char 		*line;
 
-	line = NULL;
 	lhead = NULL;
 	while (get_next_line(fd, &line))
 	{

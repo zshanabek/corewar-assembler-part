@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/13 14:35:25 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/13 16:13:48 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void			ft_main2(t_opcode *ohead, header_t *h, char **name)
+void			ft_main2(t_opcode *ohead, t_header *h, char **name)
 {
 	int				fd;
 	int				i;
@@ -28,7 +28,7 @@ void			ft_main2(t_opcode *ohead, header_t *h, char **name)
 		ft_write_in(ohead, fd);
 }
 
-void			ft_main3(header_t *h, int n, char *name, t_opcode **ohead)
+void			ft_main3(t_header *h, int n, char *name, t_opcode **ohead)
 {
 	int		fd;
 
@@ -41,7 +41,7 @@ void			ft_main3(header_t *h, int n, char *name, t_opcode **ohead)
 	ft_h(*ohead, n);
 }
 
-void			ft_main4(t_opcode *ohead, header_t *h)
+void			ft_main4(t_opcode *ohead, t_header *h)
 {
 	ft_printf(("Dumping annotated program on standard output\nProgram size "
 		": %i bytes\nName : \"%s\"\nComment : \"%s\"\n"), ft_ohead_size(ohead),
@@ -52,7 +52,7 @@ void			ft_main4(t_opcode *ohead, header_t *h)
 
 int				main(int ac, char **av)
 {
-	header_t		*h;
+	t_header		*h;
 	t_opcode		*ohead;
 	char			*name;
 	int				n;
@@ -63,7 +63,7 @@ int				main(int ac, char **av)
 	flag = ft_check_ac(ac, av, &name);
 	if (open(name, O_RDONLY) == -1)
 		exit(ft_printf("Can't read source file %s\n", name));
-	h = malloc(sizeof(header_t));
+	h = malloc(sizeof(t_header));
 	ft_main3(h, n, name, &ohead);
 	name = ft_name(name);
 	if (flag > 0)

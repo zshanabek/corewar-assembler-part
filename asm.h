@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asm.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/13 15:56:19 by zshanabe          #+#    #+#             */
+/*   Updated: 2018/08/13 17:43:49 by zshanabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ASM_H
 # define ASM_H
 # include "libft/libft.h"
@@ -24,7 +36,7 @@ struct				s_label
 
 struct				s_opcode
 {
-	int 			n;
+	int				n;
 	int				codage;
 	int				nb_param;
 	int				lab_size;
@@ -47,9 +59,6 @@ void				ft_lstaddendpar(t_param **head, t_param *item);
 void				iter_opcode(t_opcode *ohead, void (*f)(t_opcode *elem));
 void				iter_label(t_label *lhead, void (*f)(t_label *elem));
 void				iter_param(t_param *head, void (*f)(t_param *elem));
-void				print_label(t_label *label);
-void				print_opcode(t_opcode *opcode);
-void				print_param(t_param *param);
 void				read_instr(int fd, int *n, t_opcode **ohead);
 void				show_error(int type, int n, int a, char *str);
 void				clear_comment(char *line);
@@ -61,30 +70,30 @@ int					is_digital(char *line);
 int					is_valid_label(char *str);
 int					count_commas(char *str);
 int					detect_blank_line(int fd1);
-
-void			ft_read_header(header_t *h, int *n, int fd);
-int				ft_gnl(int fd, char **s);
-void			ft_h(t_opcode *instr, int n);
-char 			*ft_arg_join(char *s1, char *s2, int arg);
-unsigned int	ft_swp_bits(int n, int size);
-void			ft_write_in(t_opcode *instruct, int fd2);
-char			*ft_w(t_opcode *in);
-void			ft_param(t_opcode *in, t_opcode *instruct, int fd2);
-void			ft_print_l(t_opcode *instr, t_opcode *in, t_param *p, int fd2);
-void			ft_count_len(long value, t_param *param, int fd2);
-long			ft_bin_to(char *bin);
-void 			iter_opcode2(t_opcode *ohead, void (*f)(t_opcode *elem,
+void				ft_read_header(t_header *h, int *n, int fd);
+int					ft_gnl(int fd, char **s);
+void				ft_h(t_opcode *instr, int n);
+char				*ft_arg_join(char *s1, char *s2, int arg);
+unsigned int		ft_swp_bits(int n, int size);
+void				ft_write_in(t_opcode *instruct, int fd2);
+char				*ft_w(t_opcode *in);
+void				ft_param(t_opcode *in, t_opcode *instruct, int fd2);
+void				ft_print_l(t_opcode *instr, t_opcode *in,
+												t_param *p, int fd2);
+void				ft_count_len(long value, t_param *param, int fd2);
+long				ft_bin_to(char *bin);
+void				iter_opcode2(t_opcode *ohead, void (*f)(t_opcode *elem,
 														t_opcode *h));
-int				ft_atoi_base(const char *str, int str_base);
-int 			ft_check_ac(int ac, char **av, char **name);
-void			ft_bot_size(int fd2, t_opcode *ohead);
-int 			ft_ohead_size(t_opcode *ohead);
-void			ft_print_flag(t_opcode *in, t_opcode *ohead);
-char			*ft_name(char *av);
-void			ft_pr_param1(t_param *p);
-void			ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead);
-void			ft_pr_param3(t_param *p, t_opcode *in, t_opcode *ohead);
-char 			*ft_console(int v);
-int				ft_print_l2(t_opcode *instr, t_opcode *in, t_param *p);
+int					ft_atoi_base(const char *str, int str_base);
+int					ft_check_ac(int ac, char **av, char **name);
+void				ft_bot_size(int fd2, t_opcode *ohead);
+int					ft_ohead_size(t_opcode *ohead);
+void				ft_print_flag(t_opcode *in, t_opcode *ohead);
+char				*ft_name(char *av);
+void				ft_pr_param1(t_param *p);
+void				ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead);
+void				ft_pr_param3(t_param *p, t_opcode *in, t_opcode *ohead);
+char				*ft_console(int v);
+int					ft_print_l2(t_opcode *instr, t_opcode *in, t_param *p);
 
 #endif

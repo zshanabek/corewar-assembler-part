@@ -3,17 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+         #
+#    By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/11 21:08:02 by zshanabe          #+#    #+#              #
-#    Updated: 2018/08/13 14:35:07 by vradchen         ###   ########.fr        #
+#    Updated: 2018/08/13 15:54:36 by zshanabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME  =	asm
-SRC   =	start.c params.c aux.c extra.c list.c ft_arg_join.c ft_hex.c \
-		ft_write_in.c helpers.c parse.c      \
-		utils.c ft_read_header.c ft_atoi_base.c ft_flag.c \
+SRC   =	start.c params.c aux.c extra.c list.c helpers.c parse.c utils.c \
+		ft_arg_join.c ft_hex.c ft_write_in.c ft_read_header.c ft_flag.c \
 		ft_flag2.c ft_pr_param.c
 OBJ   = $(SRC:.c=.o)
 LIB   = libft/libft.a

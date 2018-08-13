@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:42:20 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/08/12 21:05:47 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/13 17:43:39 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,37 +44,6 @@ void	get_i_h(int *i, int *h, char *line)
 	(*h) = (*i);
 	while (line[*i] && !ft_isws(line[*i]) && line[*i] != LABEL_CHAR)
 		(*i)++;
-}
-
-void	print_label(t_label *label)
-{
-	ft_printf("{blue}   %s{eoc}\n", label->name);
-}
-
-void	print_param(t_param *param)
-{
-	if (param->sval != NULL)
-		ft_printf("   sval: %s\n", param->sval);
-	ft_printf("   ival: {yellow}%d{eoc}\n", param->ival);
-	ft_printf("   type: %d\n", param->type);
-	if (param->next != NULL)
-		ft_printf("--------------\n");
-}
-
-void	print_opcode(t_opcode *opcode)
-{
-	ft_printf("name: {magenta}%s{eoc}\n", opcode->name);
-	if (opcode->label != NULL)
-	{
-		ft_printf("labels:\n");
-		iter_label(opcode->label, print_label);
-	}
-	if (opcode->param != NULL)
-	{
-		ft_printf("params:\n");
-		iter_param(opcode->param, print_param);
-	}
-	ft_printf("////////////////\n");
 }
 
 char	**get_array(int n, int a, char *str)
