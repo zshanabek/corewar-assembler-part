@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 11:47:01 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/14 16:59:49 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:32:22 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void			ft_print_flag2(t_opcode *in, t_opcode *ohead)
 		p = p->next;
 	}
 	if (in->codage == 1)
-		ft_printf(1, "\n% 20s%-4lld%-6lld", " ", in->opcode, ft_bin_to(ft_w(in)));
+		ft_printf(1, "\n% 20s%-4lld%-6lld", " ", in->opcode, ft_b(ft_w(in)));
 	else
 		ft_printf(1, "\n% 20s%-4lld%6s", " ", in->opcode, " ");
 	p = in->param;
@@ -104,7 +104,7 @@ void			ft_print_flag2(t_opcode *in, t_opcode *ohead)
 	}
 	ft_printf(1, "\n                    %-4lld", in->opcode);
 	if (in->codage == 1)
-		ft_printf(1, "%-6lld", ft_bin_to(ft_w(in)));
+		ft_printf(1, "%-6lld", ft_b(ft_w(in)));
 	else
 		ft_printf(1, "%6s", " ");
 }

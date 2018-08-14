@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 15:56:19 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/08/13 17:43:49 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:31:49 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void				ft_param(t_opcode *in, t_opcode *instruct, int fd2);
 void				ft_print_l(t_opcode *instr, t_opcode *in,
 												t_param *p, int fd2);
 void				ft_count_len(long value, t_param *param, int fd2);
-long				ft_bin_to(char *bin);
+long				ft_b(char *bin);
 void				iter_opcode2(t_opcode *ohead, void (*f)(t_opcode *elem,
 														t_opcode *h));
 int					ft_atoi_base(const char *str, int str_base);

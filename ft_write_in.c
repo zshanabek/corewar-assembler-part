@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_write_in.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:32:21 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/03 17:32:22 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:32:03 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char			*ft_w(t_opcode *in)
 	return (cod);
 }
 
-long			ft_bin_to(char *bin)
+long			ft_b(char *bin)
 {
 	int		i;
 	long	x;
@@ -111,7 +111,7 @@ void			ft_write_in(t_opcode *instruct, int fd2)
 		write(fd2, &in->opcode, 1);
 		if (in->codage == 1)
 		{
-			x = ft_bin_to(ft_w(in));
+			x = ft_b(ft_w(in));
 			write(fd2, &x, 1);
 		}
 		ft_param(in, instruct, fd2);
