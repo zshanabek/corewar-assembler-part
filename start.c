@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/13 16:13:48 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/14 16:56:00 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ void			ft_main3(t_header *h, int n, char *name, t_opcode **ohead)
 	ft_read_header(h, &n, fd);
 	read_instr(fd, &n, ohead);
 	if (!detect_blank_line(fd))
-		exit(ft_printf("Syntax error - unexpected end of input"
+		exit(ft_printf(2, "Syntax error - unexpected end of input"
 			" (Perhaps you forgot to end with a newline ?)\n"));
 	ft_h(*ohead, n);
 }
 
 void			ft_main4(t_opcode *ohead, t_header *h)
 {
-	ft_printf(("Dumping annotated program on standard output\nProgram size "
-		": %i bytes\nName : \"%s\"\nComment : \"%s\"\n"), ft_ohead_size(ohead),
+	ft_printf(1, "Dumping annotated program on standard output\nProgram size "
+		": %i bytes\nName : \"%s\"\nComment : \"%s\"\n", ft_ohead_size(ohead),
 		h->p, h->c);
 	iter_opcode2(ohead, ft_print_flag);
 	exit(1);
@@ -62,14 +62,14 @@ int				main(int ac, char **av)
 	ohead = NULL;
 	flag = ft_check_ac(ac, av, &name);
 	if (open(name, O_RDONLY) == -1)
-		exit(ft_printf("Can't read source file %s\n", name));
+		exit(ft_printf(2, "Can't read source file %s\n", name));
 	h = malloc(sizeof(t_header));
 	ft_main3(h, n, name, &ohead);
 	name = ft_name(name);
 	if (flag > 0)
 		ft_main4(ohead, h);
 	else
-		ft_printf("Writing output program to %s\n", name);
+		ft_printf(1, "Writing output program to %s\n", name);
 	ft_main2(ohead, h, &name);
-	system("leaks asm");
+	// system("leaks asm");
 }

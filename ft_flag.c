@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 11:47:01 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/13 16:45:07 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/14 16:59:49 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void			ft_print_flag2(t_opcode *in, t_opcode *ohead)
 {
 	t_param		*p;
 
-	ft_printf2("\n%-5i(%-3i) :        %-10s", in->pos, in->size,
+	ft_printf(1, "\n%-5i(%-3i) :        %-10s", in->pos, in->size,
 		g_op[in->opcode - 1].name);
 	p = in->param;
 	while (p)
@@ -93,20 +93,20 @@ void			ft_print_flag2(t_opcode *in, t_opcode *ohead)
 		p = p->next;
 	}
 	if (in->codage == 1)
-		ft_printf2("\n% 20s%-4lld%-6lld", " ", in->opcode, ft_bin_to(ft_w(in)));
+		ft_printf(1, "\n% 20s%-4lld%-6lld", " ", in->opcode, ft_bin_to(ft_w(in)));
 	else
-		ft_printf2("\n% 20s%-4lld%6s", " ", in->opcode, " ");
+		ft_printf(1, "\n% 20s%-4lld%6s", " ", in->opcode, " ");
 	p = in->param;
 	while (p)
 	{
 		ft_pr_param2(p, in, ohead);
 		p = p->next;
 	}
-	ft_printf2("\n                    %-4lld", in->opcode);
+	ft_printf(1, "\n                    %-4lld", in->opcode);
 	if (in->codage == 1)
-		ft_printf2("%-6lld", ft_bin_to(ft_w(in)));
+		ft_printf(1, "%-6lld", ft_bin_to(ft_w(in)));
 	else
-		ft_printf2("%6s", " ");
+		ft_printf(1, "%6s", " ");
 }
 
 void			ft_print_flag(t_opcode *in, t_opcode *ohead)
@@ -117,12 +117,12 @@ void			ft_print_flag(t_opcode *in, t_opcode *ohead)
 	l = in->label;
 	while (l)
 	{
-		ft_printf2("\n%-11i:    %s:", in->pos, l->name);
+		ft_printf(1, "\n%-11i:    %s:", in->pos, l->name);
 		l = l->next;
 	}
 	if (in->opcode == -1)
 	{
-		ft_printf2("\n");
+		ft_printf(1, "\n");
 		return ;
 	}
 	ft_print_flag2(in, ohead);
@@ -132,7 +132,7 @@ void			ft_print_flag(t_opcode *in, t_opcode *ohead)
 		ft_pr_param3(p, in, ohead);
 		p = p->next;
 	}
-	ft_printf2("\n");
+	ft_printf(1, "\n");
 	if (in->next == NULL)
-		ft_printf2("\n");
+		ft_printf(1, "\n");
 }

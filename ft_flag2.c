@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_flag2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 12:01:03 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/13 12:01:04 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/14 16:47:30 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int				ft_check_ac(int ac, char **av, char **name)
 	if (ac == 3)
 	{
 		if (!(ft_strequ(av[1], "-a") || ft_strequ(av[2], "-a")))
-			exit(ft_printf("Usage: ./asm %s\n", av[2]));
+			exit(ft_printf(2, "Usage: ./asm %s\n", av[2]));
 		if (ft_strequ(av[1], "-a"))
 		{
 			*name = av[2];
@@ -69,11 +69,11 @@ int				ft_check_ac(int ac, char **av, char **name)
 		return (1);
 	}
 	else if (ac != 2)
-		exit(ft_printf("Usage: ./asm %s\n", av[1]));
+		exit(ft_printf(2, "Usage: ./asm %s\n", av[1]));
 	*name = av[1];
 	temp = *name;
 	if (temp[ft_strlen(temp) - 1] != 's')
-		exit(ft_printf("Wrong file without .s extension\n"));
+		exit(ft_printf(2, "Wrong file without .s extension\n"));
 	return (0);
 }
 

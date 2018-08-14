@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pr_param.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 12:05:34 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/13 12:05:35 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/08/14 16:54:59 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 void		ft_pr_param1(t_param *p)
 {
 	if (p->type == 1)
-		ft_printf("r%-17i", p->ival);
+		ft_printf(1, "r%-17i", p->ival);
 	else if (p->type == 2)
 	{
 		if (p->sval == NULL)
-			ft_printf("%%%-17i", p->ival);
+			ft_printf(1, "%%%-17i", p->ival);
 		else
-			ft_printf("%%:%-16s", p->sval);
+			ft_printf(1, "%%:%-16s", p->sval);
 	}
 	else if (p->type == 3)
 	{
 		if (p->sval == NULL)
-			ft_printf("%-18i", p->ival);
+			ft_printf(1, "%-18i", p->ival);
 		else
-			ft_printf(":%-17s", p->sval);
+			ft_printf(1, ":%-17s", p->sval);
 	}
 }
 
@@ -54,13 +54,13 @@ void		ft_short2(char *hex, int i, int space)
 	{
 		two[0] = hex[i];
 		two[1] = hex[i + 1];
-		ft_printf2("%-4i", ft_atoi_base(two, 16));
+		ft_printf(1, "%-4i", ft_atoi_base(two, 16));
 		i += 2;
 	}
 	if (space == 4)
-		ft_printf2("%2s", " ");
+		ft_printf(1, "%2s", " ");
 	else if (space == 2)
-		ft_printf2("%10s", " ");
+		ft_printf(1, "%10s", " ");
 	ft_strdel(&two);
 	ft_strdel(&hex);
 }
@@ -70,7 +70,7 @@ void		ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead)
 	char	*hex;
 
 	if (p->type == 1)
-		ft_printf2("%-18i", p->ival);
+		ft_printf(1, "%-18i", p->ival);
 	else
 	{
 		if (p->sval == NULL)
@@ -97,12 +97,12 @@ void		ft_pr_param2(t_param *p, t_opcode *in, t_opcode *ohead)
 void		ft_pr_param3(t_param *p, t_opcode *in, t_opcode *ohead)
 {
 	if (p->type == 1)
-		ft_printf2("%-18i", p->ival);
+		ft_printf(1, "%-18i", p->ival);
 	else
 	{
 		if (p->sval == NULL)
-			ft_printf2("%-18i", p->ival);
+			ft_printf(1, "%-18i", p->ival);
 		else
-			ft_printf2("%-18i", ft_print_l2(ohead, in, p));
+			ft_printf(1, "%-18i", ft_print_l2(ohead, in, p));
 	}
 }
