@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:28:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/14 16:48:42 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:01:16 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		ft_line_end(char *s, int i, char *str, int gnl)
 	return (gnl);
 }
 
-static void		ft_f2(int *gnl, int fd, char *s, int *i)
+static void		ft_f2(int *gnl, int fd, char **s, int *i)
 {
 	*gnl += 1;
 	if (ft_gnl(fd, &s) < 1)
@@ -55,7 +55,7 @@ static int		ft_f(int fd, int max, char *answer, char *str)
 			if (s[i++] == '\"')
 				return (ft_line_end(s, i, str, gnl));
 			ft_strcat(answer, "\n");
-			ft_f2(&gnl, fd, s, &i);
+			ft_f2(&gnl, fd, &s, &i);
 		}
 	}
 	if (max == 128)
@@ -92,9 +92,9 @@ void			ft_read_header(t_header *h, int *n, int fd)
 		s2 = ft_white(s);
 		if (s2 == NULL || ft_strequ(s2, ""))
 			continue ;
-		else if (!(*h->p) && ft_strncmp(s2, NAME_CMD_STRING, 5) == 0 && ++x > 0)
+		else if (!(*h->p) && ft_strncmp(s2, NAME_CMD_STRING, 4) == 0 && ++x > 0)
 			*n += ft_f(fd, PROG_NAME_LENGTH, h->p, ft_strtrim(s2 + 5));
-		else if (!(*h->c) && ft_strncmp(s2, COM_CMD_STRING, 8) == 0 && ++x > 0)
+		else if (!(*h->c) && ft_strncmp(s2, COM_CMD_STRING, 7) == 0 && ++x > 0)
 			*n += ft_f(fd, COMMENT_LENGTH, h->c, ft_strtrim(s2 + 8));
 		else
 			exit(ft_printf(2, "No name or header.\n"));
