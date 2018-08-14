@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:28:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/14 17:01:16 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:24:31 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		ft_line_end(char *s, int i, char *str, int gnl)
 static void		ft_f2(int *gnl, int fd, char **s, int *i)
 {
 	*gnl += 1;
-	if (ft_gnl(fd, &s) < 1)
+	if (ft_gnl(fd, s) < 1)
 		exit(ft_printf(2, "No second \"\n"));
 	*i = -1;
 }
