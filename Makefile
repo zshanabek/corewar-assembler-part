@@ -6,7 +6,7 @@
 #    By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/11 21:08:02 by zshanabe          #+#    #+#              #
-#    Updated: 2018/08/13 15:54:36 by zshanabe         ###   ########.fr        #
+#    Updated: 2018/08/14 18:56:12 by zshanabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ lib:
 
 clean:	
 		@rm -f $(OBJ)
-		@make clean -C libft
 		@echo "\x1b[33mObject files are cleaned\x1b[0m"
 
 fclean: clean
