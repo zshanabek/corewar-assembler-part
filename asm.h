@@ -23,7 +23,8 @@ struct				s_param
 {
 	int				type;
 	int				size;
-	int				ival;
+	long long		ival;
+	char 			*ival_str;
 	char			*sval;
 	t_param			*next;
 };
@@ -84,7 +85,6 @@ void				ft_count_len(long value, t_param *param, int fd2);
 long				ft_b(char *bin);
 void				iter_opcode2(t_opcode *ohead, void (*f)(t_opcode *elem,
 														t_opcode *h));
-int					ft_atoi_base(const char *str, int str_base);
 int					ft_check_ac(int ac, char **av, char **name);
 void				ft_bot_size(int fd2, t_opcode *ohead);
 int					ft_ohead_size(t_opcode *ohead);

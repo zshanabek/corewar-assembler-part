@@ -32,7 +32,10 @@ char	**get_params_array(int i, int n, char *line)
 int		analyze_type(t_param *item, char *temp, int type, int code)
 {
 	if (is_digital(temp) && type == 1)
+	{
+		item->ival_str = ft_strdup(temp);
 		item->ival = ft_atoi(temp);
+	}
 	else if (type == 2)
 		item->sval = ft_strdup(temp);
 	else

@@ -47,6 +47,7 @@ void			ft_main4(t_opcode *ohead, t_header *h)
 		": %i bytes\nName : \"%s\"\nComment : \"%s\"\n", ft_ohead_size(ohead),
 		h->p, h->c);
 	iter_opcode2(ohead, ft_print_flag);
+	system("leaks asm");
 	exit(1);
 }
 
@@ -71,4 +72,5 @@ int				main(int ac, char **av)
 	else
 		ft_printf(1, "Writing output program to %s\n", name);
 	ft_main2(ohead, h, &name);
+	system("leaks asm");
 }

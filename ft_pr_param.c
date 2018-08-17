@@ -15,18 +15,18 @@
 void		ft_pr_param1(t_param *p)
 {
 	if (p->type == 1)
-		ft_printf(1, "r%-17i", p->ival);
+		ft_printf(1, "r%-17s", p->ival_str);//lld", p->ival_str);
 	else if (p->type == 2)
 	{
 		if (p->sval == NULL)
-			ft_printf(1, "%%%-17i", p->ival);
+			ft_printf(1, "%%%-17s", p->ival_str);//lld", p->ival);
 		else
 			ft_printf(1, "%%:%-16s", p->sval);
 	}
 	else if (p->type == 3)
 	{
 		if (p->sval == NULL)
-			ft_printf(1, "%-18i", p->ival);
+			ft_printf(1, "%-18s", p->ival_str);//lld", p->ival);
 		else
 			ft_printf(1, ":%-17s", p->sval);
 	}

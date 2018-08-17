@@ -18,9 +18,9 @@ char			*ft_console2(int v)
 	int		i;
 	int		value;
 
-	value = v;
+	value = -v;
 	ret = ft_itoa_base(value, 2);
-	while (ft_strlen(ret) < 16)
+	while (ft_strlen(ret) < 32)
 		ret = ft_arg_join(ft_strdup("0"), ret, 3);
 	i = ft_strlen(ret) - 1;
 	while (i > -1)
