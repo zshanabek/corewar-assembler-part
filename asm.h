@@ -24,7 +24,7 @@ struct				s_param
 	int				type;
 	int				size;
 	long long		ival;
-	char 			*ival_str;
+	char			*ival_str;
 	char			*sval;
 	t_param			*next;
 };

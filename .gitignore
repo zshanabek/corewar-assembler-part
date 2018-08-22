@@ -15,6 +15,7 @@ file
 *.cor
 *.corr
 vm_champs/
+champs/
 examples/
 CMakeLists.txt
 cmake-build-debug
