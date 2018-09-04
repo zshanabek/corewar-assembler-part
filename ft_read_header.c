@@ -92,9 +92,9 @@ void			ft_read_header(t_header *h, int *n, int fd)
 		s2 = ft_white(s);
 		if (s2 == NULL || ft_strequ(s2, ""))
 			continue ;
-		else if (!(*h->p) && ft_strncmp(s2, NAME_CMD_STRING, 4) == 0 && ++x > 0)
+		else if (!(*h->p) && ft_strncmp(s2, NAME_CMD_STRING, 5) == 0 && ++x > 0)
 			*n += ft_f(fd, PROG_NAME_LENGTH, h->p, ft_strtrim(s2 + 5));
-		else if (!(*h->c) && ft_strncmp(s2, COM_CMD_STRING, 7) == 0 && ++x > 0)
+		else if (!(*h->c) && ft_strncmp(s2, COM_CMD_STRING, 8) == 0 && ++x > 0)
 			*n += ft_f(fd, COMMENT_LENGTH, h->c, ft_strtrim(s2 + 8));
 		else
 			exit(ft_printf(2, "No name or header.\n"));

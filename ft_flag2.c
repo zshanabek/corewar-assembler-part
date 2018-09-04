@@ -48,7 +48,7 @@ char			*ft_name(char *av)
 		}
 		i--;
 	}
-	n = ft_arg_join(n, ft_strdup(".corr"), 3);
+	n = ft_arg_join(n, ft_strdup(".cor"), 3);
 	return (n);
 }
 
