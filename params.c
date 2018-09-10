@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:40:33 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/08/11 21:40:34 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/10 13:42:40 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,18 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 		else if (ft_isdigit(str[0]) || (str[0] == '-' && ft_isdigit(str[1])))
 			type = 1;
 		else
+		{
+			ft_strdel(&str);
 			return (-1);
+		}
 	}
 	if (str[0] == LABEL_CHAR || code == REG_CODE)
 		str = ft_strresub(str, 1, ft_strlen(str) - 1);
 	if (!analyze_type(item, str, type, code))
+	{
+		 ft_strdel(&str);
 		return (0);
+	}
 	return (1);
 }
 

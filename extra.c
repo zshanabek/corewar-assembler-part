@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extra.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:42:20 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/08/14 16:47:06 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/10 13:43:11 by vradchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ void	show_error(int type, int n, int a, char *str)
 	else if (type == 8)
 		ft_printf(2, "No such label %s while attempting to dereference "
 		"token [%03d] DIRECT_LABEL \"%%:%s\"\n", str, n, str);
+	system("leaks asm");
 	exit(1);
 }

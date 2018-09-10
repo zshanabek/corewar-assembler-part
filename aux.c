@@ -50,6 +50,7 @@ int				detect_blank_line(int fd)
 	clear_comment(line);
 	if (ft_isempty(line))
 		return (1);
+	ft_strdel(&line);
 	return (0);
 }
 
