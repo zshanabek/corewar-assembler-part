@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:12:22 by vradchen          #+#    #+#             */
-/*   Updated: 2018/09/10 18:13:31 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/10 19:22:53 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	read_instr(int fd, int *n, t_opcode **ohead)
 	lhead = NULL;
 	while (get_next_line(fd, &line))
 	{
-		printf("ok:%s\n", line);		
 		(*n)++;
 		clear_comment(line);
 		if (line[0] != '\0' && !ft_isempty(line))
