@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/14 17:01:05 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/10 20:00:25 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ void			ft_main3(t_header *h, int n, char *name, t_opcode **ohead)
 	ft_read_header(h, &n, fd);
 	read_instr(fd, &n, ohead);
 	if (!detect_blank_line(fd))
-	{
-		system("leaks asm");
 		exit(ft_printf(2, "Syntax error - unexpected end of input"
 			" (Perhaps you forgot to end with a newline ?)\n"));
-	}
 	ft_h(*ohead, n);
 }
 
@@ -50,7 +47,6 @@ void			ft_main4(t_opcode *ohead, t_header *h)
 		": %i bytes\nName : \"%s\"\nComment : \"%s\"\n", ft_ohead_size(ohead),
 		h->p, h->c);
 	iter_opcode2(ohead, ft_print_flag);
-	system("leaks asm");
 	exit(1);
 }
 
@@ -66,10 +62,7 @@ int				main(int ac, char **av)
 	ohead = NULL;
 	flag = ft_check_ac(ac, av, &name);
 	if (open(name, O_RDONLY) == -1)
-	{
-		system("leaks asm");
 		exit(ft_printf(2, "Can't read source file %s\n", name));
-	}
 	h = malloc(sizeof(t_header));
 	ft_main3(h, n, name, &ohead);
 	name = ft_name(name);

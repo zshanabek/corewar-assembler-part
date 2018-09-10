@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 17:28:37 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/14 17:24:31 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/10 20:00:07 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ static int		ft_line_end(char *s, int i, char *str, int gnl)
 	while (s[i])
 	{
 		if (!ft_isws(s[i]))
-		{
-			system("leaks asm");
 			exit(ft_printf(2, "Bad name or comment\n"));
-		}
 		i++;
 	}
 	ft_strdel(&s);
@@ -33,10 +30,7 @@ static void		ft_f2(int *gnl, int fd, char **s, int *i)
 {
 	*gnl += 1;
 	if (ft_gnl(fd, s) < 1)
-	{
-		system("leaks asm");
 		exit(ft_printf(2, "No second \"\n"));
-	}
 	*i = -1;
 }
 
@@ -51,10 +45,7 @@ static int		ft_f(int fd, int max, char *answer, char *str)
 	i = -1;
 	len = -1;
 	if (str[i + 1] != '\"')
-	{
-		system("leaks asm");
 		exit(ft_printf(2, "There is no \"\n"));
-	}
 	s = ft_strdup(str + 1);
 	while (len++ < max)
 	{
@@ -68,11 +59,7 @@ static int		ft_f(int fd, int max, char *answer, char *str)
 		}
 	}
 	if (max == 128)
-	{
-		system("leaks asm");
 		exit(ft_printf(2, "Champion name too long (Max length 128)\n"));
-	}
-	system("leaks asm");
 	exit(ft_printf(2, "Champion comment too long (Max length 2048)\n"));
 }
 
@@ -110,14 +97,10 @@ void			ft_read_header(t_header *h, int *n, int fd)
 		else if (!(*h->c) && ft_strncmp(s2, COM_CMD_STRING, 8) == 0 && ++x > 0)
 			*n += ft_f(fd, COMMENT_LENGTH, h->c, ft_strtrim(s2 + 8));
 		else
-		{
-			system("leaks asm");
 			exit(ft_printf(2, "No name or header.\n"));
-		}
 		ft_strdel(&s2);
 		if (x == 2)
 			return (ft_strdel(&s));
 	}
-	system("leaks asm");
 	exit(ft_printf(2, "No name or header.\n"));
 }

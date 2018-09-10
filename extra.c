@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:42:20 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/09/10 15:00:46 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/10 19:59:18 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,5 @@ void	show_error(int type, int n, int a, char *str)
 	else if (type == 8)
 		ft_printf(2, "No such label %s while attempting to dereference "
 		"token [%03d] DIRECT_LABEL \"%%:%s\"\n", str, n, str);
-	system("leaks asm");
 	exit(1);
 }

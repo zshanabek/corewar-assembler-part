@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 12:01:03 by vradchen          #+#    #+#             */
-/*   Updated: 2018/09/10 15:19:01 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/10 20:06:44 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char			*ft_name(char *av)
 		}
 		i--;
 	}
-	n = ft_arg_join(n, ft_strdup(".corr"), 3);
+	n = ft_arg_join(n, ft_strdup(".cor"), 3);
 	return (n);
 }
 
@@ -59,10 +59,7 @@ int				ft_check_ac(int ac, char **av, char **name)
 	if (ac == 3)
 	{
 		if (!(ft_strequ(av[1], "-a") || ft_strequ(av[2], "-a")))
-		{
-			system("leaks asm");
 			exit(ft_printf(2, "Usage: ./asm %s\n", av[2]));
-		}
 		if (ft_strequ(av[1], "-a"))
 		{
 			*name = av[2];
@@ -72,17 +69,11 @@ int				ft_check_ac(int ac, char **av, char **name)
 		return (1);
 	}
 	else if (ac != 2)
-	{
-		system("leaks asm");
 		exit(ft_printf(2, "Usage: ./asm %s\n", av[1]));
-	}
 	*name = av[1];
 	temp = *name;
 	if (temp[ft_strlen(temp) - 1] != 's')
-	{
-		system("leaks asm");
 		exit(ft_printf(2, "Wrong file without .s extension\n"));
-	}
 	return (0);
 }
 
