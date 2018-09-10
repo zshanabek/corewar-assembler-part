@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
-/*   Updated: 2018/09/10 20:00:25 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/11 01:25:57 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void			ft_main3(t_header *h, int n, char *name, t_opcode **ohead)
 	read_instr(fd, &n, ohead);
 	if (!detect_blank_line(fd))
 		exit(ft_printf(2, "Syntax error - unexpected end of input"
-			" (Perhaps you forgot to end with a newline ?)\n"));
+			" (Perhaps you forgot to end with a newline abyl dalbaeb?)\n"));
 	ft_h(*ohead, n);
 }
 
@@ -71,5 +71,4 @@ int				main(int ac, char **av)
 	else
 		ft_printf(1, "Writing output program to %s\n", name);
 	ft_main2(ohead, h, &name);
-	system("leaks asm");
 }
