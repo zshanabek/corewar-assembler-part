@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extra.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:42:20 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/09/10 13:43:11 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/09/10 15:00:46 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ char	**get_array(int n, int a, char *str)
 	mrr[1] = ft_strdup("direct");
 	mrr[2] = ft_strdup("indirect");
 	mrr[3] = NULL;
-	ft_printf(2, "Invalid parameter %d type %s for \
-		instruction %s\n", n, mrr[a], str);
+	ft_printf(2, "Invalid parameter %d type %s for "
+	"instruction %s\n", n, mrr[a], str);
 	ft_del2darr(mrr);
 	return (mrr);
 }

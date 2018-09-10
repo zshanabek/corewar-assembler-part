@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:40:33 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/09/10 13:42:40 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/09/10 15:52:50 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 		str = ft_strresub(str, 1, ft_strlen(str) - 1);
 	if (!analyze_type(item, str, type, code))
 	{
-		 ft_strdel(&str);
+		ft_strdel(&str);
 		return (0);
 	}
 	return (1);
@@ -91,7 +91,7 @@ void	make_choice(t_opcode *opcode, t_param *item, char *temp, int n)
 	if (e == 0)
 		show_error(0, n, 0, temp);
 	if (e == -1)
-		show_error(6, n, 0, temp);
+		show_error(6, n, 0, "");
 }
 
 void	get_params(t_opcode *opcode, char **arr, int n)

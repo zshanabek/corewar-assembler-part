@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 20:27:58 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/08/11 20:28:00 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/10 15:11:29 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ int				detect_blank_line(int fd)
 	get_next_line(fd, &line);
 	clear_comment(line);
 	if (ft_isempty(line))
+	{
+		ft_strdel(&line);			
 		return (1);
-	ft_strdel(&line);
+	}
+	ft_strdel(&line);	
 	return (0);
 }
 

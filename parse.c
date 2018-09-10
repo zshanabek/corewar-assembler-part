@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vradchen <vradchen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:12:22 by vradchen          #+#    #+#             */
-/*   Updated: 2018/09/10 13:25:27 by vradchen         ###   ########.fr       */
+/*   Updated: 2018/09/10 15:53:01 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	get_opcode(t_opcode *opcode, int i, int n, char *line)
 	arr = get_params_array(i, n, line);
 	get_params(opcode, arr, n);
 	if (!search_struct(opcode->name))
-		show_error(3, n, 0, opcode->name);
+		show_error(3, n, 0, opcode->name);		
 	opcode->codage = search_struct(opcode->name)->coding_byte;
 	opcode->nb_param = search_struct(opcode->name)->nb_param;
 	opcode->opcode = search_struct(opcode->name)->opcode;
@@ -96,7 +96,7 @@ void	read_instr(int fd, int *n, t_opcode **ohead)
 	{
 		(*n)++;
 		clear_comment(line);
-		if (line[0] != '\0' && line[0] != COMMENT_CHAR && !ft_isempty(line))
+		if (line[0] != '\0' && line[0] != ';' && line[0] != '#' && !ft_isempty(line))
 		{
 			if (get_label(&lhead, *n, line))
 				parse_instr(ohead, &lhead, *n, line);
