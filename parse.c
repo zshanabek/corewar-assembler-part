@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:12:22 by vradchen          #+#    #+#             */
-/*   Updated: 2018/09/10 15:53:01 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/10 18:13:31 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,15 @@ void	read_instr(int fd, int *n, t_opcode **ohead)
 	lhead = NULL;
 	while (get_next_line(fd, &line))
 	{
+		printf("ok:%s\n", line);		
 		(*n)++;
 		clear_comment(line);
-		if (line[0] != '\0' && line[0] != ';' && line[0] != '#' && !ft_isempty(line))
+		if (line[0] != '\0' && !ft_isempty(line))
 		{
 			if (get_label(&lhead, *n, line))
+			{
 				parse_instr(ohead, &lhead, *n, line);
+			}
 		}
 		ft_strdel(&line);
 	}

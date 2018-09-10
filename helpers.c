@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:09:52 by vradchen          #+#    #+#             */
-/*   Updated: 2018/08/13 16:45:07 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/10 18:29:15 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,8 @@ int		is_digital(char *line)
 
 void	clear_comment(char *line)
 {
-	int i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == ';' || line[i] == COMMENT_CHAR)
-		{
-			while (line[i])
-			{
-				line[i] = '\0';
-				i++;
-			}
-		}
-		i++;
-	}
+	while (*line && (*line != ';' && *line != COMMENT_CHAR))
+		line++;
+	if (*line != '\0')
+		ft_bzero(line, ft_strlen(line));
 }
