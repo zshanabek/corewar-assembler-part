@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:42:20 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/09/10 19:59:18 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/11 16:32:27 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ char	**get_array(int n, int a, char *str)
 void	show_error(int type, int n, int a, char *str)
 {
 	if (type == 0)
+	{
 		ft_printf(2, "Syntax error at token [%03d] INSTRUCTION %s\n", n, str);
+		// ft_strdel(&str);		
+	}
 	else if (type == 1)
 		ft_printf(2, "Syntax error at token [%03d] SEPARATOR \",\"\n", n);
 	else if (type == 2)
@@ -82,6 +85,7 @@ void	show_error(int type, int n, int a, char *str)
 		ft_printf(2, "Syntax error at token [%03d] END \"(null)\"\n", n);
 	else if (type == 8)
 		ft_printf(2, "No such label %s while attempting to dereference "
-		"token [%03d] DIRECT_LABEL \"%%:%s\"\n", str, n, str);
+		"token [%03d] DIRECT_LABEL \"%%:%s\"\n", str, n, str);		
+	system("leaks asm");
 	exit(1);
 }
