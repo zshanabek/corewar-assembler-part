@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:40:33 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/09/10 19:43:29 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/11 15:07:34 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		analyze_type(t_param *item, char *temp, int type, int code)
 		item->sval = ft_strdup(temp);
 	else
 		return (0);
-	if (code == REG_CODE && (item->ival > REG_NUMBER || item->ival < 0))
+	if (code == REG_CODE && (item->ival >= REG_NUMBER || item->ival < 0))
 		return (0);
 	item->type = code;
 	ft_strdel(&temp);
