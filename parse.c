@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:12:22 by vradchen          #+#    #+#             */
-/*   Updated: 2018/09/10 19:22:53 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/11 14:31:00 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	get_opcode(t_opcode *opcode, int i, int n, char *line)
 	arr = get_params_array(i, n, line);
 	get_params(opcode, arr, n);
 	if (!search_struct(opcode->name))
-		show_error(3, n, 0, opcode->name);		
+		show_error(3, n, 0, opcode->name);
 	opcode->codage = search_struct(opcode->name)->coding_byte;
 	opcode->nb_param = search_struct(opcode->name)->nb_param;
 	opcode->opcode = search_struct(opcode->name)->opcode;
@@ -99,9 +99,7 @@ void	read_instr(int fd, int *n, t_opcode **ohead)
 		if (line[0] != '\0' && !ft_isempty(line))
 		{
 			if (get_label(&lhead, *n, line))
-			{
 				parse_instr(ohead, &lhead, *n, line);
-			}
 		}
 		ft_strdel(&line);
 	}
