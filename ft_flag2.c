@@ -72,8 +72,6 @@ int				ft_check_ac(int ac, char **av, char **name)
 		exit(ft_printf(2, "Usage: ./asm %s\n", av[1]));
 	*name = av[1];
 	temp = *name;
-	if (temp[ft_strlen(temp) - 1] != 's')
-		exit(ft_printf(2, "Wrong file without .s extension\n"));
 	return (0);
 }
 
