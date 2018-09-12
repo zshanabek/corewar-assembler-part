@@ -59,7 +59,9 @@ int				ft_check_ac(int ac, char **av, char **name)
 	if (ac == 3)
 	{
 		if (!(ft_strequ(av[1], "-a") || ft_strequ(av[2], "-a")))
-			exit(ft_printf(2, "Usage: ./asm %s\n", av[2]));
+			exit(ft_printf(2, "Usage: %s [-a] <sourcefile.s>\n    -a : Instead"
+			" of creating a .cor file, outputs a stripped and annotated versio"
+			"n of the code to the standard output\n", av[0]));
 		if (ft_strequ(av[1], "-a"))
 		{
 			*name = av[2];
@@ -69,7 +71,9 @@ int				ft_check_ac(int ac, char **av, char **name)
 		return (1);
 	}
 	else if (ac != 2)
-		exit(ft_printf(2, "Usage: ./asm %s\n", av[1]));
+		exit(ft_printf(2, "Usage: %s [-a] <sourcefile.s>\n    -a : Instead of "
+			"creating a .cor file, outputs a stripped and annotated version of"
+			" the code to the standard output\n", av[0]));
 	*name = av[1];
 	temp = *name;
 	return (0);

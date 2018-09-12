@@ -83,6 +83,5 @@ void	show_error(int type, int n, int a, char *str)
 	else if (type == 8)
 		ft_printf(2, "No such label %s while attempting to dereference "
 		"token [%03d] DIRECT_LABEL \"%%:%s\"\n", str, n, str);
-	system("leaks asm");
 	exit(1);
 }
