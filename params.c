@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 21:40:33 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/09/11 16:56:25 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/11 17:32:06 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		analyze_param(t_param *item, char *str, int code, int type)
 		str = ft_strresub(str, 1, ft_strlen(str) - 1);
 	if (!analyze_type(item, str, type, code))
 	{
-		ft_strdel(&str);
+		// ft_strdel(&str);
 		return (0);
 	}
 	return (1);
@@ -89,8 +89,8 @@ void	make_choice(t_opcode *opcode, t_param *item, char *temp, int n)
 		e = analyze_param(item, temp, IND_CODE, 2);
 	else
 	{
-		e = -1;
-		ft_strdel(&temp);
+		e = 0;
+		// ft_strdel(&temp);
 	}
 	if (e == 0)
 		show_error(0, n, 0, temp);
