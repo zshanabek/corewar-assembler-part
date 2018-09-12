@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 11:16:46 by vradchen          #+#    #+#             */
-/*   Updated: 2018/09/12 12:53:22 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/09/12 12:57:31 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ int				main(int ac, char **av)
 	else
 		ft_printf(1, "Writing output program to %s\n", name);
 	ft_main2(ohead, h, &name);
+	system("leaks asm");
 }
